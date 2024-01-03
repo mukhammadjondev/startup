@@ -1,5 +1,6 @@
 import '@/styles/globals.css'
 import '@fontsource/roboto'
+import 'react-multi-carousel/lib/styles.css'
 
 import { ChakraProvider } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'

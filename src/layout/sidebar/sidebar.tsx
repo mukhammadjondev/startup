@@ -9,6 +9,7 @@ const Sidebar = ({toggle}: SidebarProps) => {
 
   return (
     <Box
+      zIndex={99}
       w={{base: 'full', lg: '300px'}}
       h='90vh'
       bg={useColorModeValue('gray.50', 'gray.900')}
@@ -33,7 +34,7 @@ const Sidebar = ({toggle}: SidebarProps) => {
               const active = router.asPath === nav.route
 
               return (
-                <Link href={`${nav.route}`}>
+                <Link href={`${nav.route}`} key={nav.label}>
                   <Button colorScheme='facebook' variant={active ? 'solid' : 'ghost'} w='full' justifyContent='flex-start' h={14} mt={2}>
                     <HStack gap={4}>
                       <Icon as={nav.icon} />

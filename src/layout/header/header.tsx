@@ -10,7 +10,19 @@ const Header = ({ onToggle}: HeaderProps) => {
   const {toggleColorMode, colorMode} = useColorMode()
 
   return (
-    <Box w='full' h='10vh' px={10} pos='fixed' top={0} left={0} right={0} borderBottom='1px' borderBottomColor={useColorModeValue('gray.200', 'gray.700')}>
+    <Box
+      zIndex={99}
+      w='full'h='10vh'
+      px={10}
+      pos='fixed'
+      top={0}
+      left={0}
+      right={0}
+      borderBottom='1px'
+      borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
+      bg={useColorModeValue('gray.50', 'gray.900')}
+      color={useColorModeValue('gray.700', 'gray.200')}
+    >
       <Flex h='full' justify='space-between' align='center'>
         <HStack>
           <Icon as={BiMenuAltLeft} onClick={onToggle} w={6} h={6} cursor='pointer' />
