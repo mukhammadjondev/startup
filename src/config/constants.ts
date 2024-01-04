@@ -1,8 +1,9 @@
-import { AiOutlineDashboard, AiOutlineDollar } from 'react-icons/ai';
-import { FaBookReader, FaDraftingCompass, FaQuestionCircle } from 'react-icons/fa';
+import { AiFillAmazonCircle, AiOutlineDashboard, AiOutlineDollar } from 'react-icons/ai';
+import { FaApplePay, FaBookReader, FaDraftingCompass, FaQuestionCircle } from 'react-icons/fa';
 import { CiViewList } from 'react-icons/ci';
 import { MdImportContacts, MdOutlineContactMail } from 'react-icons/md';
 import { AnnouncementIcons, CodingIcons, DesignIcons, LaptopIcons, PersonIcons, PrintIcons } from '@/icons';
+import { SiAmd, SiCisco, SiLogitech, SiSpotify } from 'react-icons/si';
 
 export const navigation = [
 	{
@@ -90,36 +91,4 @@ export const categories = [
 	},
 ]
 
-export const categoryCarousel = {
-	superLargeDesktop: {
-		breakpoint: { max: 4000, min: 1024 },
-		items: 5,
-	},
-	desktop: {
-		breakpoint: { max: 1024, min: 768 },
-		items: 3,
-	},
-	tablet: {
-		breakpoint: { max: 768, min: 640 },
-		items: 2,
-	},
-	mobile: {
-		breakpoint: { max: 640, min: 0 },
-		items: 1,
-	},
-}
-
-export const courseCarousel = {
-	superLargeDesktop: {
-		breakpoint: { max: 4000, min: 768 },
-		items: 3,
-	},
-	tablet: {
-		breakpoint: { max: 768, min: 640 },
-		items: 2,
-	},
-	mobile: {
-		breakpoint: { max: 640, min: 0 },
-		items: 1,
-	},
-}
+export const trustedCompeny = [AiFillAmazonCircle, SiAmd, SiCisco, FaApplePay, SiLogitech, SiSpotify]

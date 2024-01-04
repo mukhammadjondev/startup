@@ -1,4 +1,4 @@
-import { courseCarousel } from "@/config/constants"
+import { courseCarousel } from "@/config/carousel"
 import { CourseType } from "@/interfaces/course.interface"
 import { Divider, Flex, Heading, HStack, Icon, Image, Stack, Text } from "@chakra-ui/react"
 import Carousel from "react-multi-carousel"
@@ -15,7 +15,7 @@ const PopularCourses = () => {
       <Carousel responsive={courseCarousel} arrows={true} showDots={false} autoPlay={true} autoPlaySpeed={5000} infinite>
         {data.map(item => (
           <Stack key={item.title} spacing={3} p={3} cursor='pointer'>
-            <Image src={item.image} alt={item.title} objectFit='cover' w='300px' h='210px' borderRadius='lg' />
+            <Image src={item.image} alt={item.title} objectFit='cover' w='full' h='210px' borderRadius='lg' />
             <HStack>
               <Text color='#e59819'>{item.reviewAvarage.toFixed(1)}</Text>
               <ReactStars edit={false} value={item.reviewAvarage} color2='#e59819'></ReactStars>

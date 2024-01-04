@@ -11,7 +11,7 @@ const Header = ({ onToggle}: HeaderProps) => {
 
   return (
     <Box
-      zIndex={99}
+      zIndex={1001}
       w='full'h='10vh'
       px={10}
       pos='fixed'

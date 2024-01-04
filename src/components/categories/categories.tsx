@@ -1,4 +1,5 @@
-import { categories, categoryCarousel } from "@/config/constants"
+import { categoryCarousel } from "@/config/carousel"
+import { categories } from "@/config/constants"
 import { Box, Icon, Text, useColorModeValue } from "@chakra-ui/react"
 import Carousel from "react-multi-carousel"
 import SectionTitle from "../section-title/section-title"

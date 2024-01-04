@@ -9,7 +9,7 @@ const Sidebar = ({toggle}: SidebarProps) => {
 
   return (
     <Box
-      zIndex={99}
+      zIndex={1001}
       w={{base: 'full', lg: '300px'}}
       h='90vh'
       bg={useColorModeValue('gray.50', 'gray.900')}
