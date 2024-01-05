@@ -3,9 +3,11 @@ import { Box, Button, Container, HStack, Icon, Text, useColorModeValue } from "@
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { SidebarProps } from "./sidebar.props"
+import { useTranslation } from "react-i18next"
 
 const Sidebar = ({toggle}: SidebarProps) => {
   const router = useRouter()
+  const {t} = useTranslation()
 
   return (
     <Box
@@ -29,7 +31,7 @@ const Sidebar = ({toggle}: SidebarProps) => {
       <Container maxW='container.xl'>
         {navigation.map(item => (
           <Box key={item.title} mt={5}>
-            <Text>{item.title}</Text>
+            <Text>{t(item.title, {ns: 'layout'})}</Text>
             {item.links.map(nav => {
               const active = router.asPath === nav.route
 
@@ -38,7 +40,7 @@ const Sidebar = ({toggle}: SidebarProps) => {
                   <Button colorScheme='facebook' variant={active ? 'solid' : 'ghost'} w='full' justifyContent='flex-start' h={14} mt={2}>
                     <HStack gap={4}>
                       <Icon as={nav.icon} />
-                      <Text>{nav.label}</Text>
+                      <Text>{t(nav.label, {ns: 'layout'})}</Text>
                     </HStack>
                   </Button>
                 </Link>
