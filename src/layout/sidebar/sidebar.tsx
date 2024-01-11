@@ -33,7 +33,7 @@ const Sidebar = ({toggle}: SidebarProps) => {
           <Box key={item.title} mt={5}>
             <Text>{t(item.title, {ns: 'layout'})}</Text>
             {item.links.map(nav => {
-              const active = router.asPath === nav.route
+              const active = `/${router.pathname.split('/')[1]}` === nav.route
 
               return (
                 <Link href={`${nav.route}`} key={nav.label}>
