@@ -1,9 +1,8 @@
 import { withLayout } from "@/layout/layout"
+import { PricingPageComponent } from "@/page-component"
 
 const PricingPage = () => {
-  return (
-    <div>PricingPage</div>
-  )
+  return <PricingPageComponent />
 }
 
 export default withLayout(PricingPage)
