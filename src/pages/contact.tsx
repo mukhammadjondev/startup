@@ -1,9 +1,8 @@
 import { withLayout } from "@/layout/layout"
+import { ContactPageComponent } from "@/page-component"
 
 const ContactPage = () => {
-  return (
-    <div>ContactPage</div>
-  )
+  return <ContactPageComponent />
 }
 
 export default withLayout(ContactPage)
