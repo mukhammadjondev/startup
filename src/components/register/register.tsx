@@ -1,6 +1,5 @@
 import { useShowPassword } from "@/hooks/useShowPassword"
 import { Box, Button, Checkbox, Flex, FormControl, FormLabel, Heading, HStack, Icon, Input, InputGroup, InputRightElement, Stack, Text, useColorModeValue } from "@chakra-ui/react"
-import Link from "next/link"
 import { useTranslation } from "react-i18next"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { RegisterProps } from "./register.props"
@@ -35,7 +34,7 @@ const Register = ({onNavigateStateComponent}: RegisterProps) => {
         <FormControl isRequired>
           <FormLabel>{t('register_input_confirm_password_label', {ns: 'global'})}</FormLabel>
           <InputGroup>
-            <Input focusBorderColor='facebook.500' type={!showConfirm ? 'password' : 'text'} placeholder='password' h={14} />
+            <Input focusBorderColor='facebook.500' type={!showConfirm ? 'password' : 'text'} placeholder='****' h={14} />
             <InputRightElement pt={4}>
               <Icon as={!showConfirm ? AiOutlineEye : AiOutlineEyeInvisible} cursor='pointer' onClick={toggleShowConfirm} />
             </InputRightElement>
@@ -44,11 +43,9 @@ const Register = ({onNavigateStateComponent}: RegisterProps) => {
       </Flex>
       <HStack justify='space-between'>
         <Checkbox colorScheme='facebook'>{t('auth_remember_me', {ns: 'global'})}</Checkbox>
-        <Link href='/account-recovery'>
-          <Box as='a' color='teal.500' _hover={{textDecoration: 'underline'}}>
-            {t('auth_forgot_password', {ns: 'global'})}
-          </Box>
-        </Link>
+        <Box as='a' onClick={() => onNavigateStateComponent('account-recovery')} color='teal.500' _hover={{textDecoration: 'underline'}} cursor='pointer'>
+          {t('auth_forgot_password', {ns: 'global'})}
+        </Box>
       </HStack>
       <Button w='full' bgGradient='linear(to-r, facebook.400, gray.400)' color='white' _hover={{bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl'}} h={14}>
         {t('register_btn', {ns: 'global'})}

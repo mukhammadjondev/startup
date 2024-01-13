@@ -55,5 +55,16 @@
 	"verification_btn": "Зарегистрироваться",
 	"social_media_or": "ИЛИ",
 	"social_media_github": "Продолжить с Github",
-	"social_media_google": "Войти через Google"
+	"social_media_google": "Войти через Google",
+	"account_recovery_title_form1": "Восстановление аккаунта",
+	"account_recovery_description_form1": "Вы забыли пароль от своего аккаунта. Не беспокойтесь об этом. Команда MuhsDev может помочь вам решить эту проблему. Просто следуйте инструкциям ниже.",
+	"account_recovery_btn_form1": "Отправить OTP",
+	"account_recovery_title_form2": "Подтвердить Email",
+	"account_recovery_description_form2": "Мы отправили на вашу электронную почту проверочный код otp с 6-значным номером.",
+	"account_recovery_btn_form2": "Проверять",
+	"account_recovery_title_form3": "Новый пароль",
+	"account_recovery_description_form3": "Последний шаг, чтобы вернуть аккаунт и пользоваться нашими курсами и услугами.",
+	"account_recovery_btn_form3": "Отправлять",
+	"toast_submit_success_title": "Успешно отредактировано",
+	"toast_submit_success_description": "Вы можете войти в аккаунт с новым паролем"
 }

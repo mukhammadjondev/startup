@@ -55,5 +55,16 @@
 	"verification_btn": "Kayıt",
 	"social_media_or": "VEYA",
 	"social_media_github": "Github'la devam et",
-	"social_media_google": "Google ile giriş yap"
+	"social_media_google": "Google ile giriş yap",
+	"account_recovery_title_form1": "Profili geri yükle",
+	"account_recovery_description_form1": "Profil şifrenizi unuttunuz. Endişelenme. MuhsDev'nin ekibi bu sorunu çözmenize yardımcı olacaktır. Aşağıdaki adımları takip et.",
+	"account_recovery_btn_form1": "OTP gönder",
+	"account_recovery_title_form2": "E-posta Onayla",
+	"account_recovery_description_form2": "E-postanıza 6 haneli bir otp doğrulama kodu gönderdik.",
+	"account_recovery_btn_form2": "Onayla",
+	"account_recovery_title_form3": "Yeni Şifre",
+	"account_recovery_description_form3": "Hesabı iade etmek ve kurslarımızdan ve hizmetlerimizden yararlanmak için son adım.",
+	"account_recovery_btn_form3": "Gönderme",
+	"toast_submit_success_title": "Başarıyla düzenlendi",
+	"toast_submit_success_description": "Profiliniz yeni şifre ile giriş yapabilirsiniz"
 }

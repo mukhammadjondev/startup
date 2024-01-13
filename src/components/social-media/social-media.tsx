@@ -12,7 +12,7 @@ const SocialMedia = () => {
 				_before={{
 					content: '""',
 					position: 'absolute',
-					width: '45%',
+					width: '40%',
 					left: 0,
 					top: '50%',
 					transform: 'translateY(-50%)',
@@ -22,7 +22,7 @@ const SocialMedia = () => {
 				_after={{
 					content: '""',
 					position: 'absolute',
-					width: '45%',
+					width: '40%',
 					right: 0,
 					top: '50%',
 					transform: 'translateY(-50%)',

@@ -55,5 +55,16 @@
 	"verification_btn": "Register",
 	"social_media_or": "OR",
 	"social_media_github": "Continue with Github",
-	"social_media_google": "Sign in with Google"
+	"social_media_google": "Sign in with Google",
+	"account_recovery_title_form1": "Account Recovery",
+	"account_recovery_description_form1": "You forgot password from your account. Don't worry about it. MuhsDev team can help you solve that problem. Just follow steps below.",
+	"account_recovery_btn_form1": "Send OTP",
+	"account_recovery_title_form2": "Verify email",
+	"account_recovery_description_form2": "We sent to your email otp verification code with 6 digits number.",
+	"account_recovery_btn_form2": "Verify",
+	"account_recovery_title_form3": "New password",
+	"account_recovery_description_form3": "Last step to return account and enjoy our courses and services.",
+	"account_recovery_btn_form3": "Submit",
+	"toast_submit_success_title": "Successfully edited",
+	"toast_submit_success_description": "You can login to account with new password"
 }

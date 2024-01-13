@@ -2,16 +2,16 @@ import { useState } from "react"
 import { avatars } from "@/config/constants"
 import { Avatar, AvatarGroup, Box, Container, Flex, Heading, Icon, IconProps, SimpleGrid, Stack, Text, useBreakpointValue, useColorModeValue } from "@chakra-ui/react"
 import AuthNavbarComponent from "./auth-navbar-component"
-import { Login, Register, SocialMedia, Verification } from "@/components"
+import { AccountRecovery, Login, Register, SocialMedia, Verification } from "@/components"
 import { useTranslation } from "react-i18next"
 
 const AuthPageComponent = () => {
-  const [state, setState] = useState<'login' | 'register' | 'verification'>('login')
+  const [state, setState] = useState<'login' | 'register' | 'verification' | 'account-recovery'>('login')
   const { t } = useTranslation()
 
   const breakpointValue = useBreakpointValue({ base: 'md', md: 'lg' })
 
-  const onNavigateStateComponent = (component: 'login' | 'register' | 'verification') => setState(component)
+  const onNavigateStateComponent = (component: 'login' | 'register' | 'verification' | 'account-recovery') => setState(component)
 
   const renderStateComponent = () => {
     switch(state) {
@@ -21,6 +21,8 @@ const AuthPageComponent = () => {
         return <Register onNavigateStateComponent={onNavigateStateComponent} />
       case 'verification':
         return <Verification />
+      case 'account-recovery':
+        return <AccountRecovery onNavigateStateComponent={onNavigateStateComponent} />
     }
   }
 
