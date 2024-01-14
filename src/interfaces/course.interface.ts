@@ -1,6 +1,7 @@
 export interface CourseType {
 	image: string
 	title: string
+	slug: string
 	lessonCount: number
 	totalHour: number
 	level: string

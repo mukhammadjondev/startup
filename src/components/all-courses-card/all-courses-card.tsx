@@ -1,4 +1,5 @@
 import { Box, Button, Divider, Flex, Heading, HStack, Icon, Image, Stack, Text } from "@chakra-ui/react"
+import { useRouter } from "next/router"
 import { AiOutlineClockCircle } from "react-icons/ai"
 import { BsMinecartLoaded } from "react-icons/bs"
 import { CiViewList } from "react-icons/ci"
@@ -7,10 +8,14 @@ import ReactStars from "react-stars"
 import { AllCourseCardProps } from "./all-courses-card.props"
 
 const AllCoursesCard = ({course}: AllCourseCardProps) => {
+  const router = useRouter()
+
+  const onDetailedCourse = () => router.push(`/courses/${course.slug}`)
+
   return <>
     <Box py={4}>
       <Flex gap={4} direction={{base: 'column', md: 'row'}}>
-        <Image src={course.image} alt={course.title} w={{base: '100%', md: '250px'}} h='250px' borderRadius='lg' objectFit='cover' />
+        <Image src={course.image} alt={course.title} w={{base: '100%', md: '250px'}} h='250px' borderRadius='lg' objectFit='cover' onClick={onDetailedCourse} cursor='pointer' />
         <Stack>
           <HStack>
             <Text color='#e59819'>{course.reviewAvarage.toFixed(1)}</Text>
@@ -46,7 +51,7 @@ const AllCoursesCard = ({course}: AllCourseCardProps) => {
               <Button rightIcon={<BsMinecartLoaded />} colorScheme='facebook'>
                 Add to cart
               </Button>
-              <Button colorScheme='facebook' variant='outline'>
+              <Button colorScheme='facebook' variant='outline' onClick={onDetailedCourse}>
                 Detail
               </Button>
             </Flex>

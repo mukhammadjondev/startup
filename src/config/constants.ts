@@ -155,6 +155,7 @@ export const courses: CourseType[] = [
 	{
 		image: 'https://media.graphassets.com/3gf746AKRbWNjB8OCoEB',
 		title: 'JavaScript full course',
+		slug: 'javascript',
 		lessonCount: 96,
 		totalHour: 13.6,
 		level: 'Beginner',
@@ -170,6 +171,7 @@ export const courses: CourseType[] = [
 	{
 		image: 'https://media.graphassets.com/54vR0DStGoFuZBVkFwWQ',
 		title: 'VueJS full course',
+		slug: 'vuejs',
 		lessonCount: 30,
 		totalHour: 10.6,
 		level: 'Beginner',
@@ -185,6 +187,7 @@ export const courses: CourseType[] = [
 	{
 		image: 'https://media.graphassets.com/65rcPxsLT9ysJDisXF80',
 		title: 'ReactJS full course',
+		slug: 'reactjs',
 		lessonCount: 70,
 		totalHour: 19,
 		level: 'Beginner',
@@ -200,6 +203,7 @@ export const courses: CourseType[] = [
 	{
 		image: 'https://media.graphassets.com/xactyo8TtyTIkAcMWvSm',
 		title: 'VueX full course',
+		slug: 'vuex',
 		lessonCount: 120,
 		totalHour: 24.6,
 		level: 'Beginner',
@@ -215,6 +219,7 @@ export const courses: CourseType[] = [
 	{
 		image: 'https://media.graphassets.com/Ql2hDpJhQsaBT3inNuZ4',
 		title: 'Redux full course',
+		slug: 'redux',
 		lessonCount: 39,
 		totalHour: 8.2,
 		level: 'Beginner',
@@ -230,6 +235,7 @@ export const courses: CourseType[] = [
 	{
 		image: 'https://media.graphassets.com/mDcwhbguQpyM74jb18M5',
 		title: 'NodeJS full course',
+		slug: 'nodejs',
 		lessonCount: 56,
 		totalHour: 20.6,
 		level: 'Beginner',
