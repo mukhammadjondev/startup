@@ -1,12 +1,17 @@
 import { ArticleType } from "@/interfaces/article.interface"
 import { Language } from "@/interfaces/constants.interface"
 import { withLayout } from "@/layout/layout"
+import Seo from "@/layout/seo/seo"
 import { ArticleDetailedComponent } from "@/page-component"
 import { Articles } from "@/services/article.services"
 import { GetServerSideProps } from "next"
 
 const ArticleDetailedPage = ({article}: ArticleDetailedPageProps) => {
-  return <ArticleDetailedComponent article={article} />
+  return (
+    <Seo metaTitle={article.title} metaDescription={article.excerpt}>
+			<ArticleDetailedComponent article={article} />
+		</Seo>
+  )
 }
 
 export default withLayout(ArticleDetailedPage)
