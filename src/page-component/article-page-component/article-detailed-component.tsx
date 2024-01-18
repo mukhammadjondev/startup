@@ -1,14 +1,58 @@
 import { testimonialsCarousel } from "@/config/carousel"
 import { calculateEstimatedReadingTime } from "@/helpers/time.helper"
-import { Avatar, Box, Card, CardBody, Heading, HStack, Image, ListItem, OrderedList, Stack, Text } from "@chakra-ui/react"
+import { Avatar, Box, Card, CardBody, Heading, HStack, Icon, Image, ListItem, OrderedList, Stack, Text, useToast } from "@chakra-ui/react"
 import { RichText } from "@graphcms/rich-text-react-renderer"
 import { format } from "date-fns"
 import { useTranslation } from "react-i18next"
 import Carousel from "react-multi-carousel"
 import { ArticleDetailedComponentProps } from "./article-page-component.props"
+import { useSpeechSynthesis } from "react-speech-kit"
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import Cookies from "js-cookie"
+import { voiceLanguages } from "@/config/constants"
+import { AiFillPlayCircle } from "react-icons/ai"
+import { BsFillStopCircleFill } from "react-icons/bs"
 
 const ArticleDetailedComponent = ({article}: ArticleDetailedComponentProps) => {
+  const [myVoice, setMyVoice] = useState()
+  const [isLoading, setIsLoading] = useState(false)
+
   const {t} = useTranslation()
+  const toast = useToast()
+  const router = useRouter()
+
+  const onEnd = () => {
+    toast({
+      title: 'The End',
+      status: 'info',
+      position: 'top-right',
+      isClosable: true
+    })
+  }
+
+  const {speak, voices, cancel, speaking, supported} = useSpeechSynthesis({onEnd})
+
+  useEffect(() => {
+    const lng = Cookies.get('i18next')
+    const currentLanguage = voiceLanguages.find(item => item.language === lng)
+    const supportLanguage = voiceLanguages.map(c => c.voiceUrl)
+    const allSuportVoices = voices.filter(item => supportLanguage.includes(item.voiceURI))
+		const currentVoice = allSuportVoices.find(item => item.lang === currentLanguage?.codes)
+
+    setMyVoice(currentVoice)
+  }, [voices, router])
+
+  const startSpeak = () => {
+    setIsLoading(false)
+    speak({
+      text: `${t('start_reading_article', {ns: 'global'})} ${article.title} ${t('article', {ns: 'global'})}. ${article.description.text}`,
+      voice: myVoice,
+    })
+    setTimeout(() => {
+      setIsLoading(true)
+    }, 2000)
+  }
 
   return <>
     <Card my={10}>
@@ -37,6 +81,25 @@ const ArticleDetailedComponent = ({article}: ArticleDetailedComponentProps) => {
     </Card>
 
     <Box>
+      {supported && myVoice && (
+        <Box my={5} pos='relative' cursor='pointer' border='1px' w='300px' p={1} maxH='200px' borderRadius='lg' borderColor='gray'>
+          {!speaking ? (
+            <HStack onClick={startSpeak}>
+              <Icon as={AiFillPlayCircle} w={10} h={10} />
+              <Text>{t('play', {ns: 'global'})}</Text>
+            </HStack>
+          ) : (
+            <HStack onClick={cancel}>
+              <Icon as={BsFillStopCircleFill} w={10} h={10} />
+              <Text>{t('stop', {ns: 'global'})}</Text>
+              {speaking && isLoading && (
+                <Image src='/images/wave.gif' alt='wave' pos='absolute' w='50%' right={0} />
+              )}
+            </HStack>
+          )}
+        </Box>
+      )}
+
       <RichText
         content={article.description.raw}
         renderers={{

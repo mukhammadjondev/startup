@@ -9,6 +9,7 @@ import { HeaderProps } from "./header.props"
 import { language } from "@/config/constants"
 import { useTranslation } from "react-i18next"
 import { useRouter } from "next/router"
+import { AiOutlineLogin } from "react-icons/ai"
 
 const Header = ({ onToggle}: HeaderProps) => {
   const {toggleColorMode, colorMode} = useColorMode()
@@ -40,7 +41,7 @@ const Header = ({ onToggle}: HeaderProps) => {
           <Link href={'/'}>{colorMode === 'light' ? <DarkLogo /> : <LightLogo />}</Link>
         </HStack>
         <HStack>
-          <IconButton aria-label="support" icon={<MdOutlineContactSupport />} colorScheme='facebook' variant='ghost' />
+          {/* <IconButton aria-label="support" icon={<MdOutlineContactSupport />} colorScheme='facebook' variant='ghost' /> */}
           <Menu placement="bottom">
             <MenuButton as={Button} rightIcon={<TbWorld />} textTransform='capitalize' colorScheme='gray' variant='outline'>
               {i18n.resolvedLanguage}
@@ -60,9 +61,17 @@ const Header = ({ onToggle}: HeaderProps) => {
             colorScheme='facebook'
             variant='outline'
           />
-          <Button rightIcon={<BiUserCircle />} onClick={() => router.push('/auth')} colorScheme='facebook'>
+          <Button rightIcon={<BiUserCircle />} display={{ base: 'none', md: 'flex' }} onClick={() => router.push('/auth')} colorScheme='facebook'>
             {t('login', {ns: 'layout'})}
           </Button>
+          <IconButton
+						display={{ base: 'flex', md: 'none' }}
+						aria-label='login'
+						onClick={() => router.push('/auth')}
+						icon={<AiOutlineLogin />}
+						colorScheme={'facebook'}
+						variant={'outline'}
+					/>
         </HStack>
       </Flex>
     </Box>

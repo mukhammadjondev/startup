@@ -66,5 +66,9 @@
 	"account_recovery_description_form3": "Last step to return account and enjoy our courses and services.",
 	"account_recovery_btn_form3": "Submit",
 	"toast_submit_success_title": "Successfully edited",
-	"toast_submit_success_description": "You can login to account with new password"
+	"toast_submit_success_description": "You can login to account with new password",
+	"start_reading_article": "Artificial Intelligence starting read",
+	"article": "article",
+	"play": "Play",
+	"stop": "Stop"
 }

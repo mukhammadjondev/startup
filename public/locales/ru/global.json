@@ -66,5 +66,9 @@
 	"account_recovery_description_form3": "Последний шаг, чтобы вернуть аккаунт и пользоваться нашими курсами и услугами.",
 	"account_recovery_btn_form3": "Отправлять",
 	"toast_submit_success_title": "Успешно отредактировано",
-	"toast_submit_success_description": "Вы можете войти в аккаунт с новым паролем"
+	"toast_submit_success_description": "Вы можете войти в аккаунт с новым паролем",
+	"start_reading_article": "Искусственный интеллект начинает читать",
+	"article": "статью",
+	"play": "Играть",
+	"stop": "Стоп"
 }
