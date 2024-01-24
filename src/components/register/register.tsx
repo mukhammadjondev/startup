@@ -17,13 +17,12 @@ const Register = ({onNavigateStateComponent}: RegisterProps) => {
   const { pendingRegister, sendVerificationCode } = useActions()
   const {error, isLoading} = useTypedSelector(state => state.user)
 
-  const onSubmit = async (formData: InterfaceEmailAndPassword) => {
+  const onSubmit = (formData: InterfaceEmailAndPassword) => {
     const { email, password } = formData
-    const response: any = await sendVerificationCode({email})
-    if(response.payload === 'Success') {
+    sendVerificationCode({email, isUser: false, callback: () => {
       pendingRegister({email, password})
       onNavigateStateComponent('verification')
-    }
+    }})
   }
 
   return (
