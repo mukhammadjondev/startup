@@ -68,7 +68,7 @@ const AuthNavbarComponent = () => {
 				px={10}
 				borderBottom={'1px'}
 				pos={'fixed'}
-				top={menu ? '10vh' : '-20vh'}
+				top={{base: menu ? '10vh' : '-20vh', md: '-20vh'}}
 				transition={'all .5s ease'}
 				left={0}
 				right={0}
