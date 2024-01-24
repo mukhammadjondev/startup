@@ -1,7 +1,7 @@
 import { errorCatch } from "@/helpers/api.helper";
 import { AuthService } from "@/services/auth.service";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { AuthUserResponse, InterfaceEmailAndPassword } from "./user.interface";
+import { AuthUserResponse, InterfaceEmailAndOtp, InterfaceEmailAndPassword } from "./user.interface";
 
 export const register = createAsyncThunk<AuthUserResponse, InterfaceEmailAndPassword>('auth/register',
  async({email, password}, thunkApi) => {
@@ -22,6 +22,28 @@ export const login = createAsyncThunk<AuthUserResponse, InterfaceEmailAndPasswor
     return thunkApi.rejectWithValue(errorCatch(error))
   }
 })
+
+export const sendVerificationCode = createAsyncThunk<'Success', {email: string}>('auth/verification-code',
+  async ({email}, thunkApi) => {
+    try {
+      const response = await AuthService.sentOtp(email)
+      return response.data
+    } catch (error) {
+      return thunkApi.rejectWithValue(errorCatch(error))
+    }
+  }
+)
+
+export const verifyVerificationCode = createAsyncThunk<'Success', InterfaceEmailAndOtp>('auth/verify-code',
+  async ({email, otpVerification}, thunkApi) => {
+    try {
+      const response = await AuthService.verifyOtp(email, otpVerification)
+      return response.data
+    } catch (error) {
+      return thunkApi.rejectWithValue(errorCatch(error))
+    }
+  }
+)
 
 export const logout = createAsyncThunk('auth/logout', () => {
   AuthService.logout()

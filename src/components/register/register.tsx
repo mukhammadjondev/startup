@@ -14,11 +14,16 @@ import { useTypedSelector } from "@/hooks/useTypedSelector"
 const Register = ({onNavigateStateComponent}: RegisterProps) => {
   const {show, toggleShow, showConfirm, toggleShowConfirm} = useShowPassword()
   const { t } = useTranslation()
-  const { register } = useActions()
+  const { pendingRegister, sendVerificationCode } = useActions()
   const {error, isLoading} = useTypedSelector(state => state.user)
 
-  const onSubmit = (formData: InterfaceEmailAndPassword) => {
-    register({email: formData.email, password: formData.password})
+  const onSubmit = async (formData: InterfaceEmailAndPassword) => {
+    const { email, password } = formData
+    const response: any = await sendVerificationCode({email})
+    if(response.payload === 'Success') {
+      pendingRegister({email, password})
+      onNavigateStateComponent('verification')
+    }
   }
 
   return (
