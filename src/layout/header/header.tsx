@@ -1,20 +1,30 @@
 import Link from "next/link"
-import { Box, Flex, IconButton, Button, useColorMode, HStack, Menu, MenuButton, MenuList, MenuItem, useColorModeValue, Icon } from "@chakra-ui/react"
+import { Box, Flex, IconButton, Button, useColorMode, HStack, Menu, MenuButton, MenuList, MenuItem, useColorModeValue, Icon, Avatar } from "@chakra-ui/react"
 import { DarkLogo, LightLogo, } from "@/icons"
 import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs"
 import { BiMenuAltLeft, BiUserCircle } from 'react-icons/bi'
-import { MdOutlineContactSupport } from 'react-icons/md'
 import { TbWorld } from 'react-icons/tb'
 import { HeaderProps } from "./header.props"
 import { language } from "@/config/constants"
 import { useTranslation } from "react-i18next"
 import { useRouter } from "next/router"
 import { AiOutlineLogin } from "react-icons/ai"
+import { FiSettings } from "react-icons/fi"
+import { IoIosLogOut } from "react-icons/io"
+import { useAuth } from "@/hooks/useAuth"
+import { useActions } from "@/hooks/useActions"
 
 const Header = ({ onToggle}: HeaderProps) => {
   const {toggleColorMode, colorMode} = useColorMode()
   const {t, i18n} = useTranslation()
   const router = useRouter()
+  const { user } = useAuth()
+  const { logout } = useActions()
+
+  const logoutHandler = () => {
+    logout()
+    router.push('/auth')
+  }
 
   const onLanguage = (lng: string) => {
     router.replace(router.asPath)
@@ -41,7 +51,6 @@ const Header = ({ onToggle}: HeaderProps) => {
           <Link href={'/'}>{colorMode === 'light' ? <DarkLogo /> : <LightLogo />}</Link>
         </HStack>
         <HStack>
-          {/* <IconButton aria-label="support" icon={<MdOutlineContactSupport />} colorScheme='facebook' variant='ghost' /> */}
           <Menu placement="bottom">
             <MenuButton as={Button} rightIcon={<TbWorld />} textTransform='capitalize' colorScheme='gray' variant='outline'>
               {i18n.resolvedLanguage}
@@ -61,17 +70,35 @@ const Header = ({ onToggle}: HeaderProps) => {
             colorScheme='facebook'
             variant='outline'
           />
-          <Button rightIcon={<BiUserCircle />} display={{ base: 'none', md: 'flex' }} onClick={() => router.push('/auth')} colorScheme='facebook'>
-            {t('login', {ns: 'layout'})}
-          </Button>
-          <IconButton
-						display={{ base: 'flex', md: 'none' }}
-						aria-label='login'
-						onClick={() => router.push('/auth')}
-						icon={<AiOutlineLogin />}
-						colorScheme={'facebook'}
-						variant={'outline'}
-					/>
+          {user ? (
+            <Menu>
+              <MenuButton as={Button} rounded='full' variant='link' cursor='pointer' minW={0}>
+                <Avatar backgroundColor='facebook.500' />
+              </MenuButton>
+              <MenuList p={0} m={0}>
+                <MenuItem h={14} onClick={() => router.push('/setting')} fontWeight='bold' icon={<FiSettings fontSize={18} />}>
+                  Settings
+                </MenuItem>
+                <MenuItem h={14} onClick={logoutHandler} fontWeight='bold' icon={<IoIosLogOut fontSize={18} />}>
+                  Logout
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          ) : (
+            <>
+              <Button rightIcon={<BiUserCircle />} display={{ base: 'none', md: 'flex' }} onClick={() => router.push('/auth')} colorScheme='facebook'>
+                {t('login', {ns: 'layout'})}
+              </Button>
+              <IconButton
+                display={{ base: 'flex', md: 'none' }}
+                aria-label='login'
+                onClick={() => router.push('/auth')}
+                icon={<AiOutlineLogin />}
+                colorScheme={'facebook'}
+                variant={'outline'}
+              />
+            </>
+          )}
         </HStack>
       </Flex>
     </Box>

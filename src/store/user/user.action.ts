@@ -72,7 +72,7 @@ export const checkAuth = createAsyncThunk<AuthUserResponse>('auth/check-auth',
  async (_, thunkApi) => {
   try {
     const response = await AuthService.getNewTokens()
-    return response.data
+    return response
   } catch (error) {
     console.log(error)
     return thunkApi.rejectWithValue(error)

@@ -12,6 +12,7 @@ import { Client, HydrationProvider } from 'react-hydration-provider'
 import NextNProgress from 'nextjs-progressbar'
 import { Provider } from 'react-redux'
 import { store } from '@/store/store'
+import AuthProvider from '@/provider/auth.provider'
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
@@ -21,8 +22,10 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
           <I18nextProvider i18n={i18n}>
             <ChakraProvider theme={theme}>
               <Client>
-                <NextNProgress options={{showSpinner: false}} />
-                <Component {...pageProps} />
+                <AuthProvider>
+                  <NextNProgress options={{showSpinner: false}} />
+                  <Component {...pageProps} />
+                </AuthProvider>
               </Client>
             </ChakraProvider>
           </I18nextProvider>
