@@ -1,13 +1,19 @@
-import { navigation } from "@/config/constants"
-import { Box, Button, Container, HStack, Icon, Text, useColorModeValue } from "@chakra-ui/react"
+import { language, navigation } from "@/config/constants"
+import { Box, Button, Container, HStack, Icon, Menu, MenuButton, MenuItem, MenuList, Text, useColorModeValue } from "@chakra-ui/react"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { SidebarProps } from "./sidebar.props"
 import { useTranslation } from "react-i18next"
+import { TbWorld } from "react-icons/tb"
 
 const Sidebar = ({toggle}: SidebarProps) => {
   const router = useRouter()
-  const {t} = useTranslation()
+  const { t, i18n } = useTranslation()
+
+  const onLanguage = (lng: string) => {
+    router.replace(router.asPath)
+    i18n.changeLanguage(lng)
+  }
 
   return (
     <Box
@@ -29,6 +35,18 @@ const Sidebar = ({toggle}: SidebarProps) => {
       '&::-webkit-scrollbar-thumb': {background: 'transparent'},
     }}>
       <Container maxW='container.xl'>
+        <Menu placement="bottom">
+          <MenuButton as={Button} w='full' rightIcon={<TbWorld />} textTransform='capitalize' colorScheme='gray' variant='outline' display={{base: 'block', md: 'none'}} mt={4}>
+            {i18n.resolvedLanguage}
+          </MenuButton>
+          <MenuList p={0}>
+            {language.map(item => (
+              <MenuItem key={item.lng} onClick={() => onLanguage(item.lng)} icon={<item.icon />} backgroundColor={i18n.resolvedLanguage === item.lng ? 'facebook.500' : ''}>
+                {item.nativeLng}
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Menu>
         {navigation.map(item => (
           <Box key={item.title} mt={5}>
             <Text>{t(item.title, {ns: 'layout'})}</Text>

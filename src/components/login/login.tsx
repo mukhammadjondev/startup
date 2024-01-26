@@ -24,7 +24,7 @@ const Login = ({onNavigateStateComponent}: LoginProps) => {
     const { email, password } = formData
     login({email, password, callback: () => {
       router.push('/')
-      toast({ title: 'Successfully logged in', isClosable: true, position: 'top-right' })
+      toast({ title: `${t('successfully_logged', {ns: 'global'})}`, isClosable: true, position: 'top-right' })
     }})
   }
 
@@ -38,9 +38,9 @@ const Login = ({onNavigateStateComponent}: LoginProps) => {
         {t('login_description', {ns: 'global'})}
       </Text>
 
+      <>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
       <Formik onSubmit={onSubmit} initialValues={{email: '', password: ''}} validationSchema={AuthValidation.login()}>
         <Form>
-          <>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
           <TextField name='email' label={t('login_input_email_label', {ns: 'global'})} type='text' placeholder='info@gmail.com' />
           <TextField name='password' label={t('login_input_password_label', {ns: 'global'})} type={!show ? 'password' : 'text'} placeholder='****'>
             <InputRightElement pt={4}>
@@ -53,7 +53,7 @@ const Login = ({onNavigateStateComponent}: LoginProps) => {
               {t('auth_forgot_password', {ns: 'global'})}
             </Box>
           </HStack>
-          <Button w='full' bgGradient='linear(to-r, facebook.400, gray.400)' color='white' _hover={{bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl'}} h={14} type='submit' isLoading={isLoading} loadingText='Loading...'>
+          <Button w='full' bgGradient='linear(to-r, facebook.400, gray.400)' color='white' _hover={{bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl'}} h={14} type='submit' isLoading={isLoading} loadingText={`${t('loading', {ns: 'global'})}`}>
             {t('login_btn', {ns: 'global'})}
           </Button>
         </Form>

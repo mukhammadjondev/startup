@@ -52,7 +52,7 @@ const Header = ({ onToggle}: HeaderProps) => {
         </HStack>
         <HStack>
           <Menu placement="bottom">
-            <MenuButton as={Button} rightIcon={<TbWorld />} textTransform='capitalize' colorScheme='gray' variant='outline'>
+            <MenuButton as={Button} rightIcon={<TbWorld />} textTransform='capitalize' colorScheme='gray' variant='outline' display={{base: 'none', md: 'flex'}}>
               {i18n.resolvedLanguage}
             </MenuButton>
             <MenuList p={0}>
@@ -73,14 +73,14 @@ const Header = ({ onToggle}: HeaderProps) => {
           {user ? (
             <Menu>
               <MenuButton as={Button} rounded='full' variant='link' cursor='pointer' minW={0}>
-                <Avatar backgroundColor='facebook.500' />
+                <Avatar backgroundColor='facebook.500' src={user.avatar} name={user.fullName} />
               </MenuButton>
               <MenuList p={0} m={0}>
                 <MenuItem h={14} onClick={() => router.push('/setting')} fontWeight='bold' icon={<FiSettings fontSize={18} />}>
-                  Settings
+                  {t('settings', {ns: 'global'})}
                 </MenuItem>
                 <MenuItem h={14} onClick={logoutHandler} fontWeight='bold' icon={<IoIosLogOut fontSize={18} />}>
-                  Logout
+                  {t('logout', {ns: 'global'})}
                 </MenuItem>
               </MenuList>
             </Menu>

@@ -19,7 +19,7 @@ const Verification = () => {
     verifyVerificationCode({email, otpVerification: formData.otp, callback: () => {
       register({email, password: user?.password as string, callback: () => {
         router.push('/')
-        toast({title: 'Successfully logged in', position: 'top-right', isClosable: true})
+        toast({title: `${t('successfully_logged', {ns: 'global'})}`, position: 'top-right', isClosable: true})
       }})
     }})
   }
@@ -49,7 +49,7 @@ const Verification = () => {
                 {formik.errors.otp as string}
               </Text>
             )}
-            <Button w='full' bgGradient='linear(to-r, facebook.400, gray.400)' color='white' _hover={{bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl'}} mt={4} h={14} type='submit' isLoading={isLoading} loadingText='Loading...'>
+            <Button w='full' bgGradient='linear(to-r, facebook.400, gray.400)' color='white' _hover={{bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl'}} mt={4} h={14} type='submit' isLoading={isLoading} loadingText={`${t('loading', {ns: 'global'})}`}>
               {t('verification_btn', {ns: 'global'})}{t('verification_title', {ns: 'global'})}
             </Button>
           </Form>

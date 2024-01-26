@@ -41,8 +41,8 @@ const AccountRecovery = ({onNavigateStateComponent}: AccountRecoveryProps) => {
     editProfilePassword({email, password: formData.password, callback: () => {
       onNavigateStateComponent('login')
       toast({
-        title: `${t('toast_submit_success_title', {ns: 'global'})}`,
-        description: `${t('toast_submit_success_description', {ns: 'global'})}`,
+        title: `${t('successfully_edited', {ns: 'global'})}`,
+        description: `${t('login_with_new_password', {ns: 'global'})}`,
         status: 'success',
         position: 'top-right',
         isClosable: true,
@@ -61,7 +61,7 @@ const AccountRecovery = ({onNavigateStateComponent}: AccountRecoveryProps) => {
       <Formik onSubmit={onForm1Submit} initialValues={{email: ''}} validationSchema={AuthValidation.onlyEmail}>
         <Form>
           <TextField name='email' label={t('login_input_email_label', {ns: 'global'})} type='text' placeholder='info@gmail.com' />
-          <Button w='full' mt={4} bgGradient='linear(to-r, facebook.400, gray.400)' color='white' _hover={{bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl'}} h={14} type='submit' isLoading={isLoading} loadingText='Loading...'>
+          <Button w='full' mt={4} bgGradient='linear(to-r, facebook.400, gray.400)' color='white' _hover={{bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl'}} h={14} type='submit' isLoading={isLoading} loadingText={`${t('loading', {ns: 'global'})}`}>
             {t('account_recovery_btn_form1', {ns: 'global'})}
           </Button>
         </Form>
@@ -92,7 +92,7 @@ const AccountRecovery = ({onNavigateStateComponent}: AccountRecoveryProps) => {
                 {formik.errors.otp as string}
               </Text>
             )}
-            <Button w='full' mt={4} bgGradient='linear(to-r, facebook.400, gray.400)' color='white' _hover={{bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl'}} h={14} type='submit' isLoading={isLoading} loadingText='Loading...'>
+            <Button w='full' mt={4} bgGradient='linear(to-r, facebook.400, gray.400)' color='white' _hover={{bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl'}} h={14} type='submit' isLoading={isLoading} loadingText={`${t('loading', {ns: 'global'})}`}>
               {t('account_recovery_btn_form2', {ns: 'global'})}
             </Button>
           </Form>
@@ -120,7 +120,7 @@ const AccountRecovery = ({onNavigateStateComponent}: AccountRecoveryProps) => {
               <Icon as={!showConfirm ? AiOutlineEye : AiOutlineEyeInvisible} cursor='pointer' onClick={toggleShowConfirm} />
             </InputRightElement>
           </TextField>
-          <Button w='full' mt={4} bgGradient='linear(to-r, facebook.400, gray.400)' color='white' _hover={{bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl'}} h={14} type='submit' isLoading={isLoading} loadingText='Loading...'>
+          <Button w='full' mt={4} bgGradient='linear(to-r, facebook.400, gray.400)' color='white' _hover={{bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl'}} h={14} type='submit' isLoading={isLoading} loadingText={`${t('loading', {ns: 'global'})}`}>
             {t('account_recovery_btn_form3', {ns: 'global'})}
           </Button>
         </Form>

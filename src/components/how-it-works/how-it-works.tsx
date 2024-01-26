@@ -22,7 +22,7 @@ const HowItWorks = () => {
                   <Flex w={100} h={100} justify='center' align='center' backgroundColor={backgroundColor} borderRadius='full'>
                     <Icon as={item.icon} w={50} h={50} />
                   </Flex>
-                  <Text textAlign='center'>{item.title}</Text>
+                  <Text textAlign='center'>{t(item.title, {ns: 'home'})}</Text>
                 </Stack>
               ) : (
                 <Stack justify='center'>

@@ -19,14 +19,21 @@ const AuthNavbarComponent = () => {
     i18n.changeLanguage(lng)
   }
 
-  const toggleMenu = () => setMenu(prev => !prev)
+  const toggleMenu = () => {
+    setMenu(prev => !prev)
+    if(menu) {
+      document.body.style.overflow = ''
+    } else {
+      document.body.style.overflow = 'hidden'
+    }
+  }
 
   return (
     <Box w='full' zIndex={999}>
       <Container maxW='container.lg'>
         <Flex align='center' justify='space-between' h='10vh'>
           <HStack>
-						<IconButton aria-label='menu' icon={<BiMenuAltLeft />} colorScheme={'teal'} variant={'solid'} display={{ base: 'flex', md: 'none' }} onClick={toggleMenu}/>
+						<IconButton aria-label='menu' icon={<BiMenuAltLeft fontSize={22} />} variant='solid' display={{base: 'flex', md: 'none'}} onClick={toggleMenu} />
 						<Link href={'/'}>
 							{colorMode === 'light' ? <DarkLogo /> : <LightLogo />}
 						</Link>

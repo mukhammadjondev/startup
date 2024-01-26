@@ -57,7 +57,7 @@ const Register = ({onNavigateStateComponent}: RegisterProps) => {
               {t('auth_forgot_password', {ns: 'global'})}
             </Box>
           </HStack>
-          <Button w='full' bgGradient='linear(to-r, facebook.400, gray.400)' color='white' _hover={{bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl'}} h={14} type='submit' isLoading={isLoading} loadingText='Loading...'>
+          <Button w='full' bgGradient='linear(to-r, facebook.400, gray.400)' color='white' _hover={{bgGradient: 'linear(to-r, facebook.500, gray.500)', boxShadow: 'xl'}} h={14} type='submit' isLoading={isLoading} loadingText={`${t('loading', {ns: 'global'})}`}>
             {t('register_btn', {ns: 'global'})}
           </Button>
         </Form>
