@@ -14,7 +14,7 @@ import { useTypedSelector } from "@/hooks/useTypedSelector"
 const Register = ({onNavigateStateComponent}: RegisterProps) => {
   const {show, toggleShow, showConfirm, toggleShowConfirm} = useShowPassword()
   const { t } = useTranslation()
-  const { pendingRegister, sendVerificationCode } = useActions()
+  const { pendingRegister, sendVerificationCode, clearError } = useActions()
   const {error, isLoading} = useTypedSelector(state => state.user)
 
   const onSubmit = (formData: InterfaceEmailAndPassword) => {
@@ -37,7 +37,7 @@ const Register = ({onNavigateStateComponent}: RegisterProps) => {
 
       <Formik onSubmit={onSubmit} initialValues={{email: '', password: '', confirmPassword: ''}} validationSchema={AuthValidation.register()}>
         <Form>
-          <>{error && <ErrorAlert title={error as string} />}</>
+          <>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
           <TextField name='email' label={t('login_input_email_label', {ns: 'global'})} type='text' placeholder='info@gmail.com' />
           <Flex gap={4}>
             <TextField name='password' label={t('login_input_password_label', {ns: 'global'})} type={!show ? 'password' : 'text'} placeholder='****'>

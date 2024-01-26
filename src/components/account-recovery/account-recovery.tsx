@@ -19,7 +19,7 @@ const AccountRecovery = ({onNavigateStateComponent}: AccountRecoveryProps) => {
   const {show, toggleShow, showConfirm, toggleShowConfirm} = useShowPassword()
   const { t } = useTranslation()
   const toast = useToast()
-  const { sendVerificationCode, verifyVerificationCode, editProfilePassword } = useActions()
+  const { sendVerificationCode, verifyVerificationCode, editProfilePassword, clearError } = useActions()
   const { error, isLoading } = useTypedSelector(state => state.user)
 
   const onForm1Submit = (formData: {email: string}) => {
@@ -57,7 +57,7 @@ const AccountRecovery = ({onNavigateStateComponent}: AccountRecoveryProps) => {
         <Text as='span' bgGradient='linear(to-r, gray.400, facebook.400)' bgClip='text'>!</Text>
       </Heading>
       <Text>{t('account_recovery_description_form1', {ns: 'global'})}</Text>
-      <>{error && <ErrorAlert title={error as string} />}</>
+      <>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
       <Formik onSubmit={onForm1Submit} initialValues={{email: ''}} validationSchema={AuthValidation.onlyEmail}>
         <Form>
           <TextField name='email' label={t('login_input_email_label', {ns: 'global'})} type='text' placeholder='info@gmail.com' />
@@ -76,7 +76,7 @@ const AccountRecovery = ({onNavigateStateComponent}: AccountRecoveryProps) => {
         <Text as='span' bgGradient='linear(to-r, gray.400, facebook.400)' bgClip='text'>!</Text>
       </Heading>
       <Text>{t('account_recovery_description_form2', {ns: 'global'})}</Text>
-      <>{error && <ErrorAlert title={error as string} />}</>
+      <>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
       <Formik onSubmit={onForm2Submit} initialValues={{otp: ''}} validationSchema={AuthValidation.otp}>
         {formik => (
           <Form>

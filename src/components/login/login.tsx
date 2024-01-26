@@ -15,7 +15,7 @@ import { LoginProps } from "./login.props"
 const Login = ({onNavigateStateComponent}: LoginProps) => {
   const {show, toggleShow} = useShowPassword()
   const { t } = useTranslation()
-  const { login } = useActions()
+  const { login, clearError } = useActions()
   const {error, isLoading} = useTypedSelector(state => state.user)
   const router = useRouter()
   const toast = useToast()
@@ -40,7 +40,7 @@ const Login = ({onNavigateStateComponent}: LoginProps) => {
 
       <Formik onSubmit={onSubmit} initialValues={{email: '', password: ''}} validationSchema={AuthValidation.login()}>
         <Form>
-          <>{error && <ErrorAlert title={error as string} />}</>
+          <>{error && <ErrorAlert title={error as string} clearHandler={clearError} />}</>
           <TextField name='email' label={t('login_input_email_label', {ns: 'global'})} type='text' placeholder='info@gmail.com' />
           <TextField name='password' label={t('login_input_password_label', {ns: 'global'})} type={!show ? 'password' : 'text'} placeholder='****'>
             <InputRightElement pt={4}>
