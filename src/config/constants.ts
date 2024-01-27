@@ -1,10 +1,12 @@
 import { AiFillAmazonCircle, AiOutlineDashboard, AiOutlineDollar } from 'react-icons/ai';
-import { FaApplePay, FaBookReader, FaDraftingCompass, FaQuestionCircle } from 'react-icons/fa';
+import { FaApplePay, FaBookReader, FaDraftingCompass, FaFirstdraft, FaListAlt, FaQuestionCircle, FaUserGraduate } from 'react-icons/fa';
 import { CiViewList } from 'react-icons/ci';
-import { MdImportContacts, MdOutlineContactMail } from 'react-icons/md';
+import { MdImportContacts, MdOutlineContactMail, MdOutlineCreateNewFolder } from 'react-icons/md';
 import { AnnouncementIcons, CodingIcons, DesignIcons, EngIcons, FinishRightIcon, LaptopIcons, LaunchCourseIcon, OnlineCourseIcon, OnlineLearningIcon, OnlineStudentIcon, PersonIcons, PlanCurriculumIcon, PrintIcons, RecordVideoIcon, RightLineIcon, RusIcons, TeachVal1Icon, TeachVal2Icon, TeachVal3Icon, TurkIcons, UzbIcons } from '@/icons';
 import { SiAmd, SiCisco, SiLogitech, SiSpotify } from 'react-icons/si';
 import { CourseType } from '@/interfaces/course.interface';
+import { FiEdit } from 'react-icons/fi';
+import { RiMoneyDollarBoxLine } from 'react-icons/ri';
 
 export const navigation = [
 	{
@@ -387,5 +389,38 @@ export const howToBeginCards = [
 		text3: 'how_to_begin_3_text_3',
 		helpText: 'how_we_help_you',
 		icon: LaunchCourseIcon,
+	},
+]
+
+export const instructorSidebar = [
+	{
+		name: 'Students',
+		icon: FaUserGraduate,
+		route: 'students',
+	},
+	{
+		name: 'Courses',
+		icon: FaListAlt,
+		route: 'courses',
+	},
+	{
+		name: 'Create course',
+		icon: MdOutlineCreateNewFolder,
+		route: 'create-course',
+	},
+	{
+		name: 'Edit courses',
+		icon: FiEdit,
+		route: 'edit-courses',
+	},
+	{
+		name: 'Draft courses',
+		icon: FaFirstdraft,
+		route: 'draft-courses',
+	},
+	{
+		name: 'Revenue',
+		icon: RiMoneyDollarBoxLine,
+		route: 'revenue',
 	},
 ]

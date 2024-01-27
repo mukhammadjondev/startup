@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { language, navigation } from "@/config/constants"
+import { instructorSidebar, language } from "@/config/constants"
 import { Box, Button, Container, HStack, Icon, Menu, MenuButton, MenuItem, MenuList, Text, useColorModeValue } from "@chakra-ui/react"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -7,7 +7,7 @@ import { SidebarProps } from "./sidebar.props"
 import { useTranslation } from "react-i18next"
 import { TbWorld } from "react-icons/tb"
 
-const Sidebar: FC<SidebarProps> = ({toggle}): JSX.Element => {
+const InstructorSidebar: FC<SidebarProps> = ({toggle}): JSX.Element => {
   const router = useRouter()
   const { t, i18n } = useTranslation()
 
@@ -28,8 +28,7 @@ const Sidebar: FC<SidebarProps> = ({toggle}): JSX.Element => {
       pos='fixed'
       left={{base: toggle ? 0 : '-100%', lg: 0}}
       top='10vh'
-      overflowY='scroll'
-      transition={'all .4s ease'}
+      transition='all .4s ease'
       css={{
       '&::-webkit-scrollbar': {width: '1px'},
       '&::-webkit-scrollbar-track': {width: '1px'},
@@ -48,28 +47,27 @@ const Sidebar: FC<SidebarProps> = ({toggle}): JSX.Element => {
             ))}
           </MenuList>
         </Menu>
-        {navigation.map(item => (
-          <Box key={item.title} mt={5}>
-            <Text>{t(item.title, {ns: 'layout'})}</Text>
-            {item.links.map(nav => {
-              const active = `/${router.pathname.split('/')[1]}` === nav.route
+        <Text fontSize='lg' mt={10}>
+          Instructor admin
+        </Text>
 
-              return (
-                <Link href={`${nav.route}`} key={nav.label}>
-                  <Button colorScheme='facebook' variant={active ? 'solid' : 'ghost'} w='full' justifyContent='flex-start' h={14} mt={2}>
-                    <HStack gap={4}>
-                      <Icon as={nav.icon} />
-                      <Text>{t(nav.label, {ns: 'layout'})}</Text>
-                    </HStack>
-                  </Button>
-                </Link>
-              )
-            })}
-          </Box>
-        ))}
+        {instructorSidebar.map(item => {
+          const active = `/instructor/${router.pathname.split('/')[2]}` == `/instructor/${item.route}`
+
+          return (
+            <Link href={`/instructor/${item.route}`} key={item.name}>
+              <Button colorScheme='facebook' variant={active ? 'solid' : 'ghost'} w='full' justifyContent='flex-start' h={14} mt={2}>
+                <HStack gap={4}>
+                  <Icon as={item.icon} />
+                  <Text>{item.name}</Text>
+                </HStack>
+              </Button>
+            </Link>
+          )
+        })}
       </Container>
     </Box>
   )
 }
 
-export default Sidebar
+export default InstructorSidebar
