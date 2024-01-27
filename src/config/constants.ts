@@ -2,7 +2,7 @@ import { AiFillAmazonCircle, AiOutlineDashboard, AiOutlineDollar } from 'react-i
 import { FaApplePay, FaBookReader, FaDraftingCompass, FaQuestionCircle } from 'react-icons/fa';
 import { CiViewList } from 'react-icons/ci';
 import { MdImportContacts, MdOutlineContactMail } from 'react-icons/md';
-import { AnnouncementIcons, CodingIcons, DesignIcons, EngIcons, FinishRightIcon, LaptopIcons, OnlineCourseIcon, OnlineLearningIcon, OnlineStudentIcon, PersonIcons, PrintIcons, RightLineIcon, RusIcons, TurkIcons, UzbIcons } from '@/icons';
+import { AnnouncementIcons, CodingIcons, DesignIcons, EngIcons, FinishRightIcon, LaptopIcons, LaunchCourseIcon, OnlineCourseIcon, OnlineLearningIcon, OnlineStudentIcon, PersonIcons, PlanCurriculumIcon, PrintIcons, RecordVideoIcon, RightLineIcon, RusIcons, TeachVal1Icon, TeachVal2Icon, TeachVal3Icon, TurkIcons, UzbIcons } from '@/icons';
 import { SiAmd, SiCisco, SiLogitech, SiSpotify } from 'react-icons/si';
 import { CourseType } from '@/interfaces/course.interface';
 
@@ -345,5 +345,47 @@ export const voiceLanguages = [
 		language: 'ru',
 		codes: 'ru-RU',
 		voiceUrl: 'Google русский',
+	},
+]
+
+export const teachValues = [
+	{
+		title: 'teach_your_way',
+		description: 'teach_your_way_description',
+		icon: TeachVal1Icon,
+	},
+	{
+		title: 'inspire_learners',
+		description: 'inspire_learners_description',
+		icon: TeachVal2Icon,
+	},
+	{
+		title: 'get_rewarded',
+		description: 'get_rewarded_description',
+		icon: TeachVal3Icon,
+	},
+]
+
+export const howToBeginCards = [
+	{
+		text1: 'how_to_begin_1_text_1',
+		text2: 'how_to_begin_1_text_2',
+		text3: 'how_to_begin_1_text_3',
+		helpText: 'how_we_help_you',
+		icon: PlanCurriculumIcon,
+	},
+	{
+		text1: 'how_to_begin_2_text_1',
+		text2: 'how_to_begin_2_text_2',
+		text3: 'how_to_begin_2_text_3',
+		helpText: 'how_we_help_you',
+		icon: RecordVideoIcon,
+	},
+	{
+		text1: 'how_to_begin_3_text_1',
+		text2: 'how_to_begin_3_text_2',
+		text3: 'how_to_begin_3_text_3',
+		helpText: 'how_we_help_you',
+		icon: LaunchCourseIcon,
 	},
 ]

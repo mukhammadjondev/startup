@@ -16,5 +16,6 @@
 	"faq_page_title": "Часто задаваемые вопросы",
 	"faq_page_description": "Больше пользователей на платформе muhsdev часто задаваемый вопрос",
 	"auth_page_title": "Aвторизация",
-	"auth_page_description": "Войдите или создайте учетную запись для использования платформы muhsdev"
+	"auth_page_description": "Войдите или создайте учетную запись для использования платформы muhsdev","become_instructor_page_title": "Стать инструктором",
+	"become_instructor_page_description": "Присоединяйтесь к одной из крупнейших в мире площадок онлайн-обучения и измените свою жизнь."
 }

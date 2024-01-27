@@ -16,5 +16,7 @@
 	"faq_page_title": "FAQ",
 	"faq_page_description": "MuhsDev platformunda daha fazla kullanıcı tarafından sıkça sorulan sorular",
 	"auth_page_title": "Girmek",
-	"auth_page_description": "MuhsDev platformunu kullanmak için giriş yapın veya bir hesap oluşturun"
+	"auth_page_description": "MuhsDev platformunu kullanmak için giriş yapın veya bir hesap oluşturun",
+	"become_instructor_page_title": "Eğitmen ol",
+	"become_instructor_page_description": "Dünyanın en büyük çevrimiçi öğrenme pazarlarından birine katılın ve kendi yaşamlarınızı değiştirin."
 }

@@ -16,5 +16,7 @@
 	"faq_page_title": "FAQ",
 	"faq_page_description": "More users in muhsdev platform frequently asked question",
 	"auth_page_title": "Auth",
-	"auth_page_description": "Login or create your account for using muhsdev platform"
+	"auth_page_description": "Login or create your account for using muhsdev platform",
+	"become_instructor_page_title": "Become an instructor",
+	"become_instructor_page_description": "Join one of the world’s largest online learning marketplaces and change your own lives."
 }
