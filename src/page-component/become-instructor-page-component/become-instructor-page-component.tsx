@@ -1,6 +1,9 @@
+import { ErrorAlert } from "@/components"
 import SectionTitle from "@/components/section-title/section-title"
 import TextField from "@/components/text-field/text-field"
 import { howToBeginCards, teachValues } from "@/config/constants"
+import { useActions } from "@/hooks/useActions"
+import { useTypedSelector } from "@/hooks/useTypedSelector"
 import { InstructorValidation } from "@/validations/instructor.validation"
 import { Button, Card, CardBody, Grid, Heading, HStack, Icon, Image, Stack, Tab, TabList, Tabs, Text, TabPanels, TabPanel, Box, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, Divider, ModalBody, Flex, ModalFooter, useToast } from "@chakra-ui/react"
 import { Form, Formik } from "formik"
@@ -12,15 +15,19 @@ const BecomeInstructorPageComponent = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { t } = useTranslation()
   const toast = useToast()
+  const { applyInstructor, clearInstructorError } = useActions()
+  const { error, isLoading } = useTypedSelector(state => state.instructor)
 
-  const onSubmit = () => {
-    toast({
-			title: 'Successfully sent',
-			description: "We'll contact with you coming soon",
-			isClosable: true,
-			position: 'top-right',
-		})
-		onClose()
+  const onSubmit = formData => {
+    applyInstructor({...formData, callback: () => {
+      toast({
+        title: 'Successfully sent',
+        description: "We'll contact with you coming soon",
+        isClosable: true,
+        position: 'top-right',
+      })
+      onClose()
+    }})
   }
 
   return (
@@ -45,7 +52,7 @@ const BecomeInstructorPageComponent = () => {
         {t('instructor_page_many_resaon', {ns: 'instructor'})}
       </Heading>
       <Grid gridTemplateColumns='1fr 1fr 1fr'>
-        {teachValues.map((item, idx) => <TeachValueCard item={item} idx={idx} />)}
+        {teachValues.map((item, idx) => <TeachValueCard item={item} key={idx} />)}
       </Grid>
       <Heading mt={10} textAlign='center'>
         {t('how_to_begin', {ns: 'instructor'})}
@@ -58,7 +65,7 @@ const BecomeInstructorPageComponent = () => {
           <Tab>{t('how_to_begin_3', {ns: 'instructor'})}</Tab>
         </TabList>
         <TabPanels>
-          {howToBeginCards.map((item, idx) => <TabPanelCard item={item} idx={idx} />)}
+          {howToBeginCards.map((item, idx) => <TabPanelCard item={item} key={idx} />)}
 				</TabPanels>
       </Tabs>
       <Card>
@@ -87,6 +94,7 @@ const BecomeInstructorPageComponent = () => {
             <Form>
               <ModalBody>
                 <Stack spacing={4}>
+                  <>{error && <ErrorAlert title={error as string} clearHandler={clearInstructorError} />}</>
                   <Flex gap={4}>
                     <TextField name='firstName' label={t('first_name', {ns: 'global'})} placeholder='Ali' type='text' />
                     <TextField name='lastName' label={t('last_name', {ns: 'global'})} placeholder='Osman' type='text' />
@@ -96,7 +104,7 @@ const BecomeInstructorPageComponent = () => {
                 </Stack>
               </ModalBody>
               <ModalFooter>
-								<Button type='submit' colorScheme='facebook' h={14} rightIcon={<GoVerified />}>
+								<Button type='submit' colorScheme='facebook' h={14} rightIcon={<GoVerified />} isLoading={isLoading} loadingText={`${t('loading', {ns: 'global'})}`}>
 									{t('send_to_verify_btn', {ns: 'global'})}
 								</Button>
 							</ModalFooter>
@@ -110,7 +118,6 @@ const BecomeInstructorPageComponent = () => {
 
 
 interface TeachValueCardProps {
-  idx: number
   item: {
     title: string
     description: string
@@ -118,10 +125,10 @@ interface TeachValueCardProps {
   }
 }
 
-const TeachValueCard = ({item, idx}: TeachValueCardProps) => {
+const TeachValueCard = ({item}: TeachValueCardProps) => {
   const { t } = useTranslation()
   return (
-    <Stack key={idx} align='center' textAlign='center' p={4}>
+    <Stack align='center' textAlign='center' p={4}>
       <Icon as={item.icon} fontSize={100} />
       <Text fontWeight='bold' fontSize={20}>{t(item.title, {ns: 'instructor'})}</Text>
       <Text>{t(item.description, {ns: 'instructor'})}</Text>
@@ -131,7 +138,6 @@ const TeachValueCard = ({item, idx}: TeachValueCardProps) => {
 
 
 interface TabPanelCardProps {
-  idx: number
   item: {
     text1: string
     text2: string
@@ -141,10 +147,10 @@ interface TabPanelCardProps {
   }
 }
 
-const TabPanelCard = ({item, idx}: TabPanelCardProps) => {
+const TabPanelCard = ({item}: TabPanelCardProps) => {
   const { t } = useTranslation()
   return (
-    <TabPanel key={idx}>
+    <TabPanel>
       <HStack>
         <Stack w='50%'>
           <Text>{t(item.text1, {ns: 'instructor'})}</Text>
