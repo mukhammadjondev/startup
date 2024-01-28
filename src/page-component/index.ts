@@ -11,3 +11,4 @@ export { default as AuthPageComponent } from './auth-page-component/auth-page-co
 export { default as DetailedCourseComponent } from './courses-page-component/detailed-course-component'
 export { default as BecomeInstructorPageComponent } from './become-instructor-page-component/become-instructor-page-component'
 export { default as InstructorStudentsPageComponent } from './instructor-page-component/students-page-component'
+export { default as InstructorCoursesPageComponent } from './instructor-page-component/courses-page-component'
