@@ -12,3 +12,4 @@ export { default as DetailedCourseComponent } from './courses-page-component/det
 export { default as BecomeInstructorPageComponent } from './become-instructor-page-component/become-instructor-page-component'
 export { default as InstructorStudentsPageComponent } from './instructor-page-component/students-page-component'
 export { default as InstructorCoursesPageComponent } from './instructor-page-component/courses-page-component'
+export { default as InstructorCreateCourseComponent } from './instructor-page-component/create-course-component'
