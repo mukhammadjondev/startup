@@ -15,3 +15,4 @@ export { default as InstructorCoursesPageComponent } from './instructor-page-com
 export { default as InstructorCreateCourseComponent } from './instructor-page-component/create-course-component'
 export { default as EditCoursePageComponent } from './instructor-page-component/edit-course-page-component'
 export { default as EditDetailedCoursePageComponent } from './instructor-page-component/edit-detailed-course-page-component'
+export { default as InstructorDrafCourseComponent } from './instructor-page-component/draf-course-component'
