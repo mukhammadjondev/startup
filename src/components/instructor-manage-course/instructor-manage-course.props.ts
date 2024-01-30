@@ -16,4 +16,5 @@ export interface SubmitValuesInterface {
   category: string
   price: string
   tags: string[]
+  previewImage: string
 }
