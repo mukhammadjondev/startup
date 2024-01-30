@@ -9,13 +9,16 @@ import { SiGoogleanalytics } from "react-icons/si"
 import { VscOpenPreview } from "react-icons/vsc"
 import { HiOutlineStatusOnline } from "react-icons/hi"
 import { InstructorCoursesCardProps } from "./instructor-courses-card.props"
+import { useTranslation } from "react-i18next"
 
 const InstructorCoursesCard: FC<InstructorCoursesCardProps> = ({item}): JSX.Element => {
+  const { t } = useTranslation()
+
   return (
     <HStack p={5} boxShadow='dark-lg' mt={5} borderRadius='lg'>
       <Stack spacing={5} w='70%'>
         <Text fontSize='20px' color='facebook.500' fontWeight='bold'>
-          {item.level}
+          {t(item.level, {ns: 'courses'})}
         </Text>
         <Heading>{item.title}</Heading>
         <HStack>
@@ -29,7 +32,7 @@ const InstructorCoursesCard: FC<InstructorCoursesCardProps> = ({item}): JSX.Elem
           </Flex>
           <Flex align='center' gap={1}>
             <Icon as={SiGoogleanalytics} />
-            <Text>{item.level}</Text>
+            <Text>{t(item.level, {ns: 'courses'})}</Text>
           </Flex>
         </HStack>
         <Divider />
