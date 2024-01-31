@@ -1,16 +1,27 @@
 import * as Yup from 'yup'
 
-export const manageCourseValues = {
+interface Type {
+	title: string
+	excerpt: string
+	learn: string[]
+	requirements: string[]
+	description: string
+	level: string
+	category: string
+	price: number
+	tags: string[]
+}
+
+export const manageCourseValues: Type = {
 	title: '',
 	excerpt: '',
-	name: [],
-	learn: '',
-	requirements: '',
+	learn: [],
+	requirements: [],
 	description: '',
 	level: '',
 	category: '',
-	price: '',
-	tags: '',
+	price: 0,
+	tags: [],
 }
 
 export const CourseValidation = {

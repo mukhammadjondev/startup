@@ -12,7 +12,7 @@ const InstructorProvider: FC<Props> = ({children, courses, course}): JSX.Element
   const { instructorAllCourses, instructorDetailedCourse } = useActions()
 
   useEffect(() => {
-    if(courses.length) {
+    if(courses?.length) {
       instructorAllCourses(courses)
     }
     if(course) {

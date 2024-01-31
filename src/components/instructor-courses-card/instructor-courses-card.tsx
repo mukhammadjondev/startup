@@ -10,6 +10,7 @@ import { VscOpenPreview } from "react-icons/vsc"
 import { HiOutlineStatusOnline } from "react-icons/hi"
 import { InstructorCoursesCardProps } from "./instructor-courses-card.props"
 import { useTranslation } from "react-i18next"
+import { loadImage } from "@/helpers/image.helper"
 
 const InstructorCoursesCard: FC<InstructorCoursesCardProps> = ({item}): JSX.Element => {
   const { t } = useTranslation()
@@ -44,7 +45,7 @@ const InstructorCoursesCard: FC<InstructorCoursesCardProps> = ({item}): JSX.Elem
         </HStack>
       </Stack>
       <Box w='30%' h='300px' pos='relative'>
-				<Image fill src={item.image} alt={item.title} style={{objectFit: 'cover', borderRadius: '10px'}} />
+				<Image fill src={loadImage(item.previewImage)} alt={item.title} style={{objectFit: 'cover', borderRadius: '10px'}} />
 			</Box>
     </HStack>
   )
