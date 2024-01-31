@@ -1,10 +1,12 @@
 import { InstructorDrafCourseCard } from "@/components"
 import SectionTitle from "@/components/section-title/section-title"
-import { courses } from "@/config/constants"
+import { useTypedSelector } from "@/hooks/useTypedSelector"
 import { Box, Card, CardBody, Grid, HStack, Stack, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
 import Image from "next/image"
 
 const DrafCourseComponent = () => {
+  const { courses } = useTypedSelector(state => state.instructor)
+
   return <>
     <Card>
       <CardBody p={0}>
@@ -26,12 +28,12 @@ const DrafCourseComponent = () => {
         <TabPanels>
           <TabPanel>
             <Grid gridTemplateColumns='1fr 1fr' gap={4}>
-              {courses.map(item => <InstructorDrafCourseCard key={item.slug} item={item} status='Draft' />).splice(0, 2)}
+              {courses.filter(c => !c.isActive).map(item => <InstructorDrafCourseCard key={item.slug} item={item} />)}
             </Grid>
           </TabPanel>
           <TabPanel>
             <Grid gridTemplateColumns='1fr 1fr' gap={4}>
-              {courses.map(item => <InstructorDrafCourseCard key={item.slug} item={item} status='Active' />).splice(0, 2)}
+              {courses.filter(c => c.isActive).map(item => <InstructorDrafCourseCard key={item.slug} item={item} />)}
             </Grid>
           </TabPanel>
         </TabPanels>
