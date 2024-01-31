@@ -14,4 +14,10 @@ export const CourseService = {
 
     return response.data
   },
+
+  async deleteCourse(id: string) {
+    const response = await $axios.delete(`${getCourseUrl('delete')}/${id}`)
+
+    return response.data
+  },
 }

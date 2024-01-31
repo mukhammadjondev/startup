@@ -8,3 +8,8 @@ export interface CourseInitialStateType {
 export interface CourseCreateBodyInterface extends CourseType {
   callback: () => void
 }
+
+export interface DeleteBodyInterface {
+  courseId: string
+  callback: () => void
+}
