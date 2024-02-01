@@ -22,3 +22,4 @@ export { default as InstructorCoursesCard } from './instructor-courses-card/inst
 export { default as InstructorEditCourseCard } from './instructor-courses-card/instructor-edit-course-card'
 export { default as InstructorDrafCourseCard } from './draft-course-card/draft-course-card'
 export { default as InstructorManageCourse } from './instructor-manage-course/instructor-manage-course'
+export { default as SectionAccordion } from './section-accordion/section-accordion'
