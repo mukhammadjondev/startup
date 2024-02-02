@@ -1,4 +1,4 @@
-import { SectionType } from "../instructor/instructor.interface"
+import { SectionType } from "@/interfaces/instructor.interface"
 
 export interface SectionInitialStateType {
   isLoading: boolean

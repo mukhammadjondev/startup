@@ -14,19 +14,3 @@ export interface InstructorApplyBody {
   socialMedia: string
   callback: () => void
 }
-
-export interface SectionType {
-  _id: string
-  title: string
-  lessons: []
-}
-
-export interface LessonType {
-  _id: string
-  name: string
-  material: string
-  embedVideo: string
-  hour: string
-  minute: string
-  second: string
-}

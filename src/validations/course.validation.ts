@@ -43,5 +43,10 @@ export const CourseValidation = {
 			category: Yup.string().required('Category is required'),
 			price: Yup.string().required('Price is required'),
 		})
-	}
+	},
+	section() {
+		return Yup.object({
+			title: Yup.string().required('Title is required'),
+		})
+	},
 }

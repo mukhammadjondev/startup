@@ -1,7 +1,7 @@
 import { errorCatch } from "@/helpers/api.helper"
+import { SectionType } from "@/interfaces/instructor.interface"
 import { SectionService } from "@/services/section.service"
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { SectionType } from "../instructor/instructor.interface"
 import { SectionBodyType } from "./section.interface"
 
 export const createSection = createAsyncThunk<'Success', SectionBodyType>(

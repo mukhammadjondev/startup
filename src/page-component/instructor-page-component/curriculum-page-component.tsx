@@ -6,14 +6,21 @@ import { BsFillPlusCircleFill } from "react-icons/bs"
 import { SectionAccordion } from "@/components"
 import SectionForm from "@/components/section-form/section-form"
 import { useActions } from "@/hooks/useActions"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 const CurriculumPageComponent = () => {
+  const [sectionTitle, setSectionTitle] = useState<{title: string; id: string} | null>({title: '', id: ''})
+
   const { course } = useTypedSelector(state => state.instructor)
   const { isOpen, onOpen, onClose } = useDisclosure()
 	const { getSection } = useActions()
 	const { pendingSection, sections } = useTypedSelector(state => state.section)
 	const toast = useToast()
+
+  const onCreateSection = () => {
+		onOpen()
+		setSectionTitle(null)
+	}
 
 	useEffect(() => {
 		getSection({courseId: course?._id, callback: () => {
@@ -37,7 +44,7 @@ const CurriculumPageComponent = () => {
       <CardBody>
         <Flex mb={5} justify='space-between' align='center'>
           <Text fontSize='2xl'>Create section</Text>
-          <Icon as={BsFillPlusCircleFill} w={6} h={6} cursor='pointer' onClick={onOpen} />
+          <Icon as={BsFillPlusCircleFill} w={6} h={6} cursor='pointer' onClick={onCreateSection} />
         </Flex>
 
 				{pendingSection ? (
@@ -49,7 +56,7 @@ const CurriculumPageComponent = () => {
 				) : (
 					<Accordion allowToggle>
 						{sections.map(section => (
-							<SectionAccordion key={section._id} section={section} />
+							<SectionAccordion key={section._id} section={section} setSectionTitle={setSectionTitle} onOpen={onOpen} />
 						))}
 					</Accordion>
 				)}
@@ -63,7 +70,7 @@ const CurriculumPageComponent = () => {
         <ModalCloseButton />
         <Divider />
         <ModalBody pb={5}>
-          <SectionForm onClose={onClose} />
+          <SectionForm onClose={onClose} values={sectionTitle} />
         </ModalBody>
       </ModalContent>
     </Modal>
