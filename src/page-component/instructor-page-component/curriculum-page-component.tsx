@@ -23,9 +23,11 @@ const CurriculumPageComponent = () => {
 	}
 
 	useEffect(() => {
-		getSection({courseId: course?._id, callback: () => {
-			toast({title: 'Successfully get sections', position: 'top-right', isClosable: true})
-		}})
+    if(course?._id) {
+      getSection({courseId: course._id, callback: () => {
+        toast({title: 'Successfully get sections', position: 'top-right', isClosable: true})
+      }})
+    }
 	}, [course])
 
   return <>
