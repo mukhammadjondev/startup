@@ -10,10 +10,8 @@ import { LessonAccordionProps } from "./lesson-accordion.props"
 
 const LessonAccordionItem = ({lesson, lessonIdx, sectionId}: LessonAccordionProps) => {
   const { isOpen, onToggle } = useDisclosure()
-  const { deleteLesson, getSection, editSection } = useActions()
-  const { course } = useTypedSelector(state => state.instructor)
-  const { isLoading } = useTypedSelector(state => state.lesson)
-  const { sections } = useTypedSelector(state => state.section)
+  const { deleteLesson, editSection } = useActions()
+  const { sections, isLoading } = useTypedSelector(state => state.section)
   const toast = useToast()
 
   const onDeleteLesson = () => {
@@ -22,7 +20,6 @@ const LessonAccordionItem = ({lesson, lessonIdx, sectionId}: LessonAccordionProp
     if(isAgree) {
       deleteLesson({lessonId: lesson._id, sectionId, callback: () => {
         toast({title: 'Successfully deleted lesson', position: 'top-right', isClosable: true})
-        getSection({courseId: course?._id, callback: () => {}})
       }})
     }
   }
@@ -39,9 +36,7 @@ const LessonAccordionItem = ({lesson, lessonIdx, sectionId}: LessonAccordionProp
     allLessons.splice(movingLessonIdx, 1)
     allLessons.splice(lessonIdx, 0, movingItem)
     const editedIdx = allLessons.map(c => c._id)
-    editSection({sectionId, lessons: editedIdx, callback: () => {
-      getSection({courseId: course?._id, callback: () => {}})
-    }})
+    editSection({sectionId, lessons: editedIdx, callback: () => {}})
   }
 
   return <>
@@ -55,7 +50,7 @@ const LessonAccordionItem = ({lesson, lessonIdx, sectionId}: LessonAccordionProp
       </Flex>
     </Flex>
     <Collapse in={isOpen} animateOpacity>
-      <LessonForm values={lesson} />
+      <LessonForm values={lesson} onToggle={onToggle} />
     </Collapse>
   </>
 }

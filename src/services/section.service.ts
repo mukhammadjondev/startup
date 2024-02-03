@@ -1,5 +1,5 @@
 import $axios from "@/api/axios";
-import { getCourseUrl, getSectionUrl } from "@/config/api.config";
+import { getSectionUrl } from "@/config/api.config";
 import { SectionBodyType } from "@/store/section/section.interface";
 
 export const SectionService = {
@@ -24,7 +24,7 @@ export const SectionService = {
   },
 
   async dragSection(body: SectionBodyType) {
-    const response = await $axios.put(`${getCourseUrl('drag')}/${body.courseId}`, {sections: body.sections})
+    const response = await $axios.put(`${getSectionUrl('drag')}/${body.courseId}`, {sections: body.sections})
     return response.data
   },
 }

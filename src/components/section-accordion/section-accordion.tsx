@@ -1,7 +1,6 @@
 import { DragEvent } from "react"
 import { useActions } from "@/hooks/useActions"
 import { useTypedSelector } from "@/hooks/useTypedSelector"
-import { LessonType } from "@/interfaces/instructor.interface"
 import { AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Button, Center, Collapse, Flex, Icon, List, useDisclosure, useToast } from "@chakra-ui/react"
 import { AiOutlineMenu } from "react-icons/ai"
 import { MdDelete, MdEdit } from "react-icons/md"
@@ -12,7 +11,7 @@ import { SectionAccordionProps } from "./section-accordion.props"
 
 const SectionAccordion = ({ section, sectionIdx, setSectionTitle, onOpen }: SectionAccordionProps) => {
   const { isOpen, onToggle } = useDisclosure()
-  const { deleteSection, getSection, dragSection, clearSectionError } = useActions()
+  const { deleteSection, dragSection, clearSectionError } = useActions()
   const { isLoading, error, sections } = useTypedSelector(state => state.section)
   const { course } = useTypedSelector(state => state.instructor)
   const toast = useToast()
@@ -23,7 +22,6 @@ const SectionAccordion = ({ section, sectionIdx, setSectionTitle, onOpen }: Sect
     if(isAgree) {
       deleteSection({sectionId: section._id, courseId: course?._id, callback: () => {
         toast({title: 'Successfully deleted section', position: 'top-right', isClosable: true})
-        getSection({courseId: course?._id, callback: () => {}})
       }})
     }
   }
@@ -44,9 +42,7 @@ const SectionAccordion = ({ section, sectionIdx, setSectionTitle, onOpen }: Sect
     allSections.splice(movingSectionIdx, 1)
     allSections.splice(sectionIdx, 0, movingItem)
     const editedIdx = allSections.map(c => c._id)
-    dragSection({sections: editedIdx, courseId: course?._id, callback: () => {
-      getSection({courseId: course?._id, callback: () => {}})
-    }})
+    dragSection({sections: editedIdx, courseId: course?._id, callback: () => {}})
   }
 
   return (
@@ -68,7 +64,7 @@ const SectionAccordion = ({ section, sectionIdx, setSectionTitle, onOpen }: Sect
       </AccordionButton>
       <AccordionPanel pb={4}>
         <List onDragOver={e => e.preventDefault()}>
-          {section.lessons.map((lesson: LessonType, idx) => (
+          {section.lessons.map((lesson, idx) => (
             <LessonAccordionItem key={lesson._id} lesson={lesson} lessonIdx={idx} sectionId={section._id} />
           ))}
         </List>
@@ -78,7 +74,7 @@ const SectionAccordion = ({ section, sectionIdx, setSectionTitle, onOpen }: Sect
           </Button>
         </Center>
         <Collapse in={isOpen} animateOpacity>
-          <LessonForm sectionId={section._id} />
+          <LessonForm sectionId={section._id} onToggle={onToggle} />
         </Collapse>
       </AccordionPanel>
     </AccordionItem>

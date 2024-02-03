@@ -8,7 +8,7 @@ export interface InstructorType {
 export interface SectionType {
   _id: string
   title: string
-  lessons: []
+  lessons: LessonType[]
 }
 
 export interface LessonType {

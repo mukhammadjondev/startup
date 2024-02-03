@@ -4,7 +4,7 @@ import { SectionService } from "@/services/section.service"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { SectionBodyType } from "./section.interface"
 
-export const createSection = createAsyncThunk<'Success', SectionBodyType>(
+export const createSection = createAsyncThunk<SectionType[], SectionBodyType>(
   'section/create', async(body, thunkApi) => {
   try {
     const response = await SectionService.createSection(body)
@@ -15,7 +15,7 @@ export const createSection = createAsyncThunk<'Success', SectionBodyType>(
   }
 })
 
-export const deleteSection = createAsyncThunk<'Success', SectionBodyType>(
+export const deleteSection = createAsyncThunk<SectionType[], SectionBodyType>(
   'section/delete', async(body, thunkApi) => {
   try {
     const response = await SectionService.deleteSection(body)
@@ -26,7 +26,7 @@ export const deleteSection = createAsyncThunk<'Success', SectionBodyType>(
   }
 })
 
-export const editSection = createAsyncThunk<'Success', SectionBodyType>(
+export const editSection = createAsyncThunk<SectionType, SectionBodyType>(
   'section/edit', async(body, thunkApi) => {
   try {
     const response = await SectionService.editSection(body)

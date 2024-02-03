@@ -38,10 +38,9 @@ const InstructorCoursesCard: FC<InstructorCoursesCardProps> = ({item}): JSX.Elem
         </HStack>
         <Divider />
         <HStack>
-          <Button rightIcon={<VscOpenPreview />}>Preview</Button>
-					<Button rightIcon={<FiEdit2 />}>Edit</Button>
-					<Button rightIcon={<BsTrash />}>Delete</Button>
-					<Button rightIcon={<HiOutlineStatusOnline />}>Status</Button>
+          <Button rightIcon={<VscOpenPreview />} w='full' h={16} colorScheme='facebook'>
+            Preview
+          </Button>
         </HStack>
       </Stack>
       <Box w='30%' h='300px' pos='relative'>

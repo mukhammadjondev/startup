@@ -15,25 +15,26 @@ import { LessonFormProps } from "./lesson-form.props"
 
 const ReactQuill = dynamic(() => import('react-quill'), {ssr: false})
 
-const LessonForm = ({sectionId, values}: LessonFormProps) => {
+const LessonForm = ({sectionId, values, onToggle}: LessonFormProps) => {
   const [initialValues, setInitialValues] = useState(manageLessonValues)
-  const { createLesson, getSection, editLesson, clearLessonError } = useActions()
-  const { course } = useTypedSelector(state => state.instructor)
-  const { error, isLoading } = useTypedSelector(state => state.lesson)
+  const { createLesson, editLesson, clearLessonError } = useActions()
+  const { error, isLoading } = useTypedSelector(state => state.section)
   const { t } = useTranslation()
   const toast = useToast()
 
-  const onSubmit = (formValues: FormikValues) => {
+  const onSubmit = (formValues: FormikValues, {resetForm}) => {
     const data = formValues as LessonType
     if(values) {
       editLesson({lessonId: values._id, ...data, callback: () => {
         toast({title: 'Successfully edited lesson', position: 'top-right', isClosable: true})
-        getSection({courseId: course?._id, callback: () => {}})
+        onToggle()
+        resetForm()
       }})
     } else {
       createLesson({...data, sectionId, callback: () => {
         toast({title: 'Successfully created new lesson', position: 'top-right', isClosable: true})
-        getSection({courseId: course?._id, callback: () => {}})
+        onToggle()
+        resetForm()
       }})
     }
   }

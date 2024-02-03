@@ -12,7 +12,7 @@ import { SectionFormProps } from "./section-form.props"
 const SectionForm = ({onClose, values}: SectionFormProps) => {
   const [initialValues, setInitialValues] = useState<{ title: string }>({ title: '' })
 
-  const { createSection, getSection, editSection, clearSectionError } = useActions()
+  const { createSection, editSection, clearSectionError } = useActions()
   const { error, isLoading } = useTypedSelector(state => state.section)
   const { course } = useTypedSelector(state => state.instructor)
   const { t } = useTranslation()
@@ -22,13 +22,11 @@ const SectionForm = ({onClose, values}: SectionFormProps) => {
     if(values) {
       editSection({sectionId: values.id, title: formValues.title, callback: () => {
         toast({title: 'Successfully edited section', position: 'top-right', isClosable: true})
-        getSection({courseId: course?._id, callback: () => {}})
         onClose()
       }})
     } else {
       createSection({title: formValues.title, courseId: course?._id as string, callback: () => {
         toast({title: 'Successfully created section', position: 'top-right', isClosable: true})
-        getSection({courseId: course?._id, callback: () => {}})
         onClose()
       }})
     }
