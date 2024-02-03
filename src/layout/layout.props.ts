@@ -1,5 +1,13 @@
+import { CourseType } from "@/interfaces/course.interface";
+import { InstructorType } from "@/interfaces/instructor.interface";
 import { ReactNode } from "react";
 
 export interface LayoutProps {
   children: ReactNode
+}
+
+export interface AppProviderProps {
+  courses: CourseType[]
+  course: CourseType
+  instructors: InstructorType[]
 }

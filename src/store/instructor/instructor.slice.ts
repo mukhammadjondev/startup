@@ -1,4 +1,5 @@
 import { CourseType } from "@/interfaces/course.interface"
+import { InstructorType } from "@/interfaces/instructor.interface"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { applyInstructor } from "./instructor.action"
 import { InstructorInitialStateType } from "./instructor.interface"
@@ -8,6 +9,7 @@ const initialState: InstructorInitialStateType = {
   error: null,
   courses: [],
   course: null,
+  instructors: [],
 }
 
 export const InstructorSlice = createSlice({
@@ -22,6 +24,9 @@ export const InstructorSlice = createSlice({
     },
     instructorDetailedCourse: (state, action: PayloadAction<CourseType>) => {
       state.course = action.payload
+    },
+    getInstructors: (state, action: PayloadAction<InstructorType[]>) => {
+      state.instructors = action.payload
     },
   },
   extraReducers: builder => {

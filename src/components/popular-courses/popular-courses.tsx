@@ -1,12 +1,13 @@
 import Carousel from "react-multi-carousel"
 import { useTranslation } from "react-i18next"
 import { courseCarousel } from "@/config/carousel"
-import { courses } from "@/config/constants"
 import SectionTitle from "../section-title/section-title"
 import PopularCoursesCard from "../popular-courses-card/popular-courses-card"
+import { useTypedSelector } from "@/hooks/useTypedSelector"
 
 const PopularCourses = () => {
 	const {t} = useTranslation()
+  const { courses } = useTypedSelector(state => state.course)
 
   return (
     <>
