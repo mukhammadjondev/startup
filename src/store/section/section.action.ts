@@ -47,3 +47,14 @@ export const getSection = createAsyncThunk<SectionType[], SectionBodyType>(
     return thunkApi.rejectWithValue(errorCatch(error))
   }
 })
+
+export const dragSection = createAsyncThunk<SectionType[], SectionBodyType>(
+  'section/drag', async(body, thunkApi) => {
+  try {
+    const response = await SectionService.dragSection(body)
+    body.callback()
+    return response
+  } catch (error) {
+    return thunkApi.rejectWithValue(errorCatch(error))
+  }
+})

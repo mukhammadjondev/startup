@@ -51,14 +51,14 @@ const CurriculumPageComponent = () => {
 
 				{pendingSection ? (
 					<Stack>
-						<Skeleton height='20px' />
-						<Skeleton height='20px' />
-						<Skeleton height='20px' />
+						<Skeleton height={35} />
+						<Skeleton height={35} />
+						<Skeleton height={35} />
 					</Stack>
 				) : (
-					<Accordion allowToggle>
-						{sections.map(section => (
-							<SectionAccordion key={section._id} section={section} setSectionTitle={setSectionTitle} onOpen={onOpen} />
+					<Accordion allowToggle onDragOver={e => e.preventDefault()}>
+						{sections.map((section, idx) => (
+							<SectionAccordion key={section._id} section={section} sectionIdx={idx} setSectionTitle={setSectionTitle} onOpen={onOpen} />
 						))}
 					</Accordion>
 				)}
