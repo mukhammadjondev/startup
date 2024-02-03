@@ -464,3 +464,5 @@ export const courseusers = [
 ]
 
 export const coursePrice = [10, 20, 30, 40, 50]
+
+export const courseLng = ['en', 'uz', 'ru', 'tr']

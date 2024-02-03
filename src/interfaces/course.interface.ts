@@ -17,10 +17,10 @@ export interface CourseType {
 	category: string
 	_id: string
 	isActive: boolean
+	language: string
 }
 
 export interface AuthorType {
-	firstName: string
-	lastName: string
+	fullName: string
 	avatar: string
 }
