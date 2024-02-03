@@ -40,7 +40,7 @@ const InstructorManageCourse = ({titleBtn, submitHandler, courseValues}: Instruc
 
   const onSubmit = async (formValues: FormikValues) => {
     if(!file) {
-      setErrorFile('Preview image is required')
+      setErrorFile(t('preview_image_is_required', {ns: 'global'}))
       return
     }
     let imageUrl = file
@@ -70,15 +70,15 @@ const InstructorManageCourse = ({titleBtn, submitHandler, courseValues}: Instruc
           <Flex mt={4} gap={4}>
             <Box w='70%'>
               <Stack spacing={5}>
-                <TextField name='title' label='Title' placeholder='JavaScript from 0 to hero' />
-                <TextAreaField name='excerpt' label='Excerpt' height="150px" placeholder="Full course about JavaScript" />
+                <TextField name='title' label={t('title', {ns: 'instructor'})} />
+                <TextAreaField name='excerpt' label={t('excerpt', {ns: 'instructor'}) || 'Excerpt'} height="150px" />
                 <Flex gap={4}>
-                  <TagField label='What will students learn in your courses?' name='learn' values={formik.values.learn} placeholder='Full project...' formik={formik} errorMessage={formik.touched.learn ? (formik.errors.learn as string) : ''} />
-                  <TagField label='Requirements' name='requirements' values={formik.values.requirements} placeholder='Basic JavaScript' formik={formik} errorMessage={formik.touched.requirements ? (formik.errors.requirements as string) : ''} />
+                  <TagField label={t('what_students_will_learn', {ns: 'instructor'})} name='learn' values={formik.values.learn} placeholder='' formik={formik} errorMessage={formik.touched.learn ? (formik.errors.learn as string) : ''} />
+                  <TagField label={t('requirements', {ns: 'instructor'})} name='requirements' values={formik.values.requirements} placeholder='' formik={formik} errorMessage={formik.touched.requirements ? (formik.errors.requirements as string) : ''} />
                 </Flex>
                 <Box>
                   <FormLabel>
-                    Description{' '}
+                    {t('description', {ns: 'instructor'})}{' '}
                     <Box as='span' color='red.300'>*</Box>
                   </FormLabel>
                   <ReactQuill modules={editorModules} value={formik.values.description} onChange={data => formik.setFieldValue('description', data)} />
@@ -96,13 +96,13 @@ const InstructorManageCourse = ({titleBtn, submitHandler, courseValues}: Instruc
             </Box>
             <Box w='30%'>
               <Stack spacing={5}>
-                <SelectField name='level' label='Level' placeholder='-' arrOptions={courseLevel} />
-                <SelectField name='category' label='Category' placeholder='-' arrOptions={courseCategory} />
-                <SelectField name='price' label='Price' placeholder='-' arrOptions={coursePrice} />
-                <TagField label='Course tags' values={formik.values.tags} name='tags' placeholder='JavaScript...' formik={formik} errorMessage={formik.touched.tags ? (formik.errors.tags as string) : ''} />
+                <SelectField name='level' label={t('level', {ns: 'instructor'})} placeholder='-' arrOptions={courseLevel} />
+                <SelectField name='category' label={t('category', {ns: 'instructor'})} placeholder='-' arrOptions={courseCategory} />
+                <SelectField name='price' label={t('price', {ns: 'instructor'})} placeholder='-' arrOptions={coursePrice} />
+                <TagField label={t('course_tags', {ns: 'instructor'})} values={formik.values.tags} name='tags' placeholder='' formik={formik} errorMessage={formik.touched.tags ? (formik.errors.tags as string) : ''} />
                 <Box>
                   <FormLabel>
-                    Course preview image{' '}
+                    {t('course_preview_image', {ns: 'instructor'})}{' '}
                     <Box as='span' color='red.300'>*</Box>
                   </FormLabel>
 

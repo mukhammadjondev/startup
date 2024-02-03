@@ -21,12 +21,12 @@ const SectionForm = ({onClose, values}: SectionFormProps) => {
   const onSubmit = (formValues: FormikValues) => {
     if(values) {
       editSection({sectionId: values.id, title: formValues.title, callback: () => {
-        toast({title: 'Successfully edited section', position: 'top-right', isClosable: true})
+        toast({title: t('successfully_edited', {ns: 'instructor'}), position: 'top-right', isClosable: true})
         onClose()
       }})
     } else {
       createSection({title: formValues.title, courseId: course?._id as string, callback: () => {
-        toast({title: 'Successfully created section', position: 'top-right', isClosable: true})
+        toast({title: t('successfully_created_course', {ns: 'instructor'}), position: 'top-right', isClosable: true})
         onClose()
       }})
     }
@@ -40,9 +40,9 @@ const SectionForm = ({onClose, values}: SectionFormProps) => {
     <Formik onSubmit={onSubmit} initialValues={initialValues} validationSchema={CourseValidation.section} enableReinitialize>
       <Form>
         <>{error && <ErrorAlert title={error as string} clearHandler={clearSectionError} />}</>
-        <TextField name='title' label='Title' />
+        <TextField name='title' label={t('title', {ns: 'instructor'})}/>
         <Button h={14} mt={4} w='full' colorScheme='facebook' type='submit' isLoading={isLoading} loadingText={`${t('loading', {ns: 'global'})}`}>
-          Submit
+          {t('search_input_btn', {ns: 'courses'})}
         </Button>
       </Form>
     </Formik>

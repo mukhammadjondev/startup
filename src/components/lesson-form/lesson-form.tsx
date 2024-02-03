@@ -26,13 +26,13 @@ const LessonForm = ({sectionId, values, onToggle}: LessonFormProps) => {
     const data = formValues as LessonType
     if(values) {
       editLesson({lessonId: values._id, ...data, callback: () => {
-        toast({title: 'Successfully edited lesson', position: 'top-right', isClosable: true})
+        toast({title: t('successfully_edited', {ns: 'instructor'}), position: 'top-right', isClosable: true})
         onToggle()
         resetForm()
       }})
     } else {
       createLesson({...data, sectionId, callback: () => {
-        toast({title: 'Successfully created new lesson', position: 'top-right', isClosable: true})
+        toast({title: t('successfully_created_course', {ns: 'instructor'}), position: 'top-right', isClosable: true})
         onToggle()
         resetForm()
       }})
@@ -52,23 +52,18 @@ const LessonForm = ({sectionId, values, onToggle}: LessonFormProps) => {
           <Form>
             <Stack spacing={5}>
               <>{error && <ErrorAlert title={error as string} clearHandler={clearLessonError} />}</>
-              <TextField name='name' label='Name' />
-              <TextAreaField name='embedVideo' label='Embed Video' />
+              <TextField name='name' label={t('name', {ns: 'instructor'})} />
+              <TextAreaField name='embedVideo' label={t('embed_video', {ns: 'instructor'}) || 'Embed video'} />
               <Flex gap={3}>
-                <TextField name='hour' label='Hour' type='number' />
-                <TextField name='minute' label='Minute' type='number' />
-                <TextField name='second' label='Second' type='number' />
+                <TextField name='hour' label={t('hour', {ns: 'instructor'})} type='number' />
+                <TextField name='minute' label={t('minute', {ns: 'instructor'})} type='number' />
+                <TextField name='second' label={t('second', {ns: 'instructor'})} type='number' />
               </Flex>
               <Box>
                 <ReactQuill modules={editLessonModules} value={formik.values.material} onChange={data => formik.setFieldValue('material', data)} />
-                {formik.errors.material && formik.touched.material && (
-                  <Text mt={2} fontSize='14px' color='red.500'>
-                    {formik.errors.material as string}
-                  </Text>
-                )}
               </Box>
               <Button h={14} mt={4} w='full' colorScheme='facebook' type='submit' isLoading={isLoading} loadingText={`${t('loading', {ns: 'global'})}`}>
-                Submit
+                {t('search_input_btn', {ns: 'courses'})}
               </Button>
             </Stack>
           </Form>

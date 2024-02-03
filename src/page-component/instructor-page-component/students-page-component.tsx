@@ -27,7 +27,7 @@ const StudentsPageComponent = () => {
     <Card>
       <CardBody>
         <Stack>
-          <SectionTitle title='Students' subtitle='Enrolled users to your courses and analytics' />
+          <SectionTitle title={t('students_title', {ns: 'instructor'})} subtitle={t('students_description', {ns: 'instructor'})} />
           <Box className="chart-container">
             <Line data={chartData} options={{plugins: {title: {display: false}, legend: {display: false}}}} />
           </Box>
@@ -36,7 +36,7 @@ const StudentsPageComponent = () => {
     </Card>
 
     <Box mt={10}>
-      <Heading>All users</Heading>
+      <Heading>{t('all_users', {ns: 'instructor'})}</Heading>
       <Box pos='relative' mt={5}>
         <Input h={14} w='full' bg='white' color='gray.900' placeholder={t('search_input_placeholder', { ns: 'courses' }) || ''} _placeholder={{ color: 'gray.500' }} />
         <Button pos='absolute' right={2} top={2} colorScheme='facebook' zIndex={999}>
@@ -47,7 +47,7 @@ const StudentsPageComponent = () => {
         <Table variant='striped' colorScheme='teal'>
           <TableCaption>
             <Button variant='outline' colorScheme='facebook' rightIcon={<AiOutlineReload />}>
-              more...
+              {t('more', {ns: 'instructor'})}...
             </Button>
           </TableCaption>
           <Thead>
@@ -55,10 +55,10 @@ const StudentsPageComponent = () => {
               <Th isNumeric>
                 <AiOutlineFieldNumber fontSize={20} />
               </Th>
-              <Th>Email</Th>
-              <Th>FullName</Th>
-              <Th>Courses</Th>
-              <Th>Enrolled date</Th>
+              <Th>{t('email', {ns: 'instructor'})}</Th>
+              <Th>{t('full_name', {ns: 'instructor'})}</Th>
+              <Th>{t('courses', {ns: 'instructor'})}</Th>
+              <Th>{t('enrolled_date', {ns: 'instructor'})}</Th>
             </Tr>
           </Thead>
           <Tbody>

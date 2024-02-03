@@ -2,12 +2,9 @@ import { Box, Button, Divider, Flex, Heading, HStack, Icon, Stack, Text } from "
 import Image from "next/image"
 import { FC } from "react"
 import { AiOutlineClockCircle } from "react-icons/ai"
-import { BsTrash } from "react-icons/bs"
 import { CiViewList } from "react-icons/ci"
-import { FiEdit2 } from "react-icons/fi"
 import { SiGoogleanalytics } from "react-icons/si"
 import { VscOpenPreview } from "react-icons/vsc"
-import { HiOutlineStatusOnline } from "react-icons/hi"
 import { InstructorCoursesCardProps } from "./instructor-courses-card.props"
 import { useTranslation } from "react-i18next"
 import { loadImage } from "@/helpers/image.helper"
@@ -25,11 +22,11 @@ const InstructorCoursesCard: FC<InstructorCoursesCardProps> = ({item}): JSX.Elem
         <HStack>
           <Flex align='center' gap={1}>
             <Icon as={CiViewList} />
-            <Text>{item.lessonCount} lesson</Text>
+            <Text>{item.lessonCount} {t('lesson', {ns: 'courses'})}</Text>
           </Flex>
           <Flex align='center' gap={1}>
             <Icon as={AiOutlineClockCircle} />
-            <Text>{item.totalHour} hours</Text>
+            <Text>{item.totalHour} {t('hour', {ns: 'courses'})}</Text>
           </Flex>
           <Flex align='center' gap={1}>
             <Icon as={SiGoogleanalytics} />
@@ -39,7 +36,7 @@ const InstructorCoursesCard: FC<InstructorCoursesCardProps> = ({item}): JSX.Elem
         <Divider />
         <HStack>
           <Button rightIcon={<VscOpenPreview />} w='full' h={16} colorScheme='facebook'>
-            Preview
+            {t('preview', {ns: 'instructor'})}
           </Button>
         </HStack>
       </Stack>

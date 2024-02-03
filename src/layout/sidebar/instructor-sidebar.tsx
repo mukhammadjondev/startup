@@ -48,7 +48,7 @@ const InstructorSidebar: FC<SidebarProps> = ({toggle}): JSX.Element => {
           </MenuList>
         </Menu>
         <Text fontSize='lg' mt={10}>
-          Instructor admin
+          {t('instructor_admin', {ns: 'instructor'})}
         </Text>
 
         {instructorSidebar.map(item => {
@@ -59,7 +59,7 @@ const InstructorSidebar: FC<SidebarProps> = ({toggle}): JSX.Element => {
               <Button colorScheme='facebook' variant={active ? 'solid' : 'ghost'} w='full' justifyContent='flex-start' h={14} mt={2}>
                 <HStack gap={4}>
                   <Icon as={item.icon} />
-                  <Text>{item.name}</Text>
+                  <Text>{t(item.name, {ns: 'instructor'})}</Text>
                 </HStack>
               </Button>
             </Link>

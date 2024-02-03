@@ -21,7 +21,7 @@ const DraftCourseCard: FC<DraftCourseCardProps> = ({item}): JSX.Element => {
 		if(item.isActive) {
 			draftCourse({courseId: item._id, callback: () => {
 				toast({
-					title: 'Successfully drafted your course',
+					title: t('successfully_drafted_course', {ns: 'instructor'}),
 					description: item.title,
 					position: 'top-right',
 					isClosable: true
@@ -31,7 +31,7 @@ const DraftCourseCard: FC<DraftCourseCardProps> = ({item}): JSX.Element => {
 		} else {
 			activateCourse({courseId: item._id, callback: () => {
 				toast({
-					title: 'Successfully activated your course',
+					title: t('successfully_activate_course', {ns: 'instructor'}),
 					description: item.title,
 					position: 'top-right',
 					isClosable: true
@@ -51,13 +51,13 @@ const DraftCourseCard: FC<DraftCourseCardProps> = ({item}): JSX.Element => {
 			<Stack spacing={5}>
 				<Heading>{item.title}</Heading>
 				<Text fontWeight='bold' color='facebook.500'>
-					Status:{' '}
+					{t('status', {ns: 'instructor'})}:{' '}
 					<Box as='span' color={item.isActive ? 'green.500' : 'red.500'}>
-						{item.isActive ? 'Activate' : 'Draft'}
+						{item.isActive ? t('active', {ns: 'instructor'}) : t('draft', {ns: 'instructor'})}
 					</Box>
 				</Text>
 				<Button colorScheme='facebook' h={14} variant='outline' onClick={activeHandler} isLoading={isLoading} loadingText={`${t('loading', {ns: 'global'})}`}>
-					{!item.isActive ? 'Activate' : 'Draft'}
+					{!item.isActive ? t('active', {ns: 'instructor'}) : t('draft', {ns: 'instructor'})}
 				</Button>
 			</Stack>
 		</Box>

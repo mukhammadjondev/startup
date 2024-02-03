@@ -3,6 +3,7 @@ import { useTypedSelector } from "@/hooks/useTypedSelector"
 import { LessonType, SectionType } from "@/interfaces/instructor.interface"
 import { Collapse, Flex, Icon, Text, useColorModeValue, useDisclosure, useToast } from "@chakra-ui/react"
 import { DragEvent } from "react"
+import { useTranslation } from "react-i18next"
 import { FaEdit } from "react-icons/fa"
 import { FiDelete } from "react-icons/fi"
 import LessonForm from "../lesson-form/lesson-form"
@@ -13,13 +14,14 @@ const LessonAccordionItem = ({lesson, lessonIdx, sectionId}: LessonAccordionProp
   const { deleteLesson, editSection } = useActions()
   const { sections, isLoading } = useTypedSelector(state => state.section)
   const toast = useToast()
+  const { t } = useTranslation()
 
   const onDeleteLesson = () => {
-    const isAgree = confirm('Are you sure?')
+    const isAgree = confirm(t('are_you_sure', {ns: 'global'}))
 
     if(isAgree) {
       deleteLesson({lessonId: lesson._id, sectionId, callback: () => {
-        toast({title: 'Successfully deleted lesson', position: 'top-right', isClosable: true})
+        toast({title: t('successfully_deleted', {ns: 'instructor'}), position: 'top-right', isClosable: true})
       }})
     }
   }

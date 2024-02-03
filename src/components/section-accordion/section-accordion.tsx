@@ -8,6 +8,7 @@ import ErrorAlert from "../error-alert/error-alert"
 import LessonAccordionItem from "../lesson-accordion-item/lesson-accordion-item"
 import LessonForm from "../lesson-form/lesson-form"
 import { SectionAccordionProps } from "./section-accordion.props"
+import { useTranslation } from "react-i18next"
 
 const SectionAccordion = ({ section, sectionIdx, setSectionTitle, onOpen }: SectionAccordionProps) => {
   const { isOpen, onToggle } = useDisclosure()
@@ -15,13 +16,14 @@ const SectionAccordion = ({ section, sectionIdx, setSectionTitle, onOpen }: Sect
   const { isLoading, error, sections } = useTypedSelector(state => state.section)
   const { course } = useTypedSelector(state => state.instructor)
   const toast = useToast()
+  const { t } = useTranslation()
 
   const onDelete = () => {
-    const isAgree = confirm('Are you sure?')
+    const isAgree = confirm(t('are_you_sure', {ns: 'global'}))
 
     if(isAgree) {
       deleteSection({sectionId: section._id, courseId: course?._id, callback: () => {
-        toast({title: 'Successfully deleted section', position: 'top-right', isClosable: true})
+        toast({title: t('successfully_deleted', {ns: 'instructor'}), position: 'top-right', isClosable: true})
       }})
     }
   }
@@ -70,7 +72,7 @@ const SectionAccordion = ({ section, sectionIdx, setSectionTitle, onOpen }: Sect
         </List>
         <Center>
           <Button variant='unstyled' colorScheme='facebook.200' _hover={{textDecoration: 'underline'}} onClick={onToggle}>
-            {isOpen ? 'Close form' : 'Create lesson'}
+            {isOpen ? t('close_form', {ns: 'instructor'}) : t('create_lesson', {ns: 'instructor'})}
           </Button>
         </Center>
         <Collapse in={isOpen} animateOpacity>
