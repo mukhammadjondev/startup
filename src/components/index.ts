@@ -24,3 +24,4 @@ export { default as InstructorDrafCourseCard } from './draft-course-card/draft-c
 export { default as InstructorManageCourse } from './instructor-manage-course/instructor-manage-course'
 export { default as SectionAccordion } from './section-accordion/section-accordion'
 export { default as AdminInstructorTable } from './admin-instructor-table/admin-instructor-table'
+export { default as AdminCourseCard } from './admin-course-card/admin-course-card'

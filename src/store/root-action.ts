@@ -8,6 +8,7 @@ import { instructorSliceAction } from './instructor/instructor.slice'
 import { courseSliceAction } from './course/course.slice'
 import { sectionSliceAction } from './section/section.slice'
 import { lessonSliceAction } from './lesson/lesson.slice'
+import { adminSliceAction } from './admin/admin.slice'
 
 export const allActions = {
   ...userActions,
@@ -20,4 +21,5 @@ export const allActions = {
   ...sectionSliceAction,
   ...lessonActions,
   ...lessonSliceAction,
+  ...adminSliceAction,
 }
