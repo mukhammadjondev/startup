@@ -110,5 +110,8 @@
 	"hour_is_required": "Soat talab qilinadi",
 	"minute_is_required": "Daqiqa talab qilinadi",
 	"second_is_required": "Soniyalar talab qilinadi",
+	"job_required": "Lavozimingiz talab qilinadi",
+	"course": "kurs",
+	"student": "o'quvchi",
 	"are_you_sure": "Ishonchingiz komilmi?"
 }

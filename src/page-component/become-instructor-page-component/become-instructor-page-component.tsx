@@ -1,7 +1,8 @@
 import { ErrorAlert } from "@/components"
 import SectionTitle from "@/components/section-title/section-title"
+import SelectField from "@/components/select-field/select-field"
 import TextField from "@/components/text-field/text-field"
-import { howToBeginCards, teachValues } from "@/config/constants"
+import { courseLng, howToBeginCards, teachValues } from "@/config/constants"
 import { useActions } from "@/hooks/useActions"
 import { useTypedSelector } from "@/hooks/useTypedSelector"
 import { InstructorValidation } from "@/validations/instructor.validation"
@@ -21,8 +22,8 @@ const BecomeInstructorPageComponent = () => {
   const onSubmit = formData => {
     applyInstructor({...formData, callback: () => {
       toast({
-        title: 'Successfully sent',
-        description: "We'll contact with you coming soon",
+        title: t('become_instructor_submit_toast_title', {ns: 'instructor'}),
+        description: t('become_instructor_submit_toast_description', {ns: 'instructor'}),
         isClosable: true,
         position: 'top-right',
       })
@@ -82,7 +83,7 @@ const BecomeInstructorPageComponent = () => {
 				</CardBody>
 			</Card>
 
-      <Modal isOpen={isOpen} onClose={onClose} size='4xl' isCentered={true}>
+      <Modal isOpen={isOpen} onClose={onClose} size='3xl' isCentered={true}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader fontSize='2xl'>
@@ -100,6 +101,8 @@ const BecomeInstructorPageComponent = () => {
                     <TextField name='lastName' label={t('last_name', {ns: 'global'})} placeholder='Osman' type='text' />
                   </Flex>
                   <TextField name='email' label={t('login_input_email_label', {ns: 'global'})} placeholder='info@gmail.com' type='email' />
+                  <TextField name='job' label={t('label_job', {ns: 'instructor'})} placeholder='Senior software engineer' />
+                  <SelectField name='language' label={t('language', {ns: 'courses'})} placeholder='-' arrOptions={courseLng} />
 									<TextField name='socialMedia' label={`${t('social_media', {ns: 'global'})} (YouTube)`} placeholder='Link to your lesson' type='text' />
                 </Stack>
               </ModalBody>

@@ -25,6 +25,8 @@
 	"how_we_help_you": "Size nasıl yardımcı oluyoruz",
 	"become_instructor_today": "Bugün eğitmen ol",
 	"become_instructor_today_descritpion": "Dünyanın en büyük çevrimiçi öğrenme pazarlarından birine katılın.",
+	"become_instructor_submit_toast_title": "Başarıyla gönderildi",
+	"become_instructor_submit_toast_description": "Yakında sizinle iletişime geçeceğiz",
 	"instructor_admin": "eğitmen yönetici",
 	"sidebar_students": "öğrenciler",
 	"sidebar_courses": "Dersler",
@@ -91,5 +93,6 @@
 	"embed_video": "Videoyu yerleştir",
 	"hour": "Saat",
 	"minute": "Dakika",
-	"second": "Saniye"
+	"second": "Saniye",
+	"label_job": "Mevcut profesyonel işiniz"
 }

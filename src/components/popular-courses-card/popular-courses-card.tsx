@@ -29,7 +29,7 @@ const PopularCoursesCard = ({course}: PopularCoursesCardProps) => {
         </Flex>
         <Flex align='center' gap={1}>
           <Icon as={AiOutlineClockCircle} />
-          <Text>10 {t('hour', {ns: 'courses'})}</Text>
+          <Text>{course.totalHour} {t('hour', {ns: 'courses'})}</Text>
         </Flex>
         <Flex align='center' gap={1}>
           <Icon as={SiGoogleanalytics} />

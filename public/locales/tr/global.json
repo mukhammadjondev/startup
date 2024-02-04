@@ -110,5 +110,8 @@
 	"hour_is_required": "Saat gerekli",
 	"minute_is_required": "Dakika gerekli",
 	"second_is_required": "Saniye gerekli",
+	"job_required": "Pozisyonunuz gerekli",
+	"course": "kurs",
+	"student": "öğrenci",
 	"are_you_sure": "Emin misin?"
 }

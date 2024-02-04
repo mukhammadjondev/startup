@@ -14,8 +14,16 @@ const AppProvider: FC<Props> = ({children, courses, course, instructors}): JSX.E
   const { getCourses, getCourse, getInstructors } = useActions()
 
   useEffect(() => {
-    getCourses(courses)
-    getInstructors(instructors)
+    if(courses?.length) {
+      getCourses(courses)
+    } else {
+      getCourses([])
+    }
+    if(instructors?.length) {
+      getInstructors(instructors)
+    } else {
+      getInstructors([])
+    }
     if(course) {
       getCourse(course)
     }

@@ -58,5 +58,18 @@ export const AuthService = {
     }
 
     return response.data
-  }
+  },
+
+  async checkInstructor(token?: string) {
+    try {
+      const { data } = await axios.get(`${API_URL}${getAuthUrl('check-instructor')}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  },
 }

@@ -25,6 +25,8 @@
 	"how_we_help_you": "Biz sizga qanday yordam beramiz",
 	"become_instructor_today": "Bugun o'qituvchi bo'ling",
 	"become_instructor_today_descritpion": "Dunyodagi eng yirik onlayn ta'lim bozorlaridan biriga qo'shiling.",
+	"become_instructor_submit_toast_title": "Muvaffaqiyatli yuborildi",
+	"become_instructor_submit_toast_description": "Tez orada siz bilan bog'lanamiz",
 	"instructor_admin": "O'qituvchi admin",
 	"sidebar_students": "Talabalar",
 	"sidebar_courses": "Kurslar",
@@ -91,5 +93,6 @@
 	"embed_video": "Videoni joylashtirish",
 	"hour": "Soat",
 	"minute": "Minut",
-	"second": "Sekund"
+	"second": "Sekund",
+	"label_job": "Sizning hozirgi professional ishingiz"
 }

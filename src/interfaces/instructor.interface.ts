@@ -1,7 +1,8 @@
 export interface InstructorType {
   fullName: string
   avatar: string
-  coursesCount: number
+  job: string
+  totalCourses: number
   studentsCount: number
 }
 

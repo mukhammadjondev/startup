@@ -25,6 +25,8 @@
 	"how_we_help_you": "How we help you",
 	"become_instructor_today": "Become an instructor today",
 	"become_instructor_today_descritpion": "Join one of the world’s largest online learning marketplaces.",
+	"become_instructor_submit_toast_title": "Successfully sent",
+	"become_instructor_submit_toast_description": "We'll contact with you coming soon",
 	"instructor_admin": "Instructor admin",
 	"sidebar_students": "Students",
 	"sidebar_courses": "Courses",
@@ -91,5 +93,6 @@
 	"embed_video": "Embed video",
 	"hour": "Hour",
 	"minute": "Minute",
-	"second": "Seconds"
+	"second": "Seconds",
+	"label_job": "Your current professional job"
 }

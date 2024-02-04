@@ -22,7 +22,7 @@ const Instructors = () => {
             <Stack spacing={3}>
               <Box pos='relative' w='full' h='330px'>
                 <Image
-                  src={item.avatar ? loadImage(item.avatar) : '/images/placeholder-portrait.png'}
+                  src={item.avatar ? item.avatar : '/images/placeholder-portrait.png'}
                   alt={item.fullName}
                   fill
                   style={{objectFit: 'cover', borderRadius: '8px'}}
@@ -31,15 +31,15 @@ const Instructors = () => {
               <Heading fontSize='xl'>
                 {item.fullName}
               </Heading>
-              <Text color='gray.500'>Software engineer</Text>
+              <Text color='gray.500'>{item.job}</Text>
               <HStack opacity='.6'>
                 <Flex align='center' gap={1}>
                   <Icon as={FaUserGraduate} />
-                  <Text>200 students</Text>
+                  <Text>200 {t('student', {ns: 'global'})}</Text>
                 </Flex>
                 <Flex align='center' gap={1}>
                   <Icon as={AiOutlinePlayCircle} />
-                  <Text>2 courses</Text>
+                  <Text>{item.totalCourses} {t('course', {ns: 'global'})}</Text>
                 </Flex>
               </HStack>
             </Stack>
