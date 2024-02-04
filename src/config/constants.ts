@@ -1,5 +1,5 @@
-import { AiFillAmazonCircle, AiOutlineDashboard, AiOutlineDollar } from 'react-icons/ai';
-import { FaApplePay, FaBookReader, FaDraftingCompass, FaFirstdraft, FaListAlt, FaQuestionCircle, FaUserGraduate } from 'react-icons/fa';
+import { AiFillAmazonCircle, AiOutlineDashboard, AiOutlineDollar, AiOutlineUnorderedList } from 'react-icons/ai';
+import { FaApplePay, FaBookReader, FaChalkboardTeacher, FaDraftingCompass, FaFirstdraft, FaListAlt, FaQuestionCircle, FaUserGraduate } from 'react-icons/fa';
 import { CiViewList } from 'react-icons/ci';
 import { MdImportContacts, MdOutlineContactMail, MdOutlineCreateNewFolder } from 'react-icons/md';
 import { AnnouncementIcons, CodingIcons, DesignIcons, EngIcons, FinishRightIcon, LaptopIcons, LaunchCourseIcon, OnlineCourseIcon, OnlineLearningIcon, OnlineStudentIcon, PersonIcons, PlanCurriculumIcon, PrintIcons, RecordVideoIcon, RightLineIcon, RusIcons, TeachVal1Icon, TeachVal2Icon, TeachVal3Icon, TurkIcons, UzbIcons } from '@/icons';
@@ -7,6 +7,7 @@ import { SiAmd, SiCisco, SiLogitech, SiSpotify } from 'react-icons/si';
 import { CourseType } from '@/interfaces/course.interface';
 import { FiEdit } from 'react-icons/fi';
 import { RiMoneyDollarBoxLine } from 'react-icons/ri';
+import { ImBooks } from 'react-icons/im';
 
 export const navigation = [
 	{
@@ -153,7 +154,7 @@ export const coursesFilter = [
 	},
 ]
 
-export const courses: CourseType[] = [
+export const courses = [
 	{
 		image: 'https://media.graphassets.com/3gf746AKRbWNjB8OCoEB',
 		title: 'JavaScript full course',
@@ -466,3 +467,64 @@ export const courseusers = [
 export const coursePrice = [10, 20, 30, 40, 50]
 
 export const courseLng = ['en', 'uz', 'ru', 'tr']
+
+export const adminSidebar = [
+	{
+		name: 'Users',
+		icon: FaUserGraduate,
+		route: 'users',
+	},
+	{
+		name: 'Instructors',
+		icon: FaChalkboardTeacher,
+		route: 'instructors',
+	},
+	{
+		name: 'Courses',
+		icon: AiOutlineUnorderedList,
+		route: 'courses',
+	},
+	{
+		name: 'Books',
+		icon: ImBooks,
+		route: 'books',
+	},
+]
+
+export const instructorUsers = [
+	{
+		id: 1,
+		email: 'ab@gmail.com',
+		fullName: 'Samar Badriddinov',
+		job: 'Software Engineer',
+		socialMedia: 'https://youtube.com',
+	},
+	{
+		id: 2,
+		email: 'ab@gmail.com',
+		fullName: 'Osman Ali',
+		job: 'JavaScript developer',
+		socialMedia: 'https://youtube.com',
+	},
+	{
+		id: 3,
+		email: 'ab@gmail.com',
+		fullName: 'Shox Abdulloh',
+		job: 'ReactJS developer',
+		socialMedia: 'https://youtube.com',
+	},
+	{
+		id: 4,
+		fullName: 'Abdulaziz Alimov',
+		email: 'ab@gmail.com',
+		job: 'Software Engineer',
+		socialMedia: 'https://youtube.com',
+	},
+	{
+		id: 5,
+		fullName: 'Yusuf Khamdamov',
+		email: 'ab@gmail.com',
+		job: 'Backend Engineer',
+		socialMedia: 'https://youtube.com',
+	},
+]

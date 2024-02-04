@@ -18,3 +18,7 @@ export { default as EditDetailedCoursePageComponent } from './instructor-page-co
 export { default as InstructorDrafCourseComponent } from './instructor-page-component/draf-course-component'
 export { default as InstructorRevenuePageComponent } from './instructor-page-component/revenue-page-component'
 export { default as InstructorCurriculumPageComponent } from './instructor-page-component/curriculum-page-component'
+export { default as AdminUsersPageComponent } from './admin-page-component/users-page-component'
+export { default as AdminInstructorsPageComponent } from './admin-page-component/instructors-page-component'
+export { default as AdminCoursesPageComponent } from './admin-page-component/courses-page-component'
+export { default as AdminBooksPageComponent } from './admin-page-component/books-page-component'
