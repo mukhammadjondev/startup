@@ -2,6 +2,7 @@ import { CourseType } from "@/interfaces/course.interface"
 import { InstructorType } from "@/interfaces/instructor.interface"
 import { UserType } from "@/interfaces/user.interface"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { approveInstructor, deleteInstructor } from "./admin.action"
 import { AdminInitialStateType } from "./admin.interface"
 
 const initialState: AdminInitialStateType = {
@@ -22,15 +23,42 @@ export const adminSlice = createSlice({
     clearAdminError: state => {
       state.error = null
     },
-    getCourses: (state, action: PayloadAction<CourseType[]>) => {
+    getAdminCourses: (state, action: PayloadAction<CourseType[]>) => {
       state.courses = action.payload
     },
-    getInstructors: (state, action: PayloadAction<InstructorType[]>) => {
+    getAdminInstructors: (state, action: PayloadAction<InstructorType[]>) => {
       state.instructors = action.payload
     },
-    getUsers: (state, action: PayloadAction<UserType[]>) => {
+    getAdminUsers: (state, action: PayloadAction<UserType[]>) => {
       state.users = action.payload
     },
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(approveInstructor.pending, state => {
+        state.isLoading = true
+        state.error = null
+      })
+      .addCase(approveInstructor.fulfilled, state => {
+        state.isLoading = false
+        state.error = null
+      })
+      .addCase(approveInstructor.rejected, (state, {payload}) => {
+        state.isLoading = false
+        state.error = payload
+      })
+      .addCase(deleteInstructor.pending, state => {
+        state.isLoading = true
+        state.error = null
+      })
+      .addCase(deleteInstructor.fulfilled, state => {
+        state.isLoading = false
+        state.error = null
+      })
+      .addCase(deleteInstructor.rejected, (state, {payload}) => {
+        state.isLoading = false
+        state.error = payload
+      })
   },
 })
 

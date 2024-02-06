@@ -9,3 +9,8 @@ export interface AdminInitialStateType {
   instructors: InstructorType[]
   users: UserType[]
 }
+
+export interface ApproveAndDeleteBody {
+  instructorId: string
+  callback: () => void
+}
