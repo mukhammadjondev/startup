@@ -17,6 +17,7 @@ Chart.register(CategoryScale)
 
 const UsersPageComponent = () => {
   const [limit, setLimit] = useState<number>(15)
+  const [query, setQuery] = useState<string>('')
   const [chartData, setChartData] = useState({
     labels: courseusers.map(data => data.year),
     datasets: [{
@@ -29,12 +30,16 @@ const UsersPageComponent = () => {
   })
   const { t } = useTranslation()
   const { users, isLoading, error } = useTypedSelector(state => state.admin)
-  const { moreAdminUsers, clearAdminError } = useActions()
+  const { moreAdminUsers, searchAdminUsers, clearAdminError } = useActions()
 
   const moreAdminUsersHandler = () => {
     setLimit(prev => prev + 10)
     const token = Cookies.get('refresh')
-    moreAdminUsers({limit: String(limit), token, callback() {}})
+    moreAdminUsers({limit: String(limit), token})
+  }
+
+  const searchAdminUsersHandler = () => {
+    searchAdminUsers({query})
   }
 
   return <>
@@ -52,8 +57,8 @@ const UsersPageComponent = () => {
     <Box mt={10}>
       <Heading>{t('all_users', {ns: 'instructor'})}</Heading>
       <Box pos='relative' mt={5}>
-        <Input h={14} w='full' bg='white' color='gray.900' placeholder={t('search_input_placeholder', { ns: 'courses' }) || ''} _placeholder={{ color: 'gray.500' }} />
-        <Button pos='absolute' right={2} top={2} colorScheme='facebook' zIndex={999}>
+        <Input h={14} w='full' bg='white' color='gray.900' placeholder={t('search_input_placeholder', { ns: 'courses' }) || ''} _placeholder={{ color: 'gray.500' }} value={query} onChange={e => setQuery(e.target.value)} />
+        <Button pos='absolute' right={2} top={2} colorScheme='facebook' zIndex={999} onClick={searchAdminUsersHandler}>
           {t('search_input_btn', { ns: 'courses' })}
         </Button>
       </Box>

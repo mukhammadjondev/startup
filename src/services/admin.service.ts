@@ -2,6 +2,7 @@ import $axios from "@/api/axios"
 import { API_URL, getAdminUrl, getCourseUrl } from "@/config/api.config"
 import { CourseType } from "@/interfaces/course.interface"
 import { InstructorType } from "@/interfaces/instructor.interface"
+import { UserType } from "@/interfaces/user.interface"
 import axios from "axios"
 
 export const AdminService = {
@@ -34,6 +35,11 @@ export const AdminService = {
       params: { limit },
       headers: {Authorization: `Bearer ${token}`}
     })
+    return data
+  },
+
+  async searchUsers(query: string) {
+    const {data} = await $axios.get<UserType[]>(`${getAdminUrl('search-users')}`, {params: {email: query, limit: 10}})
     return data
   }
 }

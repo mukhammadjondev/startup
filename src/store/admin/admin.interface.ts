@@ -18,5 +18,8 @@ export interface ApproveAndDeleteBody {
 export interface AdminUserInterfaceResponse {
   limit: string
   token?: string
-  callback: () => void
+}
+
+export interface AdminSearchUsersResponse {
+  query: string
 }
