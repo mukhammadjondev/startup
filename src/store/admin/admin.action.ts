@@ -1,8 +1,9 @@
 import { errorCatch } from "@/helpers/api.helper"
+import { CourseType } from "@/interfaces/course.interface"
 import { UserType } from "@/interfaces/user.interface"
 import { AdminService } from "@/services/admin.service"
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { AdminSearchUsersResponse, AdminUserInterfaceResponse, ApproveAndDeleteBody } from "./admin.interface"
+import { AdminSearchUsersResponse, AdminUserInterfaceResponse, ApproveAndDeleteBody, DeleteCourseRequest } from "./admin.interface"
 
 export const approveInstructor = createAsyncThunk<'Success', ApproveAndDeleteBody>(
   'admin/approve-instructor', async(body, thunkApi) => {
@@ -40,6 +41,17 @@ export const searchAdminUsers = createAsyncThunk<UserType[], AdminSearchUsersRes
   'admin/search-users', async(body, thunkApi) => {
   try {
     const response = await AdminService.searchUsers(body.query)
+    return response
+  } catch (error) {
+    return thunkApi.rejectWithValue(errorCatch(error))
+  }
+})
+
+export const deleteAdminCourse = createAsyncThunk<CourseType[], DeleteCourseRequest>(
+  'admin/delete-course', async(body, thunkApi) => {
+  try {
+    const response = await AdminService.deleteCourse(body.courseId)
+    body.callback()
     return response
   } catch (error) {
     return thunkApi.rejectWithValue(errorCatch(error))

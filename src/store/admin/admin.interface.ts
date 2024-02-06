@@ -23,3 +23,8 @@ export interface AdminUserInterfaceResponse {
 export interface AdminSearchUsersResponse {
   query: string
 }
+
+export interface DeleteCourseRequest {
+  courseId: string
+  callback: () => void
+}

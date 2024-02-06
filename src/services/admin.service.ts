@@ -41,5 +41,10 @@ export const AdminService = {
   async searchUsers(query: string) {
     const {data} = await $axios.get<UserType[]>(`${getAdminUrl('search-users')}`, {params: {email: query, limit: 10}})
     return data
-  }
+  },
+
+  async deleteCourse(courseId: string) {
+    const {data} = await $axios.delete<CourseType[]>(`${getAdminUrl('delete-course')}`, {params: {courseId}})
+    return data
+  },
 }

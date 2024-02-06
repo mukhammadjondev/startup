@@ -1,11 +1,26 @@
 import { loadImage } from "@/helpers/image.helper"
-import { Box, Button, ButtonGroup, Divider, Flex, Heading, Stack, Text } from "@chakra-ui/react"
+import { useActions } from "@/hooks/useActions"
+import { Box, Button, ButtonGroup, Divider, Flex, Heading, Stack, Text, useToast } from "@chakra-ui/react"
 import Image from "next/image"
+import { useTranslation } from "react-i18next"
 import { BsTrash } from "react-icons/bs"
 import { VscOpenPreview } from "react-icons/vsc"
 import { AdminCourseCardProps } from "./admin-course-card.props"
 
 const AdminCourseCard = ({course}: AdminCourseCardProps) => {
+	const { t } = useTranslation()
+	const { deleteAdminCourse } = useActions()
+	const toast = useToast()
+
+	const deleteAdminCourseHandler = () => {
+		const isAgree = confirm(t('are_you_sure', {ns: 'global'}))
+		if(isAgree) {
+			deleteAdminCourse({courseId: course._id, callback: () => {
+				toast({title: t('successfully_deleted', {ns: 'instructor'}), position: 'top-right', isClosable: true})
+			}})
+		}
+	}
+
   return (
 		<Box p={5} boxShadow='dark-lg' mt={5} borderRadius='lg'>
 			<Stack spacing={2}>
@@ -27,7 +42,7 @@ const AdminCourseCard = ({course}: AdminCourseCardProps) => {
 					<Button w='full' rightIcon={<VscOpenPreview />} colorScheme='facebook'>
 						Preview
 					</Button>
-					<Button w='full' colorScheme='red' rightIcon={<BsTrash />}>
+					<Button w='full' colorScheme='red' rightIcon={<BsTrash />} onClick={deleteAdminCourseHandler}>
 						Delete
 					</Button>
 				</ButtonGroup>
