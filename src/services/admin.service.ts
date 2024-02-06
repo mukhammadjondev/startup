@@ -28,4 +28,12 @@ export const AdminService = {
     const {data} = await $axios.put<'Success'>(`${getAdminUrl('approve-instructor')}`, {instructorId})
     return data
   },
+
+  async getUsers(limit: string, token?: string) {
+    const {data} = await axios.get(`${API_URL}${getAdminUrl('all-users')}`, {
+      params: { limit },
+      headers: {Authorization: `Bearer ${token}`}
+    })
+    return data
+  }
 }
