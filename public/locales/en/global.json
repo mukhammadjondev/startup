@@ -115,6 +115,7 @@
 	"minute_is_required": "Minute is required",
 	"second_is_required": "Second is required",
 	"job_required": "Job is required",
+	"pdf_is_requried": "PDF is required",
 	"courses": "courses",
 	"students": "students",
 	"are_you_sure": "Are you sure?"

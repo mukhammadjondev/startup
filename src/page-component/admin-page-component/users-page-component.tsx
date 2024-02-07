@@ -46,7 +46,7 @@ const UsersPageComponent = () => {
     <Card mt={10}>
       <CardBody>
         <Stack>
-          <SectionTitle title='Users' subtitle='Registred users to platform' />
+          <SectionTitle title={t('user_section_title', {ns: 'admin'})} subtitle={t('user_section_descr', {ns: 'admin'})} />
           <Box className="chart-container">
             <Line data={chartData} options={{plugins: {title: {display: false}, legend: {display: false}}}} />
           </Box>
@@ -77,7 +77,7 @@ const UsersPageComponent = () => {
               </Th>
               <Th>{t('email', {ns: 'instructor'})}</Th>
               <Th>{t('full_name', {ns: 'instructor'})}</Th>
-              <Th>Role</Th>
+              <Th>{t('role', {ns: 'admin'})}</Th>
               <Th>{t('enrolled_date', {ns: 'instructor'})}</Th>
             </Tr>
           </Thead>
@@ -86,7 +86,7 @@ const UsersPageComponent = () => {
               <Tr key={idx}>
                 <Td>{idx + 1}</Td>
                 <Td>{user.email}</Td>
-                <Td>{user.fullName || "Not found"}</Td>
+                <Td>{user.fullName || t('not_found', {ns: 'admin'})}</Td>
                 <Td>{user.role || "USER"}</Td>
                 <Td>{format(new Date(user.createdAt as Date), 'dd MMMM, yyyy')}</Td>
               </Tr>

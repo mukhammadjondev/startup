@@ -44,7 +44,7 @@ const BooksPageComponent = () => {
       <CardBody>
         <HStack>
           <Box w='30%'>
-            <SectionTitle title='Books' subtitle='All books and managing on platform' />
+            <SectionTitle title={t('books_section_title', {ns: 'admin'})} subtitle={t('books_section_descr', {ns: 'admin'})} />
           </Box>
           <Flex w='70%' justify='flex-end'>
             <PlanCurriculumIcon />
@@ -71,10 +71,10 @@ const BooksPageComponent = () => {
             </Box>
             <HStack>
               <Button w='full' rightIcon={<FaTrash />} onClick={() => deleteBooksHandler(item._id as string)} colorScheme='red'>
-                Delete
+								{t('delete_course', {ns: 'instructor'})}
               </Button>
               <Button w='full' rightIcon={<FaEdit />} onClick={() => editOpenModal(item)} colorScheme='green'>
-                Edit
+								{t('edit_course', {ns: 'instructor'})}
               </Button>
             </HStack>
           </Flex>

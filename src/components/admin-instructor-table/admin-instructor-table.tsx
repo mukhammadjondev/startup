@@ -17,36 +17,31 @@ const AdminInstructorTable = ({instructors, approved}: AdminInstructorTableProps
 	const approveInstructorHandler = (instructorId: string) => {
 		approveInstructor({instructorId, callback: () => {
 			router.replace(router.asPath)
-			toast({title: 'Successfully approved', status: 'success', position: 'top-right', isClosable: true})
+			toast({title: t('successfully_approve', {ns: 'admin'}), status: 'success', position: 'top-right', isClosable: true})
 		}})
 	}
 
 	const deleteInstructorHandler = (instructorId: string) => {
 		deleteInstructor({instructorId, callback: () => {
 			router.replace(router.asPath)
-			toast({title: 'Successfully deleted', position: 'top-right', isClosable: true})
+			toast({title: t('successfully_deleted', {ns: 'instructor'}), position: 'top-right', isClosable: true})
 		}})
 	}
 
   return (
 		<TableContainer>
 			<Table variant='striped' colorScheme='teal'>
-				<TableCaption>
-					<Button colorScheme='facebook' variant='outline' rightIcon={<AiOutlineReload />}>
-						more...
-					</Button>
-				</TableCaption>
 				<>{error && <ErrorAlert title={error as string} clearHandler={clearAdminError} />}</>
 				<Thead>
 					<Tr>
 						<Th isNumeric>
 							<AiOutlineFieldNumber fontSize={20} />
 						</Th>
-						<Th>Email</Th>
-						<Th>FullName</Th>
-						<Th>Job</Th>
-						<Th>Social media</Th>
-						<Th>Actions</Th>
+						<Th>{t('email', {ns: 'instructor'})}</Th>
+						<Th>{t('full_name', {ns: 'instructor'})}</Th>
+						<Th>{t('job', {ns: 'admin'})}</Th>
+						<Th>{t('social_media', {ns: 'admin'})}</Th>
+						<Th>{t('actions', {ns: 'admin'})}</Th>
 					</Tr>
 				</Thead>
 				<Tbody>
@@ -61,11 +56,11 @@ const AdminInstructorTable = ({instructors, approved}: AdminInstructorTableProps
 								<ButtonGroup variant='outline'>
 									{approved ? (
 										<Button size='sm' colorScheme='red' onClick={() => deleteInstructorHandler(instructor._id)} isLoading={isLoading}>
-											Del
+											{t('del', {ns: 'admin'})}
 										</Button>
 									) : (
 										<Button size='sm' colorScheme='facebook' onClick={() => approveInstructorHandler(instructor._id)} isLoading={isLoading}>
-											Appr
+											{t('appr', {ns: 'admin'})}
 										</Button>
 									)}
 								</ButtonGroup>

@@ -48,13 +48,13 @@ const BooksModal: FC<BooksModalProps> = ({isOpen, onClose, booksValue}): JSX.Ele
 
     if(booksValue) {
       updateBooks({price, title, pdf, _id, image: imageUrl as string, callback: () => {
-        toast({title: 'Successfully updated', position: 'top-right', isClosable: true})
+        toast({title: t('successfully_edited', {ns: 'instructor'}), position: 'top-right', isClosable: true})
         setFile(null)
         onClose()
       }})
     } else {
       createBooks({price, title, pdf, image: imageUrl as string, callback: () => {
-        toast({title: 'Successfully created', position: 'top-right', isClosable: true})
+        toast({title: t('successfully_created_course', {ns: 'instructor'}), position: 'top-right', isClosable: true})
         setFile(null)
         onClose()
       }})
@@ -84,8 +84,8 @@ const BooksModal: FC<BooksModalProps> = ({isOpen, onClose, booksValue}): JSX.Ele
             <>{error && <ErrorAlert title={error as string} clearHandler={clearBooksError} />}</>
               <VStack>
                 <TextField name='title' label={t('title', {ns: 'instructor'})} placeholder='Harry Poter' />
-                <SelectField name='price' label='Books price' placeholder='-' arrOptions={coursePrice} />
-                <TextField name='pdf' label='PDF Link' />
+                <SelectField name='price' label={t('books_price', {ns: 'admin'})} placeholder='-' arrOptions={coursePrice} />
+                <TextField name='pdf' label={t('pdf_link', {ns: 'admin'})} />
                 {file ? (
                   <Box pos='relative' w='full' h={200}>
                     <Image
@@ -110,7 +110,7 @@ const BooksModal: FC<BooksModalProps> = ({isOpen, onClose, booksValue}): JSX.Ele
             </ModalBody>
             <ModalFooter>
               <Button type='submit' colorScheme='blue' mr={3} isLoading={isLoading}>
-                {booksValue ? 'Edit book' : 'Add book'}
+                {booksValue ? t('edit_book', {ns: 'admin'}) : t('add_book', {ns: 'admin'})}
               </Button>
             </ModalFooter>
           </Form>

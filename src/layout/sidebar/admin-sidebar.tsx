@@ -9,7 +9,7 @@ import { adminSidebar, language } from '@/config/constants';
 
 const AdminSidebar = () => {
 	const { toggleColorMode, colorMode } = useColorMode()
-	const { i18n } = useTranslation()
+	const { i18n, t } = useTranslation()
 	const router = useRouter()
 
 	const onLanguage = (lng: string) => {
@@ -56,7 +56,7 @@ const AdminSidebar = () => {
 							<Button colorScheme='facebook' variant={active ? 'solid' : 'ghost'} w='full' justifyContent='flex-start' h={14} mt={5}>
 								<HStack gap={2}>
 									<Icon as={item.icon} />
-									<Text>{item.name}</Text>
+									<Text>{t(item.name, {ns: 'admin'})}</Text>
 								</HStack>
 							</Button>
 						</Link>

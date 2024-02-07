@@ -30,20 +30,20 @@ const AdminCourseCard = ({course}: AdminCourseCardProps) => {
 				<Heading fontSize={'xl'}>{course.title}</Heading>
 				<Divider />
 				<Flex align='center' gap={2} fontSize='16px' color='facebook.200' fontWeight='bold'>
-					Language: {course.language}
+					{t('language', {ns: 'instructor'})}: {course.language}
 				</Flex>
 				<Text fontWeight='bold' color='facebook.500'>
-					Status:{' '}
+				{t('status', {ns: 'instructor'})}:{' '}
 					<Box as='span' color={course.isActive ? 'green.500' : 'red.500'}>
 						{course.isActive ? 'Active' : 'Draft'}
 					</Box>
 				</Text>
 				<ButtonGroup>
 					<Button w='full' rightIcon={<VscOpenPreview />} colorScheme='facebook'>
-						Preview
+						{t('preview', {ns: 'instructor'})}
 					</Button>
 					<Button w='full' colorScheme='red' rightIcon={<BsTrash />} onClick={deleteAdminCourseHandler}>
-						Delete
+						{t('delete_course', {ns: 'instructor'})}
 					</Button>
 				</ButtonGroup>
 			</Stack>
