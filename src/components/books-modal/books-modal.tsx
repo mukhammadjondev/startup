@@ -5,7 +5,7 @@ import { Form, Formik, FormikValues } from "formik"
 import { BooksValidation } from "@/validations/books.validation"
 import TextField from "../text-field/text-field"
 import { useTranslation } from "react-i18next"
-import { coursePrice } from "@/config/constants"
+import { coursePrice, createBooksCategory } from "@/config/constants"
 import SelectField from "../select-field/select-field"
 import Image from "next/image"
 import { FaTimes } from "react-icons/fa"
@@ -16,6 +16,7 @@ import { FileService } from "@/services/file.service"
 import { BooksType } from "@/interfaces/books.interface"
 import ErrorAlert from "../error-alert/error-alert"
 import { useTypedSelector } from "@/hooks/useTypedSelector"
+import { booksCategory } from "@/config/constants"
 
 const BooksModal: FC<BooksModalProps> = ({isOpen, onClose, booksValue}): JSX.Element => {
 	const [file, setFile] = useState<File | string | null>()
@@ -44,16 +45,16 @@ const BooksModal: FC<BooksModalProps> = ({isOpen, onClose, booksValue}): JSX.Ele
       const response = await FileService.fileUpload(formData, 'books')
       imageUrl = response.url
     }
-    const {price, title, pdf, _id} = formValues as BooksType
+    const {price, title, pdf, _id, category} = formValues as BooksType
 
     if(booksValue) {
-      updateBooks({price, title, pdf, _id, image: imageUrl as string, callback: () => {
+      updateBooks({price, title, pdf, _id, category, image: imageUrl as string, callback: () => {
         toast({title: t('successfully_edited', {ns: 'instructor'}), position: 'top-right', isClosable: true})
         setFile(null)
         onClose()
       }})
     } else {
-      createBooks({price, title, pdf, image: imageUrl as string, callback: () => {
+      createBooks({price, title, pdf, category, image: imageUrl as string, callback: () => {
         toast({title: t('successfully_created_course', {ns: 'instructor'}), position: 'top-right', isClosable: true})
         setFile(null)
         onClose()
@@ -84,8 +85,9 @@ const BooksModal: FC<BooksModalProps> = ({isOpen, onClose, booksValue}): JSX.Ele
             <>{error && <ErrorAlert title={error as string} clearHandler={clearBooksError} />}</>
               <VStack>
                 <TextField name='title' label={t('title', {ns: 'instructor'})} placeholder='Harry Poter' />
-                <SelectField name='price' label={t('books_price', {ns: 'admin'})} placeholder='-' arrOptions={coursePrice} />
                 <TextField name='pdf' label={t('pdf_link', {ns: 'admin'})} />
+                <SelectField name='price' label={t('books_price', {ns: 'admin'})} placeholder='-' arrOptions={coursePrice} />
+                <SelectField name='category' label={t('category', {ns: 'instructor'})} placeholder='-' arrOptions={createBooksCategory} />
                 {file ? (
                   <Box pos='relative' w='full' h={200}>
                     <Image
@@ -127,4 +129,5 @@ const data = {
   title: '',
   pdf: '',
   price: 0,
+  category: '',
 }

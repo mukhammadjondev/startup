@@ -284,6 +284,15 @@ export const booksCategory = [
 	},
 ]
 
+export const createBooksCategory = [
+	'programming',
+	'design',
+	'business',
+	'history',
+	'writing',
+	'lifestyle',
+]
+
 export const faq = [
 	{
 		question: 'faq_question_1',
