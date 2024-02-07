@@ -4,12 +4,14 @@ import * as courseActions from './course/course.action'
 import * as sectionActions from './section/section.action'
 import * as lessonActions from './lesson/lesson.action'
 import * as adminActions from './admin/admin.action'
+import * as booksActions from './books/books.action'
 import { userSliceAction } from './user/user.slice'
 import { instructorSliceAction } from './instructor/instructor.slice'
 import { courseSliceAction } from './course/course.slice'
 import { sectionSliceAction } from './section/section.slice'
 import { lessonSliceAction } from './lesson/lesson.slice'
 import { adminSliceAction } from './admin/admin.slice'
+import { booksSliceAction } from './books/books.slice'
 
 export const allActions = {
   ...userActions,
@@ -24,4 +26,6 @@ export const allActions = {
   ...lessonSliceAction,
   ...adminActions,
   ...adminSliceAction,
+  ...booksSliceAction,
+  ...booksActions,
 }

@@ -1,4 +1,5 @@
 import { useActions } from "@/hooks/useActions"
+import { BooksType } from "@/interfaces/books.interface"
 import { CourseType } from "@/interfaces/course.interface"
 import { InstructorType } from "@/interfaces/instructor.interface"
 import { UserType } from "@/interfaces/user.interface"
@@ -9,10 +10,11 @@ interface Props {
   courses: CourseType[]
   instructors: InstructorType[]
   users: UserType[]
+  books: BooksType[]
 }
 
-const AdminProvider: FC<Props> = ({children, courses, instructors, users}): JSX.Element => {
-  const { getAdminCourses, getAdminInstructors, getAdminUsers } = useActions()
+const AdminProvider: FC<Props> = ({children, courses, instructors, users, books}): JSX.Element => {
+  const { getAdminCourses, getAdminInstructors, getAdminUsers, getBooks } = useActions()
 
   useEffect(() => {
     if(courses?.length) {
@@ -30,8 +32,13 @@ const AdminProvider: FC<Props> = ({children, courses, instructors, users}): JSX.
     } else {
       getAdminUsers([])
     }
+    if(books?.length) {
+      getBooks(books)
+    } else {
+      getBooks([])
+    }
 
-  }, [courses, instructors, users])
+  }, [courses, instructors, users, books])
 
   return <>{children}</>
 }

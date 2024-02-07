@@ -1,13 +1,43 @@
 import SectionTitle from "@/components/section-title/section-title";
 import { PlanCurriculumIcon } from "@/icons";
 import { CgAdd } from "react-icons/cg";
-import { Box, Button, Card, CardBody, Flex, FormControl, FormLabel, Grid, HStack, IconButton, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, Text, useColorModeValue, useDisclosure, VStack } from "@chakra-ui/react";
+import { Box, Button, Card, CardBody, Flex, Grid, HStack, IconButton, Image, Text, useColorModeValue, useDisclosure, useToast } from "@chakra-ui/react";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import { coursePrice } from "@/config/constants";
+import { BooksModal } from "@/components";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
+import { loadImage } from "@/helpers/image.helper";
+import { useActions } from "@/hooks/useActions";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import { BooksType } from "@/interfaces/books.interface";
 
 const BooksPageComponent = () => {
-  const priceBackgroundColor = useColorModeValue('gray.200', 'gray.900');
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const [booksValue, setBooksValue] = useState<BooksType | null>(null)
+  const priceBackgroundColor = useColorModeValue('gray.200', 'gray.900')
+	const { isOpen, onOpen, onClose } = useDisclosure()
+	const { books } = useTypedSelector(state => state.books)
+	const { deleteBooks } = useActions()
+	const { t } = useTranslation()
+	const toast = useToast()
+
+	const deleteBooksHandler = (id: string) => {
+		const isAgree = confirm(t('are_you_sure', {ns: 'global'}))
+		if(isAgree) {
+			deleteBooks({bookId: id, callback: () => {
+				toast({title: t('successfully_deleted', {ns: 'instructor'}), position: 'top-right', isClosable: true})
+			}})
+		}
+	}
+
+	const editOpenModal = (book: BooksType) => {
+		setBooksValue(book)
+		onOpen()
+	}
+
+	const createOpenModal = () => {
+		setBooksValue(null)
+		onOpen()
+	}
 
 	return <>
     <Card mt={10}>
@@ -24,26 +54,26 @@ const BooksPageComponent = () => {
     </Card>
 
     <Flex mt={5} justify='flex-end'>
-      <IconButton colorScheme='facebook' aria-label='Search database' icon={<CgAdd />} onClick={onOpen} />
+      <IconButton colorScheme='facebook' aria-label='Search database' icon={<CgAdd />} onClick={createOpenModal} />
     </Flex>
 
-    <Grid gridTemplateColumns={{base: 'repeat(100%)', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)'}} gap={4} rowGap={20} mt={5}>
-      {data.map(item => (
-        <Box key={item.name} pos='relative'>
-          <Image src={item.image} alt={item.name} borderRadius='lg' w='full' h='250px' objectFit='cover' />
+    <Grid gridTemplateColumns={{base: 'repeat(100%)', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)'}} gap={4} rowGap={20} mt={5} mb={20}>
+      {books.map(item => (
+        <Box key={item._id} pos='relative'>
+          <Image src={loadImage(item.image)} alt={item.title} borderRadius='lg' w='full' h='250px' objectFit='cover' />
 
           <Flex pos='absolute' left={2} right={2} borderRadius='lg' boxShadow='dark-lg' bottom='-10' minH='90px' p={2} bg={priceBackgroundColor} flexDir='column'>
             <Box>
-              <Text fontSize='lg'>{item.name}</Text>
+              <Text fontSize='lg'>{item.title}</Text>
               <Text fontSize='2xl'>
                 {item.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}
               </Text>
             </Box>
             <HStack>
-              <Button w='full' rightIcon={<FaTrash />} colorScheme='red'>
+              <Button w='full' rightIcon={<FaTrash />} onClick={() => deleteBooksHandler(item._id as string)} colorScheme='red'>
                 Delete
               </Button>
-              <Button w='full' rightIcon={<FaEdit />} colorScheme='green'>
+              <Button w='full' rightIcon={<FaEdit />} onClick={() => editOpenModal(item)} colorScheme='green'>
                 Edit
               </Button>
             </HStack>
@@ -52,41 +82,7 @@ const BooksPageComponent = () => {
       ))}
     </Grid>
 
-    <Modal isOpen={isOpen} onClose={onClose} isCentered={true} size={'xl'}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Add books</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <VStack>
-            <FormControl isRequired>
-              <FormLabel>Name</FormLabel>
-              <Input type='text' h={14} placeholder='Harry Poter' colorScheme='facebook' />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>Price</FormLabel>
-              <Select borderRadius='8px' height={14} focusBorderColor='facebook.300' placeholder={'-'}>
-                {coursePrice.map(option => (
-                  <option key={option} value={option}>
-                    {option.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel>PDF Link</FormLabel>
-              <Input type='text' h={14} colorScheme='facebook' />
-            </FormControl>
-          </VStack>
-        </ModalBody>
-
-        <ModalFooter>
-          <Button colorScheme='blue' mr={3} onClick={onClose}>
-            Add books
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+		<BooksModal isOpen={isOpen} onClose={onClose} booksValue={booksValue} />
   </>
 }
 
