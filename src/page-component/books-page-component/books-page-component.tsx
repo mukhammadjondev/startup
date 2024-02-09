@@ -1,6 +1,6 @@
 import SectionTitle from "@/components/section-title/section-title"
 import { booksCategory } from "@/config/constants"
-import { Box, Button, Flex, Grid, HStack, Text, useColorModeValue } from "@chakra-ui/react"
+import { Box, Button, Flex, Grid, HStack, Text, useColorModeValue, useToast } from "@chakra-ui/react"
 import { useState, useCallback } from "react"
 import { useTranslation } from "react-i18next"
 import { AiFillShopping } from "react-icons/ai"
@@ -8,13 +8,18 @@ import { motion } from 'framer-motion'
 import { useTypedSelector } from "@/hooks/useTypedSelector"
 import Image from "next/image"
 import { loadImage } from "@/helpers/image.helper"
+import { BooksType } from "@/interfaces/books.interface"
+import { useActions } from "@/hooks/useActions"
 
 const BooksPageComponent = () => {
   const [filter, setFilter] = useState<string>('all-categories')
 	const { books } = useTypedSelector(state => state.books)
+  const cart = useTypedSelector(state => state.cart)
+  const { addBookToCart } = useActions()
 
   const backgroundColor = useColorModeValue('gray.200', 'gray.900')
   const {t} = useTranslation()
+  const toast = useToast()
 
   const filteredData = useCallback(() => {
     switch (filter) {
@@ -34,6 +39,16 @@ const BooksPageComponent = () => {
 				return books;
 		}
   }, [filter, books])
+
+  const addToCart = (book: BooksType) => {
+    const existingProduct = cart.books.find(c => c._id === book._id)
+    if(existingProduct) {
+      toast({title: 'Book already exist in cart', position: 'bottom', status: 'warning'})
+      return
+    }
+    addBookToCart(book)
+    toast({title: 'Book added successfully', position: 'bottom'})
+  }
 
   return <>
     <SectionTitle title={t('title', {ns: 'books'})} subtitle={t('description', {ns: 'books'})} textAlign='center' pt={4} />
@@ -59,7 +74,7 @@ const BooksPageComponent = () => {
                   {item.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}
                 </Text>
               </Box>
-              <Button colorScheme='facebook' rightIcon={<AiFillShopping />}>
+              <Button colorScheme='facebook' rightIcon={<AiFillShopping />} onClick={() => addToCart(item)} isDisabled={cart.books.map(c => c._id).includes(item._id) ? true : false}>
                 {t('filter_card_btn', {ns: 'books'})}
               </Button>
             </HStack>

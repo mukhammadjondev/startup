@@ -12,6 +12,7 @@ import { sectionSliceAction } from './section/section.slice'
 import { lessonSliceAction } from './lesson/lesson.slice'
 import { adminSliceAction } from './admin/admin.slice'
 import { booksSliceAction } from './books/books.slice'
+import { cartSliceAction } from './cart/cart.slice'
 
 export const allActions = {
   ...userActions,
@@ -28,4 +29,5 @@ export const allActions = {
   ...adminSliceAction,
   ...booksSliceAction,
   ...booksActions,
+  ...cartSliceAction,
 }

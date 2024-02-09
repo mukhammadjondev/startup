@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Box, Flex, IconButton, Button, useColorMode, HStack, Menu, MenuButton, MenuList, MenuItem, useColorModeValue, Icon, Avatar } from "@chakra-ui/react"
+import { Box, Flex, IconButton, Button, useColorMode, HStack, Menu, MenuButton, MenuList, MenuItem, useColorModeValue, Icon, Avatar, Badge } from "@chakra-ui/react"
 import { DarkLogo, LightLogo, } from "@/icons"
 import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs"
 import { BiMenuAltLeft, BiUserCircle } from 'react-icons/bi'
@@ -8,12 +8,13 @@ import { HeaderProps } from "./header.props"
 import { language } from "@/config/constants"
 import { useTranslation } from "react-i18next"
 import { useRouter } from "next/router"
-import { AiOutlineLogin } from "react-icons/ai"
+import { AiOutlineLogin, AiOutlineShoppingCart } from "react-icons/ai"
 import { FiSettings } from "react-icons/fi"
 import { IoIosLogOut } from "react-icons/io"
 import { useAuth } from "@/hooks/useAuth"
 import { useActions } from "@/hooks/useActions"
 import { RiAdminFill } from "react-icons/ri"
+import { useTypedSelector } from "@/hooks/useTypedSelector"
 
 const Header = ({ onToggle}: HeaderProps) => {
   const {toggleColorMode, colorMode} = useColorMode()
@@ -21,6 +22,7 @@ const Header = ({ onToggle}: HeaderProps) => {
   const router = useRouter()
   const { user } = useAuth()
   const { logout } = useActions()
+  const { courses, books } = useTypedSelector(state => state.cart)
 
   const logoutHandler = () => {
     logout()
@@ -52,6 +54,14 @@ const Header = ({ onToggle}: HeaderProps) => {
           <Link href={'/'}>{colorMode === 'light' ? <DarkLogo /> : <LightLogo />}</Link>
         </HStack>
         <HStack>
+          <Box pos='relative'>
+            <IconButton aria-label="cart" icon={<AiOutlineShoppingCart />} colorScheme='facebook' variant='solid' onClick={() => router.push('/shop/cart')} />
+            {[...courses, ...books].length ? (
+              <Badge pos='absolute' backgroundColor='green.500' top={-2} left={-3} colorScheme='green' px={2} py={1}>
+                {[...courses, ...books].length}
+              </Badge>
+            ) : null}
+          </Box>
           <Menu placement="bottom">
             <MenuButton as={Button} rightIcon={<TbWorld />} textTransform='capitalize' colorScheme='gray' variant='outline' display={{base: 'none', md: 'flex'}}>
               {i18n.resolvedLanguage}
