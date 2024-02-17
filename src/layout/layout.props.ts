@@ -1,15 +1,17 @@
 import { BooksType } from "@/interfaces/books.interface";
+import { CardType } from "@/interfaces/constants.interface";
 import { CourseType } from "@/interfaces/course.interface";
 import { InstructorType } from "@/interfaces/instructor.interface";
 import { ReactNode } from "react";
 
 export interface LayoutProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export interface AppProviderProps {
-  courses: CourseType[]
-  course: CourseType
-  instructors: InstructorType[]
-  books: BooksType[]
+  courses: CourseType[];
+  course: CourseType;
+  instructors: InstructorType[];
+  books: BooksType[];
+  cards: CardType[];
 }
