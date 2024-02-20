@@ -26,7 +26,7 @@ export const AdminService = {
   },
 
   async deleteInstructor(instructorId: string) {
-    const {data} = await $axios.put<'Success'>(`${getAdminUrl('approve-instructor')}`, {instructorId})
+    const {data} = await $axios.put<'Success'>(`${getAdminUrl('delete-instructor')}`, {instructorId})
     return data
   },
 

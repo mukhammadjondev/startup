@@ -1,11 +1,11 @@
 export enum Language {
-  EN = "en",
-  RU = "ru",
-  UZ = "uz",
-  TR = "tr",
+  EN = 'en',
+  RU = 'ru',
+  UZ = 'uz',
+  TR = 'tr',
 }
 
-export type RoleUser = "ADMIN" | "INSTRUCTOR" | "USER";
+export type RoleUser = 'ADMIN' | 'INSTRUCTOR' | 'USER';
 
 export interface CardType {
   id: string;
@@ -26,4 +26,15 @@ export interface CardType {
     exp_year: number;
     last4: string;
   };
+}
+
+export interface ProductsType {
+  default_price: {
+    id: string;
+    nickname: string;
+    unit_amount: number;
+  };
+  description: string;
+  id: string;
+  name: string;
 }
