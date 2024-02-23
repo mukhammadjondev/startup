@@ -33,13 +33,7 @@ const PricingPageComponent = ({ products }: { products: ProductsType[] }) => {
         {products.map(product => (
           <Fragment key={product.id}>
             <Divider />
-            <Pricing
-              title={product.name}
-              price={product.default_price.unit_amount / 100}
-              options={product.description
-                .split(', ')
-                .map((c, idx) => ({ id: idx, desc: c }))}
-            />
+            <Pricing product={product} />
           </Fragment>
         ))}
       </Stack>

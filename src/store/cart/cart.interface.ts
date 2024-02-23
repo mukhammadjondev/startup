@@ -1,7 +1,9 @@
-import { BooksType } from "@/interfaces/books.interface";
-import { CourseType } from "@/interfaces/course.interface";
+import { BooksType } from '@/interfaces/books.interface';
+import { ProductsType } from '@/interfaces/constants.interface';
+import { CourseType } from '@/interfaces/course.interface';
 
 export interface CartInitialState {
-  books: BooksType[]
-  courses: CourseType[]
+  books: BooksType[];
+  courses: CourseType[];
+  product: ProductsType;
 }

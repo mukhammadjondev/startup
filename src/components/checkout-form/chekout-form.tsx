@@ -1,6 +1,6 @@
 import $axios from '@/api/axios';
 import { getMailUrl } from '@/config/api.config';
-import { getTotalPrice } from '@/helpers/total-price.helper';
+import { getPriceFormatted, getTotalPrice } from '@/helpers/total-price.helper';
 import { useActions } from '@/hooks/useActions';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { CardType } from '@/interfaces/constants.interface';
@@ -32,7 +32,7 @@ import ErrorAlert from '../error-alert/error-alert';
 export default function CheckoutForm({ cards }: { cards: CardType[] }) {
   const stripe = useStripe();
   const elements = useElements();
-  const { courses, books } = useTypedSelector(state => state.cart);
+  const { courses, books, product } = useTypedSelector(state => state.cart);
 
   const [error, setError] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -71,8 +71,8 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
 
     const { value } = await addressElement.getValue();
 
+    // @ts-ignore
     const { error, paymentMethod } = await stripe.createPaymentMethod({
-      // @ts-ignore
       type: 'card',
       card: elements.getElement(CardNumberElement),
       billing_details: {
@@ -98,35 +98,22 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
     if (!stripe) return;
 
     try {
-      if (books.length) {
-        const { data } = await $axios.post(`/payment/books`, {
-          price: getTotalPrice(courses, books),
+      if (product.id) {
+        await $axios.post(`/payment/create-subscription`, {
+          price: product.default_price.id,
           paymentMethod: paymentMethod,
         });
 
-        const payload = await stripe.confirmCardPayment(data);
-
-        if (payload.error) {
-          setIsLoading(false);
-          setError(
-            `Your payment deatails couldn't be verified: ${payload.error.message}`
-          );
-        } else {
-          for (const book of books) {
-            await $axios.post(`${getMailUrl('books')}/${book._id}`);
-          }
-          getBooks([]);
-          router.push('/shop/success');
-        }
-      }
-
-      if (courses.length) {
-        let counter = courses.length;
-        for (const course of courses) {
-          const { data } = await $axios.post(`/payment/courses`, {
-            price: course.price,
+        toast({
+          title: 'Successfully purchased',
+          position: 'top-right',
+        });
+        router.push('/shop/success');
+      } else {
+        if (books.length) {
+          const { data } = await $axios.post(`/payment/books`, {
+            price: getTotalPrice(courses, books),
             paymentMethod: paymentMethod,
-            courseId: course._id,
           });
 
           const payload = await stripe.confirmCardPayment(data);
@@ -134,19 +121,47 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
           if (payload.error) {
             setIsLoading(false);
             setError(
-              `Your payment deatails couldn't be verified: ${payload.error.message}`
+              `Your payment details couldn't be verified: ${payload.error.message}`
             );
           } else {
-            counter -= 1;
-            toast({
-              title: course.title,
-              description: 'Successfully purchased',
-              position: 'top-right',
-            });
+            for (const book of books) {
+              await $axios.post(`${getMailUrl('books')}/${book._id}`);
+            }
+            getBooks([]);
+            if (!courses.length) {
+              router.push('/shop/success');
+            }
           }
+        }
 
-          if (counter === 0) {
-            router.push('/shop/success');
+        if (courses.length) {
+          let counter = courses.length;
+          for (const course of courses) {
+            const { data } = await $axios.post(`/payment/courses`, {
+              price: course.price,
+              paymentMethod: paymentMethod,
+              courseId: course._id,
+            });
+
+            const payload = await stripe.confirmCardPayment(data);
+
+            if (payload.error) {
+              setIsLoading(false);
+              setError(
+                `Your payment deatails couldn't be verified: ${payload.error.message}`
+              );
+            } else {
+              counter -= 1;
+              toast({
+                title: course.title,
+                description: 'Successfully purchased',
+                position: 'top-right',
+              });
+            }
+
+            if (counter === 0) {
+              router.push('/shop/success');
+            }
           }
         }
       }
@@ -195,10 +210,11 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
                     colorScheme="facebook"
                   >
                     Pay now{' '}
-                    {getTotalPrice(courses, books).toLocaleString('en-US', {
-                      style: 'currency',
-                      currency: 'USD',
-                    })}
+                    {product.id
+                      ? getPriceFormatted(
+                          product.default_price.unit_amount / 100
+                        )
+                      : getPriceFormatted(getTotalPrice(courses, books))}
                   </Button>
                 </Box>
               )}
@@ -299,10 +315,9 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
             onClick={handleSubmit}
           >
             Pay now{' '}
-            {getTotalPrice(courses, books).toLocaleString('en-US', {
-              style: 'currency',
-              currency: 'USD',
-            })}
+            {product.id
+              ? getPriceFormatted(product.default_price.unit_amount / 100)
+              : getPriceFormatted(getTotalPrice(courses, books))}
           </Button>
         </>
       )}
