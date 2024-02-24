@@ -24,4 +24,25 @@ export const PaymentService = {
       console.log(error);
     }
   },
+
+  async getInstructorBalance(token?: string) {
+    const response = await axios.get(
+      `${API_URL}${getPaymentUrl('instructor-balance')}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  },
+
+  async instructorAccountLink() {
+    const response = await $axios.post(
+      `${getPaymentUrl('instructor-connect-login')}`
+    );
+
+    return response.data.url;
+  },
 };

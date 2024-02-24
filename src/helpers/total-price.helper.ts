@@ -1,5 +1,6 @@
 import { BooksType } from '@/interfaces/books.interface';
 import { CourseType } from '@/interfaces/course.interface';
+import { BalanceType } from '@/interfaces/instructor.interface';
 
 export const getTotalPrice = (
   courses: CourseType[],
@@ -16,4 +17,12 @@ export const getPriceFormatted = (amount: number) => {
     style: 'currency',
     currency: 'USD',
   });
+};
+
+export const getBalanceObject = (balance: BalanceType) => {
+  const payouts = balance.pending.reduce(
+    (total, item) => (total = item.amount),
+    0
+  );
+  return { payouts: payouts / 100 };
 };
