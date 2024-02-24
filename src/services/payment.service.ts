@@ -43,6 +43,6 @@ export const PaymentService = {
       `${getPaymentUrl('instructor-connect-login')}`
     );
 
-    return response.data.url;
+    return response.data;
   },
 };

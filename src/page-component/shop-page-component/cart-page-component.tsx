@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertIcon,
   Box,
   Button,
   Divider,
@@ -15,19 +17,28 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import Image from 'next/image';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { BsFillTrashFill } from 'react-icons/bs';
 import SectionTitle from '@/components/section-title/section-title';
 import { loadImage } from '@/helpers/image.helper';
-import { getTotalPrice } from '@/helpers/total-price.helper';
+import { getPriceFormatted, getTotalPrice } from '@/helpers/total-price.helper';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { useRouter } from 'next/router';
 import { useActions } from '@/hooks/useActions';
 import { useTranslation } from 'react-i18next';
+import $axios from '@/api/axios';
+import { getPaymentUrl } from '@/config/api.config';
+import { ErrorAlert } from '@/components';
 
 const CartPageComponent = () => {
+  const [active, setActive] = useState<boolean>(false);
+  const [coupon, setCoupon] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const cart = useTypedSelector(state => state.cart);
   const router = useRouter();
+  const { editCourseToCart } = useActions();
 
   const getSubtitle = () => {
     let textCourse: string = '';
@@ -40,6 +51,29 @@ const CartPageComponent = () => {
     const isAnd = courses.length ? true : false;
 
     return `${textCourse} ${isAnd ? 'and' : ''} ${textBooks}`;
+  };
+
+  const applyCouponHandler = async () => {
+    if (active) return;
+
+    try {
+      setIsLoading(true);
+      const { data } = await $axios.get(
+        `${getPaymentUrl('apply-coupon')}/${coupon}`
+      );
+      if (data.valid) {
+        setActive(true);
+        const newArr = cart.courses.map(item => ({
+          ...item,
+          price: item.price - (data.percent_off / 100) * item.price,
+        }));
+        editCourseToCart(newArr);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      setError('Coupon is not valid');
+    }
   };
 
   return (
@@ -87,6 +121,15 @@ const CartPageComponent = () => {
               Checkout
             </Button>
             <Divider />
+            {error && (
+              <ErrorAlert title={error} clearHandler={() => setError('')} />
+            )}
+            {active && (
+              <Alert status="success">
+                <AlertIcon />
+                Coupon was successfully applied
+              </Alert>
+            )}
             <Text fontWeight="bold" fontSize="lg">
               Promotions
             </Text>
@@ -98,6 +141,8 @@ const CartPageComponent = () => {
                 placeholder="Enter coupon"
                 _placeholder={{ color: 'gray.500' }}
                 borderRadius={0}
+                value={coupon}
+                onChange={e => setCoupon(e.target.value)}
               />
               <Button
                 pos="absolute"
@@ -106,6 +151,8 @@ const CartPageComponent = () => {
                 colorScheme="facebook"
                 zIndex={999}
                 borderRadius={0}
+                isLoading={isLoading}
+                onClick={applyCouponHandler}
               >
                 Apply
               </Button>
@@ -160,10 +207,7 @@ const ShoppingCartCard = ({ item, image }) => {
       </HStack>
       <Stack spacing={0}>
         <Text color="facebook.300" fontSize="2xl" fontWeight="bold">
-          {item.price.toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD',
-          })}
+          {getPriceFormatted(item.price)}
         </Text>
         <IconButton
           aria-label="remove"
