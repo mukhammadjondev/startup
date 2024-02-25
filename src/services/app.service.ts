@@ -20,4 +20,12 @@ export const AppService = {
 
     return courses;
   },
+
+  async getDetailedCourse(slug?: string) {
+    const { data } = await axios.get(
+      `${API_URL}${getCourseUrl('detailed-course')}/${slug}`
+    );
+
+    return data;
+  },
 };
