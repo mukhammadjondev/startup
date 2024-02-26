@@ -1,5 +1,5 @@
 import $axios from '@/api/axios';
-import { getMailUrl } from '@/config/api.config';
+import { getCourseUrl, getMailUrl } from '@/config/api.config';
 import { getPriceFormatted, getTotalPrice } from '@/helpers/total-price.helper';
 import { useActions } from '@/hooks/useActions';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
@@ -40,7 +40,7 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
 
   const { colorMode } = useColorMode();
   const router = useRouter();
-  const { getBooks } = useActions();
+  const { getBooks, checkAuth } = useActions();
   const toast = useToast();
 
   const cardStyles = {
@@ -157,9 +157,11 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
                 description: 'Successfully purchased',
                 position: 'top-right',
               });
+              await $axios.put(`${getCourseUrl('enroll-user')}/${course._id}`);
             }
 
             if (counter === 0) {
+              checkAuth();
               router.push('/shop/success');
             }
           }
