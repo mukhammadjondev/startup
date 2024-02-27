@@ -1,7 +1,5 @@
-import { getLessonTime } from '@/helpers/time.helper';
 import { useActions } from '@/hooks/useActions';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { LessonType } from '@/interfaces/instructor.interface';
 import {
   Accordion,
   AccordionButton,
@@ -10,18 +8,16 @@ import {
   AccordionPanel,
   Box,
   Center,
-  Checkbox,
   Flex,
   Heading,
   Icon,
   Spinner,
-  Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
 import { FC, useEffect, useState } from 'react';
 import { GoDotFill } from 'react-icons/go';
 import { CourseDashboardProps } from './courses-page-component.props';
+import LessonItem from './lesson-item';
 
 const Sidebar: FC<CourseDashboardProps> = ({ ...props }) => {
   const [moduleIndex, setModuleIndex] = useState<number>(0);
@@ -31,7 +27,9 @@ const Sidebar: FC<CourseDashboardProps> = ({ ...props }) => {
   const { getSection } = useActions();
 
   useEffect(() => {
-    getSection({ courseId: course?._id, callback: () => {} });
+    if (course) {
+      getSection({ courseId: course?._id, callback: () => {} });
+    }
   }, [course]);
 
   useEffect(() => {
@@ -51,9 +49,7 @@ const Sidebar: FC<CourseDashboardProps> = ({ ...props }) => {
   return (
     <Box
       position="fixed"
-      display={{ base: 'none', lg: 'block' }}
       top="12vh"
-      right="4vw"
       bottom="4vh"
       w="400px"
       bg={useColorModeValue('gray.50', 'gray.900')}
@@ -124,62 +120,3 @@ const Sidebar: FC<CourseDashboardProps> = ({ ...props }) => {
 };
 
 export default Sidebar;
-
-const LessonItem = ({ lesson }: { lesson: LessonType }) => {
-  const router = useRouter();
-  const { user } = useTypedSelector(state => state.user);
-  const { course } = useTypedSelector(state => state.course);
-  const { getLesson } = useActions();
-
-  const onLesson = () => {
-    getLesson(lesson);
-    localStorage.setItem(`${course?._id}`, lesson._id);
-    const link = `/courses/dashboard/${course?.slug}`;
-    router.replace(
-      { pathname: link, query: { lesson: lesson._id } },
-      undefined,
-      { shallow: true }
-    );
-  };
-
-  return (
-    <Box
-      _hover={{
-        background: useColorModeValue('gray.100', 'gray.800'),
-      }}
-      transition="all .3s ease"
-      borderRadius="md"
-      onClick={onLesson}
-      bg={
-        router.query.lesson === lesson._id
-          ? useColorModeValue('gray.100', 'gray.800')
-          : 'transparent'
-      }
-      fontWeight={router.query.lesson === lesson._id ? 'bold' : 'normal'}
-      color={router.query.lesson === lesson._id ? 'facebook.500' : 'normal'}
-    >
-      <Flex
-        justify="space-between"
-        align="center"
-        mt={2}
-        p={4}
-        cursor="pointer"
-      >
-        <Flex align="center" w="8%">
-          {user ? (
-            <Checkbox
-              colorScheme="facebook"
-              defaultChecked={lesson.completed.includes(user._id)}
-            />
-          ) : null}
-        </Flex>
-        <Flex w="92%" justify="space-between">
-          <Text>{lesson.name}</Text>
-          <Text textDecoration={'underline'} ml={1}>
-            {getLessonTime(lesson.hour, lesson.minute, lesson.second)}
-          </Text>
-        </Flex>
-      </Flex>
-    </Box>
-  );
-};

@@ -79,7 +79,7 @@ const Header = () => {
             Sponsor
           </Button>
           <IconButton
-            onClick={() => router.push(`/course/${course?.slug}`)}
+            onClick={() => router.push(`/courses/${course?.slug}`)}
             colorScheme="red"
             variant="outline"
             icon={<FiLogOut />}
