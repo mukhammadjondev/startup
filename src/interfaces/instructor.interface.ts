@@ -26,6 +26,7 @@ export interface LessonType {
   hour: number;
   minute: number;
   second: number;
+  completed: string[];
 }
 
 export interface BalanceType {
