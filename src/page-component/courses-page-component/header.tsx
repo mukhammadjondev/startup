@@ -2,6 +2,7 @@ import TextAreaField from '@/components/text-area-field/text-area-field';
 import TextField from '@/components/text-field/text-field';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { DarkLogo, LightLogo } from '@/icons';
+import { CourseService } from '@/services/course.service';
 import {
   Box,
   Button,
@@ -20,6 +21,7 @@ import {
   useColorMode,
   useColorModeValue,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import { Form, Formik, FormikValues } from 'formik';
 import Link from 'next/link';
@@ -33,15 +35,62 @@ import ReactStars from 'react-stars';
 
 const Header = () => {
   const [reviewVal, setReviewVal] = useState(val);
+  const [reviewId, setReviewId] = useState<string>();
 
   const { colorMode, toggleColorMode } = useColorMode();
   const router = useRouter();
   const { course } = useTypedSelector(state => state.course);
   const { user } = useTypedSelector(state => state.user);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
-  const onReviewSubmit = (formikValues: FormikValues) => {
-    console.log(formikValues);
+  const onReviewSubmit = async (formikValues: FormikValues) => {
+    try {
+      if (reviewId) {
+        const data = {
+          summary: formikValues.summary,
+          rating: formikValues.rating,
+        };
+
+        await CourseService.editReview(data, reviewId);
+        toast({ title: 'Successfully edited', status: 'success' });
+        setReviewId('');
+        onClose();
+      } else {
+        const response = await CourseService.getReviewByUser({
+          course: course?._id,
+          user: user?._id,
+        });
+
+        if (response._id) {
+          setReviewVal({
+            ...reviewVal,
+            summary: response.summary,
+            rating: response.rating,
+          });
+          setReviewId(response._id);
+          toast({
+            title: 'Already have review, you can change it now',
+            status: 'warning',
+          });
+        } else {
+          const data = {
+            course: course?._id,
+            author: user?._id,
+            rating: formikValues.rating,
+            summary: formikValues.summary,
+          };
+          await CourseService.createReview(data);
+          toast({
+            title: 'Successfully created new review',
+            status: 'success',
+          });
+          onClose();
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

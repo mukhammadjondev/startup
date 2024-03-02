@@ -72,7 +72,7 @@ const LessonItem = ({ lesson }: { lesson: LessonType }) => {
           {user ? (
             <Checkbox
               colorScheme="facebook"
-              defaultChecked={lesson.completed.includes(user.id)}
+              defaultChecked={lesson.completed.includes(user._id)}
               onChange={e => onComplete(e, lesson._id)}
               cursor={isComplete ? 'progress' : 'pointer'}
             />
