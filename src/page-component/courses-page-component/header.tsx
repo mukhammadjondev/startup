@@ -1,25 +1,56 @@
+import TextAreaField from '@/components/text-area-field/text-area-field';
+import TextField from '@/components/text-field/text-field';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { DarkLogo, LightLogo } from '@/icons';
 import {
   Box,
   Button,
+  Divider,
+  Flex,
   IconButton,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Stack,
+  Text,
   useColorMode,
   useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react';
+import { Form, Formik, FormikValues } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { BiLogOut } from 'react-icons/bi';
+import { useEffect, useState } from 'react';
 import { BsFillMoonFill } from 'react-icons/bs';
 import { FaRegCommentDots, FaTelegram } from 'react-icons/fa';
 import { FiLogOut, FiSun } from 'react-icons/fi';
 import { HiHeart } from 'react-icons/hi';
+import ReactStars from 'react-stars';
 
 const Header = () => {
+  const [reviewVal, setReviewVal] = useState(val);
+
   const { colorMode, toggleColorMode } = useColorMode();
   const router = useRouter();
   const { course } = useTypedSelector(state => state.course);
+  const { user } = useTypedSelector(state => state.user);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const onReviewSubmit = (formikValues: FormikValues) => {
+    console.log(formikValues);
+  };
+
+  useEffect(() => {
+    setReviewVal({
+      ...reviewVal,
+      name: user?.fullName as string,
+      email: user?.email as string,
+    });
+  }, [user]);
 
   return (
     <Box
@@ -63,7 +94,7 @@ const Header = () => {
             display={{ base: 'none', md: 'flex' }}
           />
           <IconButton
-            // onClick={onOpen}
+            onClick={onOpen}
             colorScheme="facebook"
             variant="outline"
             icon={<FaRegCommentDots />}
@@ -87,8 +118,78 @@ const Header = () => {
           />
         </Stack>
       </Stack>
+
+      <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+        <ModalOverlay
+          bg="blackAlpha.300"
+          backdropFilter="blur(10px) hue-rotate(90deg)"
+        >
+          <ModalContent>
+            <ModalHeader>Izoh</ModalHeader>
+            <ModalCloseButton />
+            <Divider />
+            <Formik
+              initialValues={reviewVal}
+              onSubmit={onReviewSubmit}
+              enableReinitialize
+            >
+              {formik => (
+                <Form>
+                  <ModalBody>
+                    <Text fontWeight="bold" mb="1rem">
+                      Kurs haqida o'z fikringizni yozishingiz mumkin.
+                    </Text>
+                    <Flex gap={2}>
+                      <TextField
+                        name="email"
+                        label="Email manzilingiz"
+                        disabled={true}
+                      />
+                      <TextField name="name" label="Ismingiz" disabled={true} />
+                    </Flex>
+                    <Box mt={2}>
+                      <ReactStars
+                        edit={true}
+                        size={20}
+                        value={formik.values.rating}
+                        onChange={e => formik.setFieldValue('rating', e)}
+                      />
+                    </Box>
+                    <Box mt={2}>
+                      <TextAreaField
+                        name="summary"
+                        label="Izohingiz"
+                        resize="none"
+                        height="150px"
+                        placeholder="Men ushbu kursni ko'rib bir texnologiyani to'liq o'rgana oldim. Kurslar ham amaliy ham nazariy ekan...."
+                      />
+                    </Box>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button
+                      type="submit"
+                      w="full"
+                      h={14}
+                      colorScheme="facebook"
+                    >
+                      Submit
+                    </Button>
+                  </ModalFooter>
+                </Form>
+              )}
+            </Formik>
+          </ModalContent>
+        </ModalOverlay>
+      </Modal>
     </Box>
   );
 };
 
 export default Header;
+
+const val = {
+  email: '',
+  name: '',
+  rating: 0,
+  summary: '',
+};
