@@ -1,4 +1,5 @@
 import { StatsCardProps } from '@/components/stats-card/stats-card.props';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
 import {
   Box,
   Flex,
@@ -14,6 +15,8 @@ import { MdAlternateEmail, MdUpdate } from 'react-icons/md';
 import { SiAwesomelists } from 'react-icons/si';
 
 export default function Account() {
+  const { user } = useTypedSelector(state => state.user);
+
   return (
     <Box maxW="7xl" mx="auto" px={{ base: 2, sm: 12, md: 17 }}>
       <chakra.h1 textAlign="center" fontSize="4xl" pb={6} fontWeight="bold">
@@ -22,17 +25,17 @@ export default function Account() {
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
         <StatsCard
           title="Ro'yhatdan o'tgan sana"
-          stat={`${format(new Date(), 'dd MMMM, yyyy')}`}
+          stat={`${format(new Date(user?.createdAt as Date), 'dd MMMM, yyyy')}`}
           icon={<MdUpdate size="3em" />}
         />
         <StatsCard
-          title="info@sammi.ac"
-          stat="Email manzilingiz"
+          title="Email manzilingiz"
+          stat={user?.email as string}
           icon={<MdAlternateEmail size="3em" />}
         />
         <StatsCard
           title="Kurslar"
-          stat="7 ta"
+          stat={`${user?.courses.length} ta`}
           icon={<SiAwesomelists size="3em" />}
         />
       </SimpleGrid>
@@ -54,11 +57,9 @@ function StatsCard(props: StatsCardProps) {
     >
       <Flex justifyContent="space-between">
         <Box>
-          <StatLabel fontWeight="medium" isTruncated>
-            {title}
-          </StatLabel>
+          <StatLabel fontWeight="medium">{title}</StatLabel>
           <StatNumber fontSize="lg" fontWeight="bold">
-            {stat}
+            {stat.length > 13 ? `${stat.slice(0, 13)}...` : stat}
           </StatNumber>
         </Box>
         <Box

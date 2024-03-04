@@ -13,9 +13,12 @@ import Transactions from './transactions';
 import MyCourses from './my-courses';
 import SavedCards from './saved-cards';
 import DangerZone from './danger-zone';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
 
 const DashboardPageComponent = () => {
   const [tabIndex, setTabIndex] = useState(0);
+
+  const { user } = useTypedSelector(state => state.user);
 
   const tabHandler = async (idx: number) => {
     setTabIndex(idx);
@@ -42,7 +45,7 @@ const DashboardPageComponent = () => {
               <Tab>Danger Zone</Tab>
             </TabList>
             <TabPanels px={5}>
-              {tabIndex === 0 && <Account />}
+              {tabIndex === 0 && user && <Account />}
               {tabIndex === 1 && <Settings />}
               {tabIndex === 2 && <Transactions />}
               {tabIndex === 3 && <MyCourses />}
