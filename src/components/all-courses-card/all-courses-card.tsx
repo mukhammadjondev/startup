@@ -24,7 +24,7 @@ import { SiGoogleanalytics } from 'react-icons/si';
 import ReactStars from 'react-stars';
 import { AllCourseCardProps } from './all-courses-card.props';
 
-const AllCoursesCard = ({ course }: AllCourseCardProps) => {
+const AllCoursesCard = ({ course, isMyCourse }: AllCourseCardProps) => {
   const router = useRouter();
   const { t } = useTranslation();
   const { addCourseToCart } = useActions();
@@ -62,40 +62,41 @@ const AllCoursesCard = ({ course }: AllCourseCardProps) => {
             cursor="pointer"
           />
           <Stack>
-            <HStack>
-              <Text color="#e59819">{course.reviewAvg || 0}</Text>
-              <ReactStars
-                edit={false}
-                value={course.reviewAvg || 5}
-                color2="#e59819"
-              />
-              <Text opacity=".8">({course.reviewCount})</Text>
-            </HStack>
-            <Heading fontSize="xl">{course.title}</Heading>
-            <Text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-              beatae nemo, eos maiores culpa facere.
-            </Text>
-            <Flex gap={2} direction={{ base: 'column', sm: 'row' }}>
-              <Avatar
-                src={course.author.avatar}
-                name={course.author.fullName}
-              />
+            {!isMyCourse && (
               <HStack>
-                <Flex align="center" gap={1}>
-                  <Icon as={CiViewList} />
-                  <Text>{course.lessonCount} lesson</Text>
-                </Flex>
-                <Flex align="center" gap={1}>
-                  <Icon as={AiOutlineClockCircle} />
-                  <Text>{course.totalHour} hour</Text>
-                </Flex>
-                <Flex align="center" gap={1}>
-                  <Icon as={SiGoogleanalytics} />
-                  <Text>{t(course.level, { ns: 'courses' })}</Text>
-                </Flex>
+                <Text color="#e59819">{course.reviewAvg || 0}</Text>
+                <ReactStars
+                  edit={false}
+                  value={course.reviewAvg || 5}
+                  color2="#e59819"
+                />
+                <Text opacity=".8">({course.reviewCount})</Text>
               </HStack>
-            </Flex>
+            )}
+            <Heading fontSize="xl">{course.title}</Heading>
+            <Text>{course.excerpt}</Text>
+            {!isMyCourse && (
+              <Flex gap={2} direction={{ base: 'column', sm: 'row' }}>
+                <Avatar
+                  src={course.author.avatar}
+                  name={course.author.fullName}
+                />
+                <HStack>
+                  <Flex align="center" gap={1}>
+                    <Icon as={CiViewList} />
+                    <Text>{course.lessonCount} lesson</Text>
+                  </Flex>
+                  <Flex align="center" gap={1}>
+                    <Icon as={AiOutlineClockCircle} />
+                    <Text>{course.totalHour} hour</Text>
+                  </Flex>
+                  <Flex align="center" gap={1}>
+                    <Icon as={SiGoogleanalytics} />
+                    <Text>{t(course.level, { ns: 'courses' })}</Text>
+                  </Flex>
+                </HStack>
+              </Flex>
+            )}
             <Divider />
             <Flex
               align={{ bae: 'flex-start', md: 'center' }}
@@ -109,16 +110,20 @@ const AllCoursesCard = ({ course }: AllCourseCardProps) => {
                 })}
               </Text>
               <Flex gap={4} mt={{ base: 4, md: 0 }}>
-                <Button
-                  rightIcon={<BsMinecartLoaded />}
-                  onClick={addCourseToCartHandler}
-                  colorScheme="facebook"
-                  isDisabled={
-                    courses.map(c => c._id).includes(course._id) ? true : false
-                  }
-                >
-                  Add to cart
-                </Button>
+                {!isMyCourse && (
+                  <Button
+                    rightIcon={<BsMinecartLoaded />}
+                    onClick={addCourseToCartHandler}
+                    colorScheme="facebook"
+                    isDisabled={
+                      courses.map(c => c._id).includes(course._id)
+                        ? true
+                        : false
+                    }
+                  >
+                    Add to cart
+                  </Button>
+                )}
                 <Button
                   colorScheme="facebook"
                   variant="outline"

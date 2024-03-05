@@ -1,11 +1,11 @@
 import { AllCoursesCard } from '@/components';
-import { courses } from '@/config/constants';
+import { MyCoursesProps } from './dashboard.props';
 
-export default function MyCourses() {
+export default function MyCourses({ myCourses }: MyCoursesProps) {
   return (
     <>
-      {courses.map(course => (
-        <AllCoursesCard course={course} />
+      {myCourses.map(course => (
+        <AllCoursesCard course={course} isMyCourse={true} />
       ))}
     </>
   );
