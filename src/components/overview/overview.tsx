@@ -11,7 +11,10 @@ const Overview = () => {
   return (
     <>
       <Heading mt={10}>{t('overview', { ns: 'courses' })}</Heading>
-      <Box mt={3} dangerouslySetInnerHTML={{ __html: course?.description! }} />
+      <Box
+        mt={3}
+        dangerouslySetInnerHTML={{ __html: course?.description as string }}
+      />
       <Heading mt={10}>{t('what_you_will_learn', { ns: 'courses' })}</Heading>
       <Grid
         mt={5}

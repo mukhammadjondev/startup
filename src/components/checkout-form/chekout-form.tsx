@@ -43,6 +43,12 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
   const { getBooks, checkAuth } = useActions();
   const toast = useToast();
 
+  const borderColor = useColorModeValue(
+    'rgba(0,0,0,.1)',
+    'rgba(255,255,255,.1)'
+  );
+  const bgColor = useColorModeValue('white', '#30303d');
+
   const cardStyles = {
     base: {
       color: colorMode === 'light' ? '#000' : '#fff',
@@ -185,11 +191,8 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
               p="4"
               border="1px"
               borderRadius="lg"
-              borderColor={useColorModeValue(
-                'rgba(0,0,0,.1)',
-                'rgba(255,255,255,.1)'
-              )}
-              bg={useColorModeValue('white', '#30303d')}
+              borderColor={borderColor}
+              bg={bgColor}
             >
               <Flex>
                 <Radio value={`${idx}`}>{card.billing_details.name} |</Radio>
@@ -226,11 +229,8 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
             p="4"
             border="1px"
             borderRadius="lg"
-            borderColor={useColorModeValue(
-              'rgba(0,0,0,.1)',
-              'rgba(255,255,255,.1)'
-            )}
-            bg={useColorModeValue('white', '#30303d')}
+            borderColor={borderColor}
+            bg={bgColor}
           >
             <Radio value={`${cards.length + 1}`}>New Credit card</Radio>
           </Box>
@@ -251,11 +251,8 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
               }
               borderRadius="md"
               border="1px"
-              borderColor={useColorModeValue(
-                'rgba(0,0,0,.1)',
-                'rgba(255,255,255,.1)'
-              )}
-              bg={useColorModeValue('white', '#30303d')}
+              borderColor={borderColor}
+              bg={bgColor}
             >
               <CardNumberElement
                 options={{
@@ -276,11 +273,8 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
               }
               borderRadius="md"
               border="1px"
-              borderColor={useColorModeValue(
-                'rgba(0,0,0,.1)',
-                'rgba(255,255,255,.1)'
-              )}
-              bg={useColorModeValue('white', '#30303d')}
+              borderColor={borderColor}
+              bg={bgColor}
             >
               <CardExpiryElement options={{ style: cardStyles }} />
             </Box>
@@ -295,11 +289,8 @@ export default function CheckoutForm({ cards }: { cards: CardType[] }) {
               }
               borderRadius="md"
               border="1px"
-              borderColor={useColorModeValue(
-                'rgba(0,0,0,.1)',
-                'rgba(255,255,255,.1)'
-              )}
-              bg={useColorModeValue('white', '#30303d')}
+              borderColor={borderColor}
+              bg={bgColor}
             >
               <CardCvcElement
                 options={{ style: cardStyles, placeholder: 'Security code' }}

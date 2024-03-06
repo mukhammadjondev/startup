@@ -1,3 +1,4 @@
+import { ArticleType } from '@/interfaces/article.interface';
 import { BooksType } from '@/interfaces/books.interface';
 import { CardType, ProductsType } from '@/interfaces/constants.interface';
 import { CourseType } from '@/interfaces/course.interface';
@@ -15,4 +16,6 @@ export interface AppProviderProps {
   books: BooksType[];
   cards: CardType[];
   products: ProductsType[];
+  articles: ArticleType[];
+  article: ArticleType;
 }

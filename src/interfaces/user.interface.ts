@@ -1,7 +1,7 @@
 import { RoleUser } from './constants.interface';
 
 export interface UserType {
-  _id: string;
+  _id?: string;
   email?: string;
   fullName?: string;
   role?: RoleUser;
@@ -9,9 +9,9 @@ export interface UserType {
   password?: string;
   avatar?: string;
   job?: string;
-  birthday: string;
-  bio: string;
-  courses: string[];
+  birthday?: string;
+  bio?: string;
+  courses?: string[];
 }
 
 export interface TransactionsType {

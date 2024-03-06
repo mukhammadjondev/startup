@@ -94,8 +94,8 @@ export default function Settings() {
         firstName: full?.[0],
         lastName: full?.[1],
         job: job as string,
-        bio,
-        birthday,
+        bio: bio as string,
+        birthday: birthday as string,
       });
     }
   }, []);

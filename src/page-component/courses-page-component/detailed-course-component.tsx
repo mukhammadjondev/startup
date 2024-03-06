@@ -64,14 +64,14 @@ const DetailedCourseComponent = () => {
       getSection({ courseId: course?._id, callback: () => {} });
     } else if (idx === 2 && !reviews.length) {
       setIsLoading(true);
-      const response = await CourseService.getReviews(course?._id!);
+      const response = await CourseService.getReviews(course?._id as string);
       setReviews(response);
       setIsLoading(false);
     }
   };
 
   const navigateUser = () => {
-    if (user?.courses.includes(course?._id as string)) {
+    if ((user?.courses as string[]).includes(course?._id as string)) {
       push(`/courses/dashboard/${course?.slug}`);
     } else {
       const existingProduct = courses.find(c => c._id == course?._id);
@@ -128,7 +128,7 @@ const DetailedCourseComponent = () => {
               <Card variant="outlie" boxShadow="dark-lg">
                 <CardBody p={{ base: 2, lg: 5 }}>
                   <Image
-                    src={loadImage(course?.previewImage!)}
+                    src={loadImage(course?.previewImage as string)}
                     alt={course?.title}
                     w="full"
                     h="300px"
@@ -151,7 +151,7 @@ const DetailedCourseComponent = () => {
                     h={14}
                     onClick={navigateUser}
                   >
-                    {user?.courses.includes(course?._id as string)
+                    {(user?.courses as string[]).includes(course?._id as string)
                       ? 'Go'
                       : 'Add to cart'}
                   </Button>
@@ -201,7 +201,9 @@ const DetailedCourseComponent = () => {
                           {t('level', { ns: 'courses' })}
                         </Text>
                       </Flex>
-                      <Text>{t(course?.level!, { ns: 'courses' })}</Text>
+                      <Text>
+                        {t(course?.level as string, { ns: 'courses' })}
+                      </Text>
                     </Flex>
                     <Divider />
                     <Flex

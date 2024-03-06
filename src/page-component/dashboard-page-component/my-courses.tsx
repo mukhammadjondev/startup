@@ -5,7 +5,7 @@ export default function MyCourses({ myCourses }: MyCoursesProps) {
   return (
     <>
       {myCourses.map(course => (
-        <AllCoursesCard course={course} isMyCourse={true} />
+        <AllCoursesCard key={course._id} course={course} isMyCourse={true} />
       ))}
     </>
   );

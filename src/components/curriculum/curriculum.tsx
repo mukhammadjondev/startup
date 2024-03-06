@@ -23,6 +23,9 @@ const Curriculum = () => {
   const { t } = useTranslation();
   const { sections, pendingSection } = useTypedSelector(state => state.section);
 
+  const color = useColorModeValue('white', 'black');
+  const bgColor = useColorModeValue('facebook.500', 'facebook.200');
+
   return (
     <>
       <Heading mt={10}>{t('curriculum', { ns: 'courses' })}</Heading>
@@ -50,8 +53,8 @@ const Curriculum = () => {
               >
                 <AccordionButton
                   height="60px"
-                  background={useColorModeValue('facebook.500', 'facebook.200')}
-                  color={useColorModeValue('white', 'black')}
+                  background={bgColor}
+                  color={color}
                   borderRadius="lg"
                   _hover={{
                     backgroundColor: 'facebook.400',

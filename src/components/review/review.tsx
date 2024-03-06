@@ -19,6 +19,7 @@ import { FC } from 'react';
 import { ReviewProps } from './review.props';
 
 const Review: FC<ReviewProps> = ({ reviews, isLoading }) => {
+  const bgColor = useColorModeValue('gray.200', 'gray.600');
   const { t } = useTranslation();
 
   const getLocalLanguage = () => {
@@ -49,7 +50,7 @@ const Review: FC<ReviewProps> = ({ reviews, isLoading }) => {
           {reviews.map(item => (
             <Flex key={item._id} gap={4} mt={6} borderBottomWidth="1px" pb={2}>
               <Avatar
-                bg={useColorModeValue('gray.200', 'gray.600')}
+                bg={bgColor}
                 display={{ base: 'none', md: 'block' }}
                 size="md"
                 name={item.author.fullName}

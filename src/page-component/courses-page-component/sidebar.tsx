@@ -26,6 +26,8 @@ const Sidebar: FC<CourseDashboardProps> = ({ ...props }) => {
   const { course } = useTypedSelector(state => state.course);
   const { getSection } = useActions();
 
+  const bgColor = useColorModeValue('gray.100', 'gray.700');
+
   useEffect(() => {
     if (course) {
       getSection({ courseId: course?._id, callback: () => {} });
@@ -94,7 +96,7 @@ const Sidebar: FC<CourseDashboardProps> = ({ ...props }) => {
               <AccordionItem borderRadius="8px" mt={5} key={section._id}>
                 <AccordionButton
                   height="60px"
-                  bg={useColorModeValue('gray.100', 'gray.700')}
+                  bg={bgColor}
                   borderRadius="md"
                   fontWeight="bold"
                   _hover={{}}

@@ -10,6 +10,7 @@ import $axios from '@/api/axios';
 
 const LessonItem = ({ lesson }: { lesson: LessonType }) => {
   const [isComplete, setIsComplete] = useState(false);
+  const bgColor = useColorModeValue('gray.100', 'gray.800');
 
   const router = useRouter();
   const { user } = useTypedSelector(state => state.user);
@@ -48,16 +49,12 @@ const LessonItem = ({ lesson }: { lesson: LessonType }) => {
   return (
     <Box
       _hover={{
-        background: useColorModeValue('gray.100', 'gray.800'),
+        background: bgColor,
       }}
       transition="all .3s ease"
       borderRadius="md"
       onClick={onLesson}
-      bg={
-        router.query.lesson === lesson._id
-          ? useColorModeValue('gray.100', 'gray.800')
-          : 'transparent'
-      }
+      bg={router.query.lesson === lesson._id ? bgColor : 'transparent'}
       fontWeight={router.query.lesson === lesson._id ? 'bold' : 'normal'}
       color={router.query.lesson === lesson._id ? 'facebook.500' : 'normal'}
     >
@@ -72,7 +69,7 @@ const LessonItem = ({ lesson }: { lesson: LessonType }) => {
           {user ? (
             <Checkbox
               colorScheme="facebook"
-              defaultChecked={lesson.completed.includes(user._id)}
+              defaultChecked={lesson.completed.includes(user._id as string)}
               onChange={e => onComplete(e, lesson._id)}
               cursor={isComplete ? 'progress' : 'pointer'}
             />
