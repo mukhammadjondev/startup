@@ -25,11 +25,18 @@ import {
 } from './courses-page-component.props';
 import { useTranslation } from 'react-i18next';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 import { CourseType } from '@/interfaces/course.interface';
 import { AppService } from '@/services/app.service';
 
 const CoursesPageComponent = () => {
+  const [searchVal, setSearchVal] = useState<string>('');
   const [filter, setFilter] = useState<FilterCourseType>({
     id: '',
     category: '',
@@ -62,6 +69,15 @@ const CoursesPageComponent = () => {
     }
   }, [filter]);
 
+  const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchVal(e.target.value);
+    setAllCourses(
+      courses.filter(
+        c => c.title.toLowerCase().indexOf(e.target.value.toLowerCase()) !== -1
+      )
+    );
+  };
+
   useEffect(() => {
     setAllCourses(courses);
   }, [courses]);
@@ -78,6 +94,8 @@ const CoursesPageComponent = () => {
           w="full"
           bg="white"
           color="gray.900"
+          value={searchVal}
+          onChange={searchHandler}
           placeholder={t('search_input_placeholder', { ns: 'courses' })}
           _placeholder={{ color: 'gray.500' }}
         />

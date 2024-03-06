@@ -18,11 +18,16 @@ export default function Account() {
   const { user } = useTypedSelector(state => state.user);
 
   return (
-    <Box maxW="7xl" mx="auto" px={{ base: 2, sm: 12, md: 17 }}>
-      <chakra.h1 textAlign="center" fontSize="4xl" pb={6} fontWeight="bold">
+    <Box maxW="7xl" mx="auto">
+      <chakra.h1
+        textAlign="center"
+        fontSize={{ base: '2xl', md: '4xl' }}
+        pb={6}
+        fontWeight="bold"
+      >
         Your account information.
       </chakra.h1>
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
+      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 3, lg: 5 }}>
         <StatsCard
           title="Ro'yhatdan o'tgan sana"
           stat={`${format(new Date(user?.createdAt as Date), 'dd MMMM, yyyy')}`}

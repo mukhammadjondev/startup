@@ -44,7 +44,7 @@ export default function DangerZone() {
     <>
       <Text fontSize="2xl">Change password</Text>
       <Divider my={5} />
-      <Box maxW={'70%'}>
+      <Box w={{ base: 'full', md: '70%' }}>
         <Formik
           onSubmit={onSubmit}
           initialValues={{ password: '', confirmPassword: '' }}

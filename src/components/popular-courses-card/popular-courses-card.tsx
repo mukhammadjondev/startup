@@ -17,12 +17,19 @@ import { CiViewList } from 'react-icons/ci';
 import { SiGoogleanalytics } from 'react-icons/si';
 import ReactStars from 'react-stars';
 import { PopularCoursesCardProps } from './popular-courses-card.props';
+import { useRouter } from 'next/router';
 
 const PopularCoursesCard = ({ course }: PopularCoursesCardProps) => {
   const { t } = useTranslation();
+  const { push } = useRouter();
 
   return (
-    <Stack spacing={3} p={3} cursor="pointer">
+    <Stack
+      spacing={3}
+      p={3}
+      cursor="pointer"
+      onClick={() => push(`/courses/${course.slug}`)}
+    >
       <Box pos="relative" w="full" h="210px">
         <Image
           src={loadImage(course.previewImage)}
@@ -62,7 +69,10 @@ const PopularCoursesCard = ({ course }: PopularCoursesCardProps) => {
       <Divider />
       <Flex justify="space-between" align="center">
         <HStack align="center">
-          <Avatar src={course.author.avatar} name={course.author.fullName} />
+          <Avatar
+            src={loadImage(course.author.avatar)}
+            name={course.author.fullName}
+          />
           <Text>{course.author.fullName}</Text>
         </HStack>
         <Text>

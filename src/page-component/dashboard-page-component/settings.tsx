@@ -156,7 +156,10 @@ export default function Settings() {
       </HStack>
       <Formik onSubmit={onSubmit} initialValues={values} enableReinitialize>
         <Form>
-          <Flex gap={5}>
+          <Flex
+            gap={{ base: 1, md: 5 }}
+            direction={{ base: 'column', md: 'row' }}
+          >
             <TextField name="firstName" label="Ismingiz" placeholder="Omar" />
             <TextField
               name="lastName"
@@ -164,7 +167,10 @@ export default function Settings() {
               placeholder="Osman"
             />
           </Flex>
-          <Flex gap={5}>
+          <Flex
+            gap={{ base: 1, md: 5 }}
+            direction={{ base: 'column', md: 'row' }}
+          >
             <TextField
               name="birthday"
               label="Tug'ilgan sana"

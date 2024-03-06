@@ -2,6 +2,7 @@ import { API_URL } from '@/config/api.config';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { CardType } from '@/interfaces/constants.interface';
 import { withLayout } from '@/layout/layout';
+import Seo from '@/layout/seo/seo';
 import { CheckoutPageComponent } from '@/page-component';
 import axios from 'axios';
 import { GetServerSideProps, NextPage } from 'next';
@@ -13,7 +14,13 @@ const CheckoutPage: NextPage<CheckoutPageProps> = ({ cards }) => {
 
   return (
     <>
-      {checkCart() ? <CheckoutPageComponent cards={cards} /> : <>Empty cart</>}
+      {checkCart() ? (
+        <Seo metaTitle="MuhsDev | Chekout">
+          <CheckoutPageComponent cards={cards} />
+        </Seo>
+      ) : (
+        <>Empty cart</>
+      )}
     </>
   );
 };

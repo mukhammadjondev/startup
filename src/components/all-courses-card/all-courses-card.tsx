@@ -78,7 +78,7 @@ const AllCoursesCard = ({ course, isMyCourse }: AllCourseCardProps) => {
             {!isMyCourse && (
               <Flex gap={2} direction={{ base: 'column', sm: 'row' }}>
                 <Avatar
-                  src={course.author.avatar}
+                  src={loadImage(course.author.avatar)}
                   name={course.author.fullName}
                 />
                 <HStack>
