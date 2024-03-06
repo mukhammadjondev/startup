@@ -42,7 +42,7 @@ export default function DangerZone() {
 
   return (
     <>
-      <Text fontSize="2xl">Change password</Text>
+      <Text fontSize="2xl">{t('danger_zone_title', { ns: 'global' })}</Text>
       <Divider my={5} />
       <Box w={{ base: 'full', md: '70%' }}>
         <Formik

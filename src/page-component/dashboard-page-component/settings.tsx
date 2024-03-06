@@ -19,6 +19,7 @@ import {
 import { Form, Formik, FormikValues } from 'formik';
 import Cookies from 'js-cookie';
 import { ChangeEvent, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AiOutlineClose } from 'react-icons/ai';
 import { MdEdit } from 'react-icons/md';
 
@@ -30,6 +31,7 @@ export default function Settings() {
   const { user } = useTypedSelector(state => state.user);
   const toast = useToast();
   const { checkAuth } = useActions();
+  const { t } = useTranslation();
 
   const onSubmit = async (formikValues: FormikValues) => {
     setIsLoading(true);
@@ -148,7 +150,7 @@ export default function Settings() {
           </Text>
           <Text>
             <Box fontWeight="bold" as="span">
-              Email
+              {t('contact_email', { ns: 'global' })}
             </Box>
             : {user?.email}
           </Text>
@@ -160,10 +162,14 @@ export default function Settings() {
             gap={{ base: 1, md: 5 }}
             direction={{ base: 'column', md: 'row' }}
           >
-            <TextField name="firstName" label="Ismingiz" placeholder="Omar" />
+            <TextField
+              name="firstName"
+              label={t('first_name', { ns: 'global' })}
+              placeholder="Omar"
+            />
             <TextField
               name="lastName"
-              label="Familyangiz"
+              label={t('last_name', { ns: 'global' })}
               placeholder="Osman"
             />
           </Flex>
@@ -173,20 +179,20 @@ export default function Settings() {
           >
             <TextField
               name="birthday"
-              label="Tug'ilgan sana"
+              label={t('birthday', { ns: 'global' })}
               placeholder="birthday"
               type="date"
             />
             <TextField
               name="job"
-              label="Kasbingiz"
+              label={t('profession', { ns: 'global' })}
               placeholder="Front-End developer"
             />
           </Flex>
           <TextAreaField
             name="bio"
-            placeholder="O'zingiz haqingizda"
-            label="Ma'lumot"
+            placeholder={t('bio', { ns: 'global' })}
+            label={t('information', { ns: 'global' })}
             height="100"
           />
           <Button
@@ -197,7 +203,7 @@ export default function Settings() {
             type="submit"
             isLoading={isLoading}
           >
-            Submit
+            {t('account_recovery_btn_form3', { ns: 'global' })}
           </Button>
         </Form>
       </Formik>
